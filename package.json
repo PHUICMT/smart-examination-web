@@ -1,0 +1,62 @@
+{
+  "name": "phq-9-web",
+  "version": "0.1.0",
+  "proxy": "http://server:5000",
+  "homepage": "/index",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.5",
+    "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.1",
+    "react": "^17.0.2",
+    "react-addons-update": "^15.6.3",
+    "react-bulma-components": "^4.0.7",
+    "react-dom": "^17.0.2",
+    "react-loader-spinner": "^4.0.0",
+    "react-lottie": "^1.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-toggle": "^4.1.2",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "start": "",
+    "start:dev": "cross-env react-scripts start",
+    "build": "",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "no-unused-vars": "off",
+      "eqeqeq": "off",
+      "array-callback-return": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "import/no-anonymous-default-export": "off"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

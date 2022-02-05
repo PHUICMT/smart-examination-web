@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import MainPage from './pages/MainPage';
 import Header from "./components/header/header";
-import PHQTestComponent from './components/phq-9-test/phq-9-test';
 
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
@@ -18,7 +17,8 @@ function App() {
         <Route path="/" component={Header} />
         <Switch>
           <Route path="/index" component={MainPage} />
-          <Route path="/phq-9" component={PHQTestComponent} />
+          <Route path="/student" component={MainPage} /> // TODO add student component here
+          <Route path="/teacher" component={MainPage} /> // TODO add teacher component here
           <Route path='*' exact >
             <Redirect from='*' to='/index' />
           </Route>

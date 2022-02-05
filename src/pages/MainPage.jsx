@@ -5,7 +5,7 @@ const MainPage = () => {
     return (
         <React.Fragment>
             <HeaderWithIcon />
-            <AcceptToggle />
+            {/* <AcceptToggle /> */}
         </React.Fragment>
     );
 };

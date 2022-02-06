@@ -3,7 +3,11 @@ import Button from '@mui/material/Button';
 
 const CustomButton = (props) => {
     return (
-        <Button variant="outlined">Outlined</Button>
+        <div className="custom-button">
+            <Button variant="outlined">
+                {props.message}
+            </Button>
+        </div>
     );
 };
 

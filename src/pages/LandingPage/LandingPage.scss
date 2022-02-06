@@ -1,0 +1,12 @@
+.button-group {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+
+  button {
+    padding-inline: 200px;
+    padding-block: 150px;
+  }
+}

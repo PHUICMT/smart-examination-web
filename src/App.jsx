@@ -3,7 +3,7 @@ import "./App.scss";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import MainPage from './pages/MainPage';
+import LandingPage from './pages/LandingPage';
 import Header from "./components/header/header";
 
 window.onbeforeunload = function () {
@@ -16,9 +16,9 @@ function App() {
       <Router>
         <Route path="/" component={Header} />
         <Switch>
-          <Route path="/index" component={MainPage} />
-          <Route path="/student" component={MainPage} /> // TODO add student component here
-          <Route path="/teacher" component={MainPage} /> // TODO add teacher component here
+          <Route path="/index" component={LandingPage} />
+          <Route path="/student" component={LandingPage} /> // TODO add student component here
+          <Route path="/teacher" component={LandingPage} /> // TODO add teacher component here
           <Route path='*' exact >
             <Redirect from='*' to='/index' />
           </Route>

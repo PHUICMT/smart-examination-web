@@ -5,8 +5,32 @@
   grid-template-columns: auto auto;
   justify-content: center;
 
+  .student {
+    background-color: #007569;
+  }
+
+  .student:hover {
+    background-color: #004e46;
+  }
+
+  .teacher {
+    background-color: #6c5ce7;
+  }
+
+  .teacher:hover {
+    background-color: #4c419e;
+  }
+
+  p {
+    font-size: 50px;
+  }
+
   button {
-    padding-inline: 200px;
-    padding-block: 150px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 }

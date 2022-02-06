@@ -2,22 +2,27 @@
   margin-top: 50px;
   margin-bottom: 50px;
   border-radius: 30px;
-  min-height: 450px;
-
+  height: 450px;
+  overflow: hidden;
   background-color: #c4c4c462;
 
-  .MuiTabs-indicator {
-    border-radius: 20px;
-    height: 50px !important;
+  .button-login {
+    display: grid;
+    justify-content: center;
+    top: 10px;
 
-    background-color: #3a3dff62;
+    button {
+      padding: 20px;
+      border-radius: 30px;
+    }
+
+    img {
+      padding: 20px;
+    }
   }
 
-  .MuiTab-root {
-    font-size: 20px;
-    z-index: 100;
-
-    color: #6c5ce7;
+  .MuiPaper-root {
+    background-color: #969696ad;
   }
 
   .react-swipeable-view-container {
@@ -25,7 +30,35 @@
     display: inline-block;
   }
 
-  .MuiAppBar-root {
-    border-radius: 20px;
+  .Mui-selected-1 {
+    .Mui-selected {
+      background-color: #78e75ce7;
+      color: #c9003cdc;
+    }
+    .MuiTabs-indicator {
+      background-color: #c9003cdc;
+    }
+  }
+
+  .Mui-selected-2 {
+    .Mui-selected {
+      background-color: #6c5ce7;
+      color: #d3c943;
+    }
+    .MuiTabs-indicator {
+      background-color: #d3c943;
+    }
+  }
+
+  .MuiTabs-indicator {
+    height: 5px !important;
+    z-index: 100;
+  }
+
+  .MuiTab-root {
+    font-size: 30px;
+    font-weight: bold;
+    z-index: 100;
+    color: #5a5a5a;
   }
 }

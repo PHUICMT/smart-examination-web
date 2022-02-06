@@ -2,8 +2,9 @@ import "./custom-selected-animation.scss";
 
 import studentIcon from '../../assets/icons/student-icon.svg'
 import teacherIcon from '../../assets/icons/teacher-icon.svg'
+import LoginIcon from '@mui/icons-material/Login';
 
-
+import Button from '@mui/material/Button';
 import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -13,9 +14,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Zoom from '@mui/material/Zoom';
-import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
-import { borderRadius } from "@mui/system";
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -76,12 +76,14 @@ const CustomSelectionAnimation = (props) => {
 
             className="custom-selected-animation"
         >
-            <AppBar position="static" color="default">
+            <AppBar position="static">
                 <Tabs
                     value={value}
                     onChange={handleChange}
                     variant="fullWidth"
+                    className={value === 0 ? "Mui-selected-1" : "Mui-selected-2"}
                 >
+                    {console.log(value)}
                     <Tab label="นักศึกษา" />
                     <Tab label="อาจารย์" />
                 </Tabs>
@@ -105,9 +107,15 @@ const CustomSelectionAnimation = (props) => {
                     style={{
                         transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,
                     }}
-                    unmountOnExit
+                    unmountOnExit={true}
                 >
-                    <img src={fab.icon} />
+                    <div className="button-login">
+                        <Button variant="contained" endIcon={<LoginIcon />}>
+                            ลงชื่อเข้าใช้
+                        </Button>
+                        <img src={fab.icon} />
+                    </div>
+
                 </Zoom>
             ))}
         </Box>

@@ -4,6 +4,7 @@ import maintenanceIcon from '../assets/icons/process-01.svg'
 import React from 'react';
 import HeaderWithIcon from "../components/header-with-icon/header-with-icon"
 import InfoCard from "../components/info-card/info-card"
+import CustomButton from "../components/custom-button/custom-button"
 
 const MainPage = () => {
     return (

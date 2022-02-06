@@ -10,6 +10,11 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
 const DashBoard = () => {
+  const textStyle = {
+    color: "text.primary",
+    fontWeight: "bold",
+  };
+
   return (
     <React.Fragment>
       <HeaderWithIcon
@@ -19,13 +24,13 @@ const DashBoard = () => {
       />
       <div className="button-group">
         <Stack direction="row" spacing={10}>
-          <Button variant="contained" className="create-exam">
+          <Button variant="contained" className="create-exam" sx={textStyle}>
             <img src={createExamIcon}></img>
             <p>สร้างข้อสอบ</p>
           </Button>
-          <Button variant="contained" className="result-exam">
-              <img src={resultExamIcon}></img>
-              <p>ผลการทดสอบ</p>
+          <Button variant="contained" className="result-exam" sx={textStyle}>
+            <img src={resultExamIcon}></img>
+            <p>ผลการทดสอบ</p>
           </Button>
         </Stack>
       </div>

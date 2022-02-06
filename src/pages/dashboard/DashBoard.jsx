@@ -11,7 +11,7 @@ const DashBoard = () => {
             <HeaderWithIcon
                 title="ยินดีต้อนรับ"
                 description="มาเริ่มสร้างข้อสอบกันเลย"
-                icon={silpakornIcon}
+                icon={null}
             />
             
         </React.Fragment>

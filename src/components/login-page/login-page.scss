@@ -6,11 +6,24 @@
 
   display: grid;
   justify-content: center;
+  align-content: center;
 
-  background-color: #303030bd;
+  background-color: #303030b0;
+  backdrop-filter: blur(10px);
+
   color: #ffffff;
-
   font-size: 40px;
+
+  .MuiBox-root {
+    margin-top: 5px;
+    margin-bottom: 40px;
+  }
+
+  .MuiInput-input {
+    color: #ffffff;
+    padding-left: 5px;
+    border-bottom: #ffffff !important;
+  }
 
   .MuiAvatar-circular {
     margin-left: auto;
@@ -18,14 +31,41 @@
   }
 
   .student {
+    display: flex;
+    flex-direction: column;
+
     .MuiAvatar-circular {
       background-color: #004e46;
+    }
+    .MuiButton-root {
+      background-color: #004e46;
+    }
+    .MuiButton-root:hover {
+      background-color: #009182;
     }
   }
 
   .teacher {
+    display: flex;
+    flex-direction: column;
+
     .MuiAvatar-circular {
       background-color: #4c419e;
     }
+    .MuiButton-root {
+      background-color: #4c419e;
+    }
+    .MuiButton-root:hover {
+      background-color: #6153cc;
+    }
+  }
+
+  p {
+    text-align: center;
+  }
+
+  label {
+    color: #ffffff;
+    padding-left: 5px;
   }
 }

@@ -5,22 +5,27 @@ import maintenanceIcon from '../../assets/icons/process-01.svg'
 import studentIcon from '../../assets/icons/student-icon.svg'
 import teacherIcon from '../../assets/icons/teacher-icon.svg'
 
-import React from 'react';
 
 import HeaderWithIcon from "../../components/header-with-icon/header-with-icon"
 import InfoCard from "../../components/info-card/info-card"
 import LoginPage from "../../components/login-page/login-page"
 
+import React from 'react';
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useSpring, animated } from 'react-spring';
 
-const ModalObject = (userType) => {
+
+const MainPage = () => {
+    const [isStudent, setIsStudent] = React.useState(true);
+    const [openLogin, setOpenLogin] = React.useState(false);
+    const handleOpenLogin = () => setOpenLogin(true);
+    const handleCloseLogin = () => setOpenLogin(false);
+
     const Fade = React.forwardRef(function Fade(props, ref) {
         const { in: open, children, onEnter, onExited, ...other } = props;
         const style = useSpring({
@@ -62,36 +67,28 @@ const ModalObject = (userType) => {
         p: 4,
     };
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-    return (
-        <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+    const ShowModal = () => {
+        return (<div id="modal-container-layout">
             <Modal
                 className="modal-container"
-                aria-labelledby="spring-modal-title"
-                aria-describedby="spring-modal-description"
-                open={open}
-                onClose={handleClose}
+                open={openLogin}
+                onClose={handleCloseLogin}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                     timeout: 500,
                 }}
+                id="login-modal-modal-id"
             >
-                <Fade in={open}>
+                <Fade in={openLogin}>
                     <Box sx={style}>
-                        <LoginPage />
+                        <LoginPage isStudent={isStudent} />
                     </Box>
                 </Fade>
             </Modal>
-        </div>
-    );
-}
+        </div>)
+    }
 
-const MainPage = () => {
     return (
         <React.Fragment>
             <HeaderWithIcon
@@ -106,17 +103,31 @@ const MainPage = () => {
             />
             <div className="button-group">
                 <Stack direction="row" spacing={2}>
-                    <Button variant="contained" className="student">
+                    <Button
+                        variant="contained"
+                        className="student"
+                        onClick={() => {
+                            setIsStudent(true)
+                            handleOpenLogin()
+                        }}
+                    >
                         <p>นักศึกษา</p>
                         <img src={studentIcon}></img>
                     </Button>
-                    <Button variant="contained" className="teacher">
+                    <Button
+                        variant="contained"
+                        className="teacher"
+                        onClick={() => {
+                            setIsStudent(false)
+                            handleOpenLogin()
+                        }}
+                    >
                         <p>อาจารย์</p>
                         <img src={teacherIcon}></img>
                     </Button>
                 </Stack>
             </div>
-            {ModalObject()}
+            {openLogin ? <ShowModal /> : <></>}
         </React.Fragment>
     );
 };

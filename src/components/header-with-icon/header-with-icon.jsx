@@ -4,7 +4,6 @@ import React from 'react';
 import { Container } from 'react-bulma-components';
 
 const HeaderWithIcon = (props) => {
-    console.log(props.icon)
     return (
         <React.Fragment>
             <Container>

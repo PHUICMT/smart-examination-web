@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import LandingPage from './pages/LandingPage/LandingPage';
+import DashBoard from './pages/dashboard/DashBoard';
 import Header from "./components/header/header";
 
 window.onbeforeunload = function () {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/index" component={LandingPage} />
           <Route path="/student" component={LandingPage} /> // TODO add student component here
           <Route path="/teacher" component={LandingPage} /> // TODO add teacher component here
+          <Route path="/dashboard" component={DashBoard} />
           <Route path='*' exact >
             <Redirect from='*' to='/index' />
           </Route>

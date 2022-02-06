@@ -1,0 +1,31 @@
+.login-page {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  border-radius: 30px;
+
+  display: grid;
+  justify-content: center;
+
+  background-color: #303030bd;
+  color: #ffffff;
+
+  font-size: 40px;
+
+  .MuiAvatar-circular {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .student {
+    .MuiAvatar-circular {
+      background-color: #004e46;
+    }
+  }
+
+  .teacher {
+    .MuiAvatar-circular {
+      background-color: #4c419e;
+    }
+  }
+}

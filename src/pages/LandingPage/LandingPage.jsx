@@ -9,12 +9,87 @@ import React from 'react';
 
 import HeaderWithIcon from "../../components/header-with-icon/header-with-icon"
 import InfoCard from "../../components/info-card/info-card"
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
+import LoginPage from "../../components/login-page/login-page"
 
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import PropTypes from 'prop-types';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useSpring, animated } from 'react-spring';
 
+const ModalObject = (userType) => {
+    const Fade = React.forwardRef(function Fade(props, ref) {
+        const { in: open, children, onEnter, onExited, ...other } = props;
+        const style = useSpring({
+            from: { opacity: 0 },
+            to: { opacity: open ? 1 : 0 },
+            onStart: () => {
+                if (open && onEnter) {
+                    onEnter();
+                }
+            },
+            onRest: () => {
+                if (!open && onExited) {
+                    onExited();
+                }
+            },
+        });
+
+        return (
+            <animated.div ref={ref} style={style} {...other}>
+                {children}
+            </animated.div>
+        );
+    });
+
+    Fade.propTypes = {
+        children: PropTypes.element,
+        in: PropTypes.bool.isRequired,
+        onEnter: PropTypes.func,
+        onExited: PropTypes.func,
+    };
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 550,
+        height: 550,
+        p: 4,
+    };
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    return (
+        <div>
+            <Button onClick={handleOpen}>Open modal</Button>
+            <Modal
+                className="modal-container"
+                aria-labelledby="spring-modal-title"
+                aria-describedby="spring-modal-description"
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={open}>
+                    <Box sx={style}>
+                        <LoginPage />
+                    </Box>
+                </Fade>
+            </Modal>
+        </div>
+    );
+}
 
 const MainPage = () => {
     return (
@@ -41,6 +116,7 @@ const MainPage = () => {
                     </Button>
                 </Stack>
             </div>
+            {ModalObject()}
         </React.Fragment>
     );
 };

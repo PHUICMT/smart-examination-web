@@ -2,7 +2,7 @@ import "./info-card.scss";
 
 import { Container } from 'react-bulma-components';
 
-const AcceptCard = (props) => {
+const InfoCard = (props) => {
     return (
         <Container>
             <div className="info-card">
@@ -16,4 +16,4 @@ const AcceptCard = (props) => {
     );
 };
 
-export default AcceptCard;
+export default InfoCard;

@@ -34,3 +34,9 @@
     flex-direction: column;
   }
 }
+
+.modal-container {
+  .MuiBackdrop-root {
+    backdrop-filter: blur(50px);
+  }
+}

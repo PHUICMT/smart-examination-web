@@ -1,0 +1,39 @@
+.button-group {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+
+  .create-exam {
+    background-color: #ffcf76;
+  }
+
+  .create-exam:hover {
+    background-color: #f8be53;
+  }
+
+  .result-exam {
+    background-color: #b0a6ff;
+  }
+
+  .result-exam:hover {
+    background-color: #6c5ce7;
+  }
+
+  p {
+    font-size: 50px;
+    font-weight: bold;
+    color: #000000;
+  }
+
+  button {
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 30px;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}

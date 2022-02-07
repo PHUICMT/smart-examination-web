@@ -9,7 +9,26 @@
   align-content: center;
 
   background-color: #303030b0;
+  animation: fadeIn 3s;
   backdrop-filter: blur(10px);
+
+  @-webkit-keyframes fadeIn {
+    from {
+      backdrop-filter: blur(0px);
+    }
+    to {
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      backdrop-filter: blur(0px);
+    }
+    to {
+      backdrop-filter: blur(10px);
+    }
+  }
 
   color: #ffffff;
   font-size: 40px;

@@ -6,7 +6,7 @@
   justify-content: center;
 
   .student {
-    background-color: #007569;
+    background-color: #007569ea;
   }
 
   .student:hover {
@@ -14,15 +14,20 @@
   }
 
   .teacher {
-    background-color: #6c5ce7;
+    background-color: #6c5ce7ea;
   }
 
   .teacher:hover {
     background-color: #4c419e;
   }
 
+  img {
+    height: 80%;
+  }
+
   p {
     font-size: 50px;
+    margin-left: 20px;
   }
 
   button {

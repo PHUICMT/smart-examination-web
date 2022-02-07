@@ -13,14 +13,15 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
 const InputField = (props) => {
+    let color = props.isStudent ? '#009182' : '#64FF'
     return (
         <Box sx={{
             display: 'flex',
             alignItems: 'flex-end',
             '& .MuiTextField-root': { width: '15ch', },
-            '& .MuiInput-underline:after': { borderBottomColor: '#64FFF0', },
+            '& .MuiInput-underline:after': { borderBottomColor: color, },
             '& .MuiInput-underline:before': { borderBottomColor: '#ffff', },
-            '& label.Mui-focused': { color: '#64FFF0', },
+            '& label.Mui-focused': { color: color, },
         }}
             className=""
         >
@@ -46,10 +47,10 @@ const LoginPage = (props) => {
                         sx={{ width: 100, height: 100 }}
                     />
                     <p>{props.isStudent ? "นักศึกษา" : "อาจารย์"}</p>
-                    <InputField label="รหัสประจำตัว" isUserId={true} />
-                    <InputField label="รหัสผ่าน" isUserId={false} />
+                    <InputField isStudent={props.isStudent} label="รหัสประจำตัว" isUserId={true} />
+                    <InputField isStudent={props.isStudent} label="รหัสผ่าน" isUserId={false} />
                     <Button variant="contained" endIcon={<LoginIcon />}>
-                        <h>ลงชื่อเข้าใช้</h>
+                        <p>ลงชื่อเข้าใช้</p>
                     </Button>
                 </div>
             </div>

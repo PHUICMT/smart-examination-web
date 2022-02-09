@@ -23,7 +23,6 @@ const InputField = (props) => {
             '& .MuiInput-underline:before': { borderBottomColor: '#ffff', },
             '& label.Mui-focused': { color: color, },
         }}
-            className=""
         >
             {
                 props.isUserId ? <AccountCircle /> : <LockIcon />
@@ -49,7 +48,11 @@ const LoginPage = (props) => {
                     <p>{props.isStudent ? "นักศึกษา" : "อาจารย์"}</p>
                     <InputField isStudent={props.isStudent} label="รหัสประจำตัว" isUserId={true} />
                     <InputField isStudent={props.isStudent} label="รหัสผ่าน" isUserId={false} />
-                    <Button variant="contained" endIcon={<LoginIcon />}>
+                    <Button
+                        variant="contained"
+                        endIcon={<LoginIcon />}
+                        href="/student"
+                    >
                         <p>ลงชื่อเข้าใช้</p>
                     </Button>
                 </div>

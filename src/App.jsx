@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import LandingPage from './pages/LandingPage/LandingPage';
-import DashBoard from './pages/dashboard/DashBoard';
+import DashBoard from './pages/DashBoard/DashBoard';
 import Header from "./components/header/header";
 
 window.onbeforeunload = function () {

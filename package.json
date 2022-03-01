@@ -29,6 +29,8 @@
     "react-spring": "^9.4.2",
     "react-swipeable-views": "^0.14.0",
     "react-toggle": "^4.1.2",
+    "socket.io-client": "^4.4.1",
+    "socket.io-stream": "^0.9.1",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.0"
   },
@@ -55,5 +57,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

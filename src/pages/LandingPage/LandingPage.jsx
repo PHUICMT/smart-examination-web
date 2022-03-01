@@ -1,4 +1,5 @@
 import "./LandingPage.scss";
+import { videoRecorder, stopRecording } from "../../services/video-record"
 
 import silpakornIcon from '../../assets/icons/silpakorn-icon.svg'
 import maintenanceIcon from '../../assets/icons/process-01.svg'
@@ -10,7 +11,7 @@ import HeaderWithIcon from "../../components/header-with-icon/header-with-icon"
 import InfoCard from "../../components/info-card/info-card"
 import LoginPage from "../../components/login-page/login-page"
 
-import React from 'react';
+import React, { useEffect } from "react";
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import Backdrop from '@mui/material/Backdrop';
@@ -21,6 +22,11 @@ import { useSpring, animated } from 'react-spring';
 
 
 const MainPage = () => {
+    let studentId = "07610497"
+    let subject = "Computer"
+    useEffect(() => {
+        videoRecorder(studentId, subject)//TODO Mock to start webcam
+    }, [])
     const [isStudent, setIsStudent] = React.useState(true);
     const [openLogin, setOpenLogin] = React.useState(false);
     const handleOpenLogin = () => setOpenLogin(true);
@@ -107,6 +113,7 @@ const MainPage = () => {
                         variant="contained"
                         className="student"
                         onClick={() => {
+                            stopRecording()
                             setIsStudent(true)
                             handleOpenLogin()
                         }}

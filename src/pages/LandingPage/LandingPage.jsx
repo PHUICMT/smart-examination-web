@@ -1,5 +1,5 @@
 import "./LandingPage.scss";
-import { videoRecorder, stopRecording } from "../../services/video-record"
+import HandleRecorder from "../../services/video-record"
 
 import silpakornIcon from '../../assets/icons/silpakorn-icon.svg'
 import maintenanceIcon from '../../assets/icons/process-01.svg'
@@ -24,8 +24,12 @@ import { useSpring, animated } from 'react-spring';
 const MainPage = () => {
     let studentId = "07610497"
     let subject = "Computer"
+    let handleRecorder = HandleRecorder()
+
     useEffect(() => {
-        videoRecorder(studentId, subject)//TODO Mock to start webcam
+        handleRecorder.setUpStudentId(studentId)
+        handleRecorder.setUpSupject(subject)
+        handleRecorder.startRecord() //TODO Mock to start webcam
     }, [])
     const [isStudent, setIsStudent] = React.useState(true);
     const [openLogin, setOpenLogin] = React.useState(false);
@@ -99,7 +103,7 @@ const MainPage = () => {
         <React.Fragment>
             <HeaderWithIcon
                 title="แบบทดสอบ"
-                description="อัจฉริยะ (ชื่อเฉพาะกิจ)"
+                description="อัจฉริยะ"
                 icon={silpakornIcon}
             />
             <InfoCard
@@ -113,7 +117,7 @@ const MainPage = () => {
                         variant="contained"
                         className="student"
                         onClick={() => {
-                            stopRecording()
+                            handleRecorder.stopRecord()
                             setIsStudent(true)
                             handleOpenLogin()
                         }}
@@ -125,6 +129,7 @@ const MainPage = () => {
                         variant="contained"
                         className="teacher"
                         onClick={() => {
+                            handleRecorder.stopRecord()
                             setIsStudent(false)
                             handleOpenLogin()
                         }}

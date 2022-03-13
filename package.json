@@ -29,6 +29,7 @@
     "react-spring": "^9.4.2",
     "react-swipeable-views": "^0.14.0",
     "react-toggle": "^4.1.2",
+    "recordrtc": "^5.6.2",
     "socket.io-client": "^4.4.1",
     "socket.io-stream": "^0.9.1",
     "uuid": "^8.3.2",

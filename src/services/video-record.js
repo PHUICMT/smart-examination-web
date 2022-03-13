@@ -3,12 +3,7 @@ const RecordRTC = require("recordrtc");
 
 export default function HandleRecorder() {
   console.log("Create HandleRecorder object");
-  const hasGetUserMedia = !!(
-    navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia
-  );
+
   let studentId = null;
   let supject = null;
 
@@ -28,24 +23,20 @@ export default function HandleRecorder() {
 
   const stopRecord = () => {
     const fileName = getFileName(studentId, supject);
-    recordVideo.stopRecording(() => {
-      let params = {
-        type: "video/webm",
-        data: recordVideo.blob,
-        id: fileName,
-      };
-      recording = false;
-      uploading = true;
-      //TODO Send video to server
-    });
-  };
-
-  const requestUserMedia = () => {
-    console.log("requestUserMedia");
-    captureUserMedia((stream) => {
-      src = window.URL.createObjectURL(stream);
-      console.log("setting state", src);
-    });
+    if (recordVideo !== null) {
+      recordVideo.stopRecording(() => {
+        let params = {
+          type: "video/webm",
+          data: recordVideo.blob,
+          id: fileName,
+        };
+        recording = false;
+        uploading = true;
+        console.log("File name : " + fileName);
+        console.log(recordVideo);
+        //TODO Send video to server
+      });
+    }
   };
 
   function getFileName(studentId, supject) {
@@ -59,7 +50,7 @@ export default function HandleRecorder() {
 
       return year + "-" + month + "-" + date;
     };
-    return "[" + supject + "]" + "[" + studentId + "]" + dateNow + ".mp4";
+    return "[" + supject + "]-" + "[" + studentId + "]-" + dateNow() + ".mp4";
   }
 
   function captureUserMedia(callback) {
@@ -71,24 +62,15 @@ export default function HandleRecorder() {
   }
 
   return {
-    setUpStudentId(studentId) {
-      if (studentId !== undefined) {
-        this.studentId = studentId;
+    setUpStudentId(setStudentId) {
+      if (setStudentId !== undefined) {
+        studentId = setStudentId;
       }
     },
-    setUpSupject(supject) {
-      if (supject !== undefined) {
-        this.supject = supject;
+    setUpSupject(setSupject) {
+      if (setSupject !== undefined) {
+        supject = setSupject;
       }
-    },
-    getUserMedia() {
-      if (!hasGetUserMedia) {
-        alert(
-          "Your browser cannot stream from your webcam. Please switch to Chrome or Firefox."
-        );
-        return;
-      }
-      requestUserMedia();
     },
     startRecord,
     stopRecord,

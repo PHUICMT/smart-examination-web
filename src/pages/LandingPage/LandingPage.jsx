@@ -21,7 +21,7 @@ import Button from '@mui/material/Button';
 import { useSpring, animated } from 'react-spring';
 
 
-const MainPage = () => {
+const LandingPage = () => {
     let studentId = "07610497"
     let subject = "Computer"
     let handleRecorder = HandleRecorder()
@@ -144,4 +144,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default LandingPage;

@@ -21,20 +21,21 @@ export default function HandleRecorder() {
     });
   };
 
-  const stopRecord = () => {
+  const stopRecord = async () => {
     const fileName = getFileName(studentId, supject);
     if (recordVideo !== null) {
       recordVideo.stopRecording(() => {
         let params = {
-          type: "video/webm",
+          type: "video/mp4",
           data: recordVideo.blob,
-          id: fileName,
+          name: fileName,
         };
         recording = false;
         uploading = true;
-        console.log("File name : " + fileName);
-        console.log(recordVideo);
-        //TODO Send video to server
+
+        VideoSender.uploadVideo(params).then((res) => {
+          return res;
+        });
       });
     }
   };

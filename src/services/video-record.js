@@ -26,13 +26,12 @@ export default function HandleRecorder() {
     if (recordVideo !== null) {
       recordVideo.stopRecording(() => {
         let params = {
-          type: "video/mp4",
+          type: "video/webm",
           data: recordVideo.blob,
           name: fileName,
         };
         recording = false;
         uploading = true;
-
         VideoSender.uploadVideo(params).then((res) => {
           return res;
         });

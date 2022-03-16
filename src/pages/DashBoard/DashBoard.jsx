@@ -4,15 +4,21 @@ import createExamIcon from "../../assets/icons/create-exam.svg";
 import resultExamIcon from "../../assets/icons/result-exam.svg";
 
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import HeaderWithIcon from "../../components/header-with-icon/header-with-icon";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
 const DashBoard = () => {
+  const history = useHistory();
   const textStyle = {
     color: "text.primary",
     fontWeight: "bold",
+  };
+
+  const onClickCreateExamButton = () => {
+    history.push("/teacher/create-exam");
   };
 
   return (
@@ -24,7 +30,12 @@ const DashBoard = () => {
       />
       <div className="button-group">
         <Stack direction="row" spacing={10}>
-          <Button variant="contained" className="create-exam" sx={textStyle}>
+          <Button
+            variant="contained"
+            className="create-exam"
+            onClick={onClickCreateExamButton}
+            sx={textStyle}
+          >
             <img src={createExamIcon}></img>
             <p>สร้างข้อสอบ</p>
           </Button>

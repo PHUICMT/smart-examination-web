@@ -13,8 +13,8 @@ const InfoCard = (props) => {
             <div className="info-card" style={{ marginTop: `${marginTop}px` }}>
                 <div className="info-card-text">
                     <div className="info-card-text title-1">{title}</div>
-                    <div className="info-card-text title-2">{description}</div>
-                    <div className="info-card-text title-3">{radio}</div>
+                    {description !== null ? <div className="info-card-text title-2">{description}</div> : null}
+                    {radio !== null ? <div className="info-card-text title-3">{radio}</div> : null}
                 </div>
                 <img src={props.icon} className="info-card-icon" />
             </div>

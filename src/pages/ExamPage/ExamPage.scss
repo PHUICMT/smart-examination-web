@@ -1,36 +1,51 @@
-.exam-card {
-    height: auto;
-}
-
 .info-card {
     margin-left: auto;
     margin-right: auto;
     padding-top: 4%;
     padding-bottom: 4%;
-    padding-left: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
     border-radius: 20px;
 
     width: 1170px;
     height: auto;
-
-    grid-template-columns: auto auto;
-    align-items: center;
+    display: flex;
     justify-items: stretch;
-    justify-content: space-around;
+    justify-content: flex-start;
 
     background-color: rgba(255, 255, 255, 0.7);
     filter: drop-shadow(3px 8px 13px rgba(0, 0, 0, 0.25));
 
+    .form-group {
+        .textarea {
+            border-radius: 20px;
+            width: auto;
+            min-height: 467px;
+            border: none;
+            padding: 34px;
+        }
+    }
+
+
+
     .info-card-text {
-        width: fit-content;
+        width: max;
         text-align: left;
         padding: 1%;
         height: auto;
         word-break: break-all;
 
+        &.title-2 {
+            padding: 3%;
+            width: auto;
+            height: auto;
+        }
+
         &.title-3 {
+            width: fit-content;
             padding-left: 10%;
             padding-right: 10%;
+
         }
     }
 }

@@ -2,8 +2,11 @@ import "./ExamPage.scss";
 import "bulma";
 
 import React from "react";
+import HeaderWithIcon from "../../components/header-with-icon/header-with-icon";
 import InfoCard from "../../components/info-card/info-card";
 import { Checkbox, FormGroup } from "@mui/material/";
+import studentIcon from "../../assets/image/student-icon.png";
+import Button from "@material-ui/core/Button";
 
 import {
   RadioGroup,
@@ -13,12 +16,33 @@ import {
 } from "@material-ui/core";
 
 const ExamPage = () => {
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <React.Fragment>
+      <div className="title-card">
+        <HeaderWithIcon
+          title="แบบทดสอบ"
+          description="วิชา ศาสตร์การเขียนโปรแกรมขั้นสูง"
+          icon={studentIcon}
+        />
+      </div>
+
+      <div className="head-card">
+        <InfoCard
+          title={<div className="head"> แบบทดสอบก่อนเรียน</div>}
+          description={
+            <div className="head">
+              ชุดกิจกรรมการเรียนรู้ที่ 1 เรื่อง คอมพิวเตอร์ครอบจักรวาล
+            </div>
+          }
+          icon={null}
+          marginTop={100}
+          input={null}
+        />
+      </div>
+
       <InfoCard
         className="exam-card"
-        title="1. ขั้นตอนการพัฒนาอัลกอริทึมเพื่อแก้ปัญหา (Develops the algorithm for solution)หมายถึงข้อใด"
+        title="1. ขั้นตอนการพัฒนาอัลกอริทึมเพื่อแก้ปัญหา(Develops the algorithm for solution) หมายถึงข้อใด"
         description={null}
         icon={null}
         marginTop={100}
@@ -67,9 +91,9 @@ const ExamPage = () => {
             </div>
           </form>
         }
-        input={null}
         icon={null}
         marginTop={100}
+        input={null}
       />
 
       <InfoCard
@@ -89,6 +113,11 @@ const ExamPage = () => {
           </div>
         }
       />
+      <div className="exam-button">
+        <Button variant="contained" size="large" className="submit-exam">
+          ยืนยัน
+        </Button>
+      </div>
     </React.Fragment>
   );
 };

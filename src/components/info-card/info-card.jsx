@@ -20,7 +20,10 @@ const InfoCard = (props) => {
             <div className="info-card-text title-3">{input}</div>
           ) : null}
         </div>
-        <img alt="icon info" src={props.icon} className="info-card-icon" />
+
+        {props.icon !== null ? (
+          <img alt="icon info" src={props.icon} className="info-card-icon" />
+        ) : null}
       </div>
     </Container>
   );

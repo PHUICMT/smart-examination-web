@@ -1,49 +1,100 @@
+.title-card {
+  position: relative;
+  background: rgba(0, 117, 105, 0.8);
+  height: 383px;
+
+  .header-icon {
+    height: 680px;
+    width: 560px;
+    position: absolute;
+    top: 5%;
+    left: 60%;
+    z-index: 100;
+  }
+  .title-box {
+    .title-2 {
+      padding-left: 5%;
+    }
+  }
+}
+.head-card {
+  .info-card {
+    width: 1181px;
+    height: 197px;
+    background: rgba(162, 224, 218, 0.8);
+
+    .head {
+      text-align: center;
+      color: black;
+    }
+  }
+}
+
 .info-card {
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 4%;
-    padding-bottom: 4%;
-    padding-left: 2%;
-    padding-right: 2%;
-    border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 20px;
+  margin-top: 10px;
 
-    width: 1170px;
+  width: 1170px;
+  height: auto;
+  display: flex;
+  justify-items: stretch;
+  justify-content: flex-start;
+
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(3px 8px 13px rgba(0, 0, 0, 0.25));
+
+  .form-group {
+    .textarea {
+      border-radius: 20px;
+      width: auto;
+      min-height: 467px;
+      border: none;
+      padding: 34px;
+    }
+  }
+
+  .info-card-text {
+    width: max;
+    text-align: left;
+    padding: 1%;
     height: auto;
-    display: flex;
-    justify-items: stretch;
-    justify-content: flex-start;
+    word-break: break-all;
 
-    background-color: rgba(255, 255, 255, 0.7);
-    filter: drop-shadow(3px 8px 13px rgba(0, 0, 0, 0.25));
-
-    .form-group {
-        .textarea {
-            border-radius: 20px;
-            width: auto;
-            min-height: 467px;
-            border: none;
-            padding: 34px;
-        }
+    &.title-2 {
+      padding: 3%;
+      width: auto;
+      height: auto;
     }
 
-    .info-card-text {
-        width: max;
-        text-align: left;
-        padding: 1%;
-        height: auto;
-        word-break: break-all;
-
-        &.title-2 {
-            padding: 3%;
-            width: auto;
-            height: auto;
-        }
-
-        &.title-3 {
-            width: fit-content;
-            padding-left: 10%;
-            padding-right: 10%;
-
-        }
+    &.title-3 {
+      width: fit-content;
+      padding-left: 10%;
+      padding-right: 10%;
     }
+  }
+}
+.exam-button {
+  button {
+    margin-top: 100px;
+    margin-bottom: 38px;
+    width: 200px;
+    height: 78px;
+    background: #007569;
+    border: 5px solid #f2f2f2;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 24px;
+    color: #f2f2f2;
+  }
+  button:hover {
+    background-color: #004e46;
+  }
 }

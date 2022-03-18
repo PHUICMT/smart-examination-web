@@ -25,14 +25,12 @@ export default function HandleRecorder() {
     const fileName = getFileName(studentId, supject);
     if (recordVideo !== null) {
       recordVideo.stopRecording(() => {
-        let params = {
-          type: "video/webm",
-          data: recordVideo.blob,
-          name: fileName,
-        };
+        var data = new FormData();
+        data.append("data", recordVideo.getBlob());
+        data.append("fileName", fileName);
         recording = false;
         uploading = true;
-        VideoSender.uploadVideo(params).then((res) => {
+        VideoSender.uploadVideo(data).then((res) => {
           return res;
         });
       });
@@ -50,7 +48,7 @@ export default function HandleRecorder() {
 
       return year + "-" + month + "-" + date;
     };
-    return "[" + supject + "]-" + "[" + studentId + "]-" + dateNow() + ".mp4";
+    return "[" + supject + "]-" + "[" + studentId + "]-" + dateNow() + ".webm";
   }
 
   function captureUserMedia(callback) {

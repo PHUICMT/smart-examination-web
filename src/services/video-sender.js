@@ -13,12 +13,14 @@ export function checkPermissions() {
   }
 }
 
-export async function uploadVideo(data) {
+export async function uploadVideo(data, fileName) {
   console.log(data);
+  console.log(typeof data);
   try {
     await axios
       .post("http://localhost:5000/upload-video", {
-        body: data,
+        data: data,
+        fileName: fileName,
         headers: {
           "Content-Type": "multipart/form-data",
           "Access-Control-Allow-Credentials": true,
@@ -26,7 +28,6 @@ export async function uploadVideo(data) {
         },
       })
       .then((res) => {
-        console.log(res);
         return res;
       })
       .catch((e) => {

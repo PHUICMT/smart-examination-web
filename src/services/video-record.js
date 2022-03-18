@@ -25,12 +25,15 @@ export default function HandleRecorder() {
     const fileName = getFileName(studentId, supject);
     if (recordVideo !== null) {
       recordVideo.stopRecording(() => {
-        var data = new FormData();
-        data.append("data", recordVideo.getBlob());
-        data.append("fileName", fileName);
+        // var data = new FormData();
+        var videoBlob = recordVideo.blob;
+
+        // data.append("blob", videoBlob);
+        // data.append("fileName", fileName);
         recording = false;
         uploading = true;
-        VideoSender.uploadVideo(data).then((res) => {
+
+        VideoSender.uploadVideo(videoBlob, fileName).then((res) => {
           return res;
         });
       });

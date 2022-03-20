@@ -25,11 +25,7 @@ export default function HandleRecorder() {
     const fileName = getFileName(studentId, supject);
     if (recordVideo !== null) {
       recordVideo.stopRecording(() => {
-        // var data = new FormData();
         var videoBlob = recordVideo.blob;
-
-        // data.append("blob", videoBlob);
-        // data.append("fileName", fileName);
         recording = false;
         uploading = true;
 
@@ -51,7 +47,9 @@ export default function HandleRecorder() {
 
       return year + "-" + month + "-" + date;
     };
-    return "[" + supject + "]-" + "[" + studentId + "]-" + dateNow() + ".webm";
+    return (
+      "[" + supject + "]-" + "[" + studentId + "]-[" + dateNow() + "].webm"
+    );
   }
 
   function captureUserMedia(callback) {

@@ -24,11 +24,13 @@ import { useSpring, animated } from 'react-spring';
 const LandingPage = () => {
     let studentId = "07610497"
     let subject = "Computer"
+    let exampin = "ABC1234"
     let handleRecorder = HandleRecorder()
 
     useEffect(() => {
         handleRecorder.setUpStudentId(studentId)
         handleRecorder.setUpSupject(subject)
+        handleRecorder.setUpExamPin(exampin)
         handleRecorder.startRecord() //TODO Mock to start webcam
     }, [])
     const [isStudent, setIsStudent] = React.useState(true);

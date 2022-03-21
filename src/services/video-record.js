@@ -6,6 +6,7 @@ export default function HandleRecorder() {
 
   let studentId = null;
   let supject = null;
+  let exam_pin = null;
 
   let recordVideo = null;
   let recording = false;
@@ -22,7 +23,7 @@ export default function HandleRecorder() {
   };
 
   const stopRecord = async () => {
-    const fileName = getFileName(studentId, supject);
+    const fileName = getFileName(studentId, supject, exam_pin);
     if (recordVideo !== null) {
       recordVideo.stopRecording(() => {
         var videoBlob = recordVideo.blob;
@@ -36,7 +37,7 @@ export default function HandleRecorder() {
     }
   };
 
-  function getFileName(studentId, supject) {
+  function getFileName(studentId, supject, exam_pin) {
     const dateNow = () => {
       let timestamp = Date.now();
       let dateObject = new Date(timestamp);
@@ -48,7 +49,15 @@ export default function HandleRecorder() {
       return year + "_" + month + "_" + date;
     };
     return (
-      "[" + supject + "]-" + "[" + studentId + "]-[" + dateNow() + "].webm"
+      "[" +
+      exam_pin +
+      "]-[" +
+      supject +
+      "]-[" +
+      studentId +
+      "]-[" +
+      dateNow() +
+      "].webm"
     );
   }
 
@@ -69,6 +78,11 @@ export default function HandleRecorder() {
     setUpSupject(setSupject) {
       if (setSupject !== undefined) {
         supject = setSupject;
+      }
+    },
+    setUpExamPin(exampin) {
+      if (exampin !== undefined) {
+        exam_pin = exampin;
       }
     },
     startRecord,

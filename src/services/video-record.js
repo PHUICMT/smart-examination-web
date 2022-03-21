@@ -45,7 +45,7 @@ export default function HandleRecorder() {
       let month = dateObject.getMonth() + 1;
       let year = dateObject.getFullYear();
 
-      return year + "-" + month + "-" + date;
+      return year + "_" + month + "_" + date;
     };
     return (
       "[" + supject + "]-" + "[" + studentId + "]-[" + dateNow() + "].webm"

@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import AddIcon from "@mui/icons-material/Add";
+import Modal from "../../components/modal-notification/moodal-notification";
 
 const CreateExam = () => {
   const CreateExam = 0;
@@ -23,7 +24,6 @@ const CreateExam = () => {
   const [tab, setTab] = useState(CreateExam);
   const [pin, setPIN] = useState();
   const [isCollapsed, setIsCollapsed] = useState(false);
-  console.log(isCollapsed);
 
   const titleTextFieldStyled = {
     width: "100%",
@@ -153,6 +153,12 @@ const CreateExam = () => {
     setPIN(pin);
   };
 
+  const [show, setShow] = useState(false);
+
+  const handleOpen = () => {
+    setShow(true);
+  };
+
   return (
     <React.Fragment>
       <Box>
@@ -172,7 +178,7 @@ const CreateExam = () => {
             >
               <Typography
                 sx={tabCreateExamStyled}
-                onclick={() => {
+                onClick={() => {
                   setTab(0);
                 }}
               >
@@ -190,7 +196,7 @@ const CreateExam = () => {
             >
               <Typography
                 sx={tabExamStyled}
-                onclick={() => {
+                onClick={() => {
                   setTab(1);
                 }}
               >
@@ -329,6 +335,19 @@ const CreateExam = () => {
           <Typography>ข้อสอบ</Typography>
         )}
       </Container>
+      <div className="exam-button">
+        <Button
+          variant="contained"
+          size="large"
+          className="submit-exam"
+          onClick={handleOpen}
+        >
+          ยืนยัน
+        </Button>
+        <Modal title="แจ้งเตือน" show={show}>
+          <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
+        </Modal>
+      </div>
     </React.Fragment>
   );
 };

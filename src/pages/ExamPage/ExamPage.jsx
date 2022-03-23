@@ -1,12 +1,13 @@
 import "./ExamPage.scss";
 import "bulma";
 
-import React from "react";
+import React, { useState } from "react";
 import HeaderWithIcon from "../../components/header-with-icon/header-with-icon";
 import InfoCard from "../../components/info-card/info-card";
 import { Checkbox, FormGroup } from "@mui/material/";
 import studentIcon from "../../assets/image/student-icon.png";
 import Button from "@material-ui/core/Button";
+import Modal from "../../components/modal-notification/moodal-notification";
 
 import {
   RadioGroup,
@@ -16,6 +17,7 @@ import {
 } from "@material-ui/core";
 
 const ExamPage = () => {
+  const [show, setShow] = useState(false);
   return (
     <React.Fragment>
       <div className="title-card">
@@ -85,7 +87,7 @@ const ExamPage = () => {
           <form>
             <div className="form-group">
               <textarea
-                class="textarea has-fixed-size"
+                className="textarea has-fixed-size"
                 placeholder="เขียนคำตอบ"
               ></textarea>
             </div>
@@ -114,9 +116,17 @@ const ExamPage = () => {
         }
       />
       <div className="exam-button">
-        <Button variant="contained" size="large" className="submit-exam">
+        <Button
+          variant="contained"
+          size="large"
+          className="submit-exam"
+          onClick={() => setShow(true)}
+        >
           ยืนยัน
         </Button>
+        <Modal title="แจ้งเตือน" onClose={() => setShow(false)} show={true}>
+          <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
+        </Modal>
       </div>
     </React.Fragment>
   );

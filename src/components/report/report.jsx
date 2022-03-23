@@ -27,9 +27,6 @@
 // import Button from '@material-ui/core/Button';
 // import TextField from '@material-ui/core/TextField';
 
-
-
-
 // export function Report(props) {
 
 //     const [checkBox, setCheckBox] = useState(1);
@@ -44,8 +41,6 @@
 
 //     const [email, setEmail] = useState();
 //     const [sendingMail, setSendingMail] = useState(false);
-
-
 
 //     useEffect(() => {
 //         setCheckBox(props.location.state.checkBox);
@@ -127,8 +122,8 @@
 //         if (typeof (behavior) !== 'undefined') {
 //             return (
 //                 <div className="behavior">
-//                     {(behavior[n].includes('Changed')) ? <div className="behavior change"><h>Change</h></div> : <div />}
-//                     {(behavior[n].includes('Skip')) ? <div className="behavior skip"><h>Skip</h></div> : <div />}
+//                     {(behavior[n].includes('Changed')) ? <div className="behavior change"><h1>Change</h1></div> : <div />}
+//                     {(behavior[n].includes('Skip')) ? <div className="behavior skip"><h1>Skip</h1></div> : <div />}
 //                 </div>
 //             );
 //         }
@@ -263,4 +258,3 @@
 // };
 
 // export default Report;
-

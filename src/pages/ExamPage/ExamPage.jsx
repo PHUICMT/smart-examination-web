@@ -124,7 +124,7 @@ const ExamPage = () => {
         >
           ยืนยัน
         </Button>
-        <Modal title="แจ้งเตือน" onClose={() => setShow(false)} show={true}>
+        <Modal title="แจ้งเตือน" onClose={() => setShow(false)} show={show}>
           <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
         </Modal>
       </div>

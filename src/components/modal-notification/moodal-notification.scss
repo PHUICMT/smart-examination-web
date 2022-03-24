@@ -1,16 +1,21 @@
 .modal {
-  position: fixed;
+  position: sticky !important;
+  height: 100%;
+  width: 100%;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: all 0.3s ease-in-out;
   pointer-events: none;
+
+  -webkit-box-shadow: 0 8px 6px 1000px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 8px 6px 1000px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 6px 1000px rgba(0, 0, 0, 0.3);
 }
 
 .modal.enter-done {
@@ -24,6 +29,7 @@
 
 .modal-content {
   width: 500px;
+  height: max-content;
   border-radius: 16px;
   background-color: #fff;
   transition: all 0.3s ease-in-out;
@@ -53,13 +59,15 @@
 
 .modal-body {
   padding: 30px;
+  background-color: #fff;
   word-break: break-all;
 }
 .modal-footer {
   padding: 8px;
-  background-color: rgba(196, 196, 196, 0.35);
+  background-color: rgb(131, 131, 131);
   height: 75px;
 }
+
 .button-submit {
   margin: 10px;
   float: right;

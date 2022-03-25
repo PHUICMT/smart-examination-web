@@ -8,6 +8,9 @@ import { Button } from "@material-ui/core";
 const EnterPin = () => {
   return (
     <React.Fragment>
+      <div className="title">
+        <h1>กรุณากรอกรหัสเพื่อเข้าสอบ</h1>
+      </div>
       <InfoCard
         title={null}
         description={

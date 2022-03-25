@@ -10,6 +10,7 @@ import DashBoard from "./pages/DashBoard/DashBoard";
 import EnterPin from "./pages/EnterPin/EnterPin";
 import CreateExam from "./pages/CreateExam/CreateExam";
 import ExamPage from "./pages/ExamPage/ExamPage";
+import ResultPage from "./pages/ResultPage/ResultPage";
 
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/student/exampage" component={ExamPage} />
           <Route path="/teacher/dashboard" component={DashBoard} />
           <Route path="/teacher/create-exam" component={CreateExam} />
+          <Route path="/resultpage" component={ResultPage} />
           <Route path="*" exact>
             <Redirect from="*" to="/index" />
           </Route>

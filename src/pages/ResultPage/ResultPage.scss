@@ -1,0 +1,38 @@
+.title h1 {
+  padding-top: 15%;
+  font-size: 38px;
+  color: white;
+}
+
+.card-result-page {
+  .info-card {
+    background-color: #2d3436;
+    .result-header h1 {
+      font-size: 28px;
+      color: white;
+    }
+    .result-header label {
+      font-size: 18px;
+      color: white;
+      word-spacing: 10px;
+    }
+
+    .form-enter-pin input {
+      border-radius: 10px;
+      width: 555px;
+      height: 70px;
+      border: none;
+      font-size: 32px;
+      text-align: center;
+      box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.15);
+    }
+    .result-button button {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      width: 555px;
+      height: 70px;
+      border: none;
+      border-radius: 10px;
+    }
+  }
+}

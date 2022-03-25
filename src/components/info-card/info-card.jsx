@@ -12,7 +12,9 @@ const InfoCard = (props) => {
     <Container>
       <div className="info-card" style={{ marginTop: `${marginTop}px` }}>
         <div className="info-card-text">
-          <div className="info-card-text title-1">{title}</div>
+          {title !== null ? (
+            <div className="info-card-text title-1">{title}</div>
+          ) : null}
           {description !== null ? (
             <div className="info-card-text title-2">{description}</div>
           ) : null}

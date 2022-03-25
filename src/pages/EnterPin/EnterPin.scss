@@ -3,25 +3,28 @@
   font-size: 38px;
   color: white;
 }
-.info-card {
-  margin-top: 50px !important;
-  width: 680px !important;
-  height: 298px !important;
-  .form-enter-pin input {
-    border-radius: 10px;
-    width: 555px;
-    height: 70px;
-    border: none;
-    font-size: 32px;
-    text-align: center;
-    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.15);
-  }
-  .exam-button button {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    width: 555px;
-    height: 70px;
-    border: none;
-    border-radius: 10px;
+
+.card-enter-pin {
+  .info-card {
+    margin-top: 50px !important;
+    width: 680px !important;
+    height: 298px !important;
+    .form-enter-pin input {
+      border-radius: 10px;
+      width: 555px;
+      height: 70px;
+      border: none;
+      font-size: 32px;
+      text-align: center;
+      box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.15);
+    }
+    .exam-button button {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      width: 555px;
+      height: 70px;
+      border: none;
+      border-radius: 10px;
+    }
   }
 }

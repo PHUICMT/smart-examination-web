@@ -1,11 +1,12 @@
 import "./EnterPin.scss";
-
+import { useHistory } from "react-router-dom";
 import React from "react";
 import InfoCard from "../../components/info-card/info-card";
 
 import { Button } from "@material-ui/core";
 
 const EnterPin = () => {
+  const history = useHistory();
   return (
     <React.Fragment>
       <div className="title">
@@ -29,6 +30,7 @@ const EnterPin = () => {
                   variant="contained"
                   size="large"
                   className="submit-exam"
+                  onClick={() => history.push("/student/exampage")}
                 >
                   ยืนยัน
                 </Button>

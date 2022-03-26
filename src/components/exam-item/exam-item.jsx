@@ -14,6 +14,18 @@ export function CheckBoxExam(props) {
 
     const title = props.title
     const items = props.items
+
+    let result = [];
+    for (let i = 0; i < items.length; i++) {
+        result.push(false);
+    }
+
+    const handleChange = (event) => {
+        const index = event.target.id;
+        result[index] = event.target.checked;
+        props.onValueChange(result);
+    };
+
     return (
         < InfoCard
             className="exam-card"
@@ -27,7 +39,7 @@ export function CheckBoxExam(props) {
                         {
                             items.map((data, index) => {
                                 return (
-                                    <FormControlLabel control={<Checkbox />} label={data} key={index} />
+                                    <FormControlLabel control={<Checkbox onChange={handleChange} id={`${index}`} />} label={data} key={index} />
                                 )
                             })
                         }
@@ -42,6 +54,12 @@ export function RadioBoxExam(props) {
 
     const title = props.title
     const items = props.items
+
+    const handleChange = (event) => {
+        let result = event.target.value;
+        props.onValueChange(result);
+    };
+
     return (
         < InfoCard
             className="exam-card"
@@ -62,6 +80,7 @@ export function RadioBoxExam(props) {
                                     control={< Radio />}
                                     label={data}
                                     key={index}
+                                    onChange={handleChange}
                                 />
                             )
                         })}
@@ -75,6 +94,12 @@ export function RadioBoxExam(props) {
 export function TextFieldExam(props) {
 
     const title = props.title
+
+    const handleChange = (event) => {
+        let result = event.target.value;
+        props.onValueChange(result);
+    };
+
     return (
         <InfoCard
             className="exam-card"
@@ -85,6 +110,7 @@ export function TextFieldExam(props) {
                         <textarea
                             className="textarea has-fixed-size"
                             placeholder="เขียนคำตอบ"
+                            onChange={handleChange}
                         ></textarea>
                     </div>
                 </form>

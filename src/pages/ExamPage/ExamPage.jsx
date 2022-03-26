@@ -14,6 +14,7 @@ let scopeTimePerItem = [];
 let startHoverTimeStamp = [];
 
 let examItemsTimeStamp = [];
+let resultPerItems = [];
 let startAndEndTime = [-1, -1];
 
 const ExamPage = (props) => {
@@ -47,13 +48,13 @@ const ExamPage = (props) => {
   ]
 
   const totalItems = allItems.length;
-  console.log(totalItems);
   //Prepairing default data
   if (scopeTimePerItem.length !== totalItems) {
     for (let i = 0; i < totalItems; i++) {
       scopeTimePerItem.push(0);
       startHoverTimeStamp.push(0);
       examItemsTimeStamp.push([]);
+      resultPerItems.push(null);
     }
   }
 
@@ -78,20 +79,23 @@ const ExamPage = (props) => {
         var now = (getCurrentTime() - startAndEndTime[0]);
         var sumTime = now - before;
         scopeTimePerItem[index] += sumTime;
-        console.log(examItemsTimeStamp)
         examItemsTimeStamp[index] = [...examItemsTimeStamp[index], [before, now]];
       }
+    }
+
+    function handleOnValueChange(valueCallback) {
+      resultPerItems[index] = valueCallback;
     }
 
     const ExamItem = () => {
       if (type !== undefined) {
         switch (type) {
           case 'Radio':
-            return <RadioBoxExam title={detail.title} items={detail.items} />
+            return <RadioBoxExam onValueChange={handleOnValueChange} title={detail.title} items={detail.items} />
           case 'CheckBox':
-            return <CheckBoxExam title={detail.title} items={detail.items} />
+            return <CheckBoxExam onValueChange={handleOnValueChange} title={detail.title} items={detail.items} />
           case 'TextField':
-            return <TextFieldExam title={detail.title} />
+            return <TextFieldExam onValueChange={handleOnValueChange} title={detail.title} />
           default:
             return undefined
         }
@@ -102,7 +106,7 @@ const ExamPage = (props) => {
 
     if (ExamItem !== undefined) {
       return (
-        <div key={index} id={`id_${index}`} onMouseOver={handleOnMouseOver} onMouseLeave={handleOnMouseLeave} >
+        <div key={index} id={`${index}`} onMouseOver={handleOnMouseOver} onMouseLeave={handleOnMouseLeave} >
           <ExamItem />
         </div>
       )

@@ -13,36 +13,30 @@ import Modal from "../../components/modal-notification/moodal-notification";
 const ExamPage = (props) => {
   const [show, setShow] = useState(false);
 
-  //TODO Data From Database
-  const item1 = { //TODO MOCK data
-    title: '1. ขั้นตอนการพัฒนาอัลกอริทึมเพื่อแก้ปัญหา(Develops the algorithm for solution) หมายถึงข้อใด',
-    items: ["เอกสารประกอบโปรแกรมจะช่วยอธิบายถึงจุดประสงค์ของโปรแกรม", "อัลกอริทึมในที่นี้หมายถึงสูตรทางคณิตศาสตร์ที่ใช้สำหรับในการแก้ปัญญา", "การวางแผนการเขียนโปรแกรม ด้วยการออกแบบให้มีเวลาการประมวลผล คือผังงาน(Flowchart)"]
-  }
-
-  const item2 = { //TODO MOCK data
-    title: '2. เขียนโค้ดที่แสดงถึง MVC'
-  }
-
-  const item3 = { //TODO MOCK data
-    title: '3. ข้อใดบ้างที่เกี่ยวของกับ React',
-    items: ["Fontend", "Library", "Client"]
-  }
-
+  //TODO Data From Database should get this data from props
   const allItems = [
     {
       article: 1,
       type: 'Radio',
-      data: item1
+      data: {
+        title: '1. ขั้นตอนการพัฒนาอัลกอริทึมเพื่อแก้ปัญหา(Develops the algorithm for solution) หมายถึงข้อใด',
+        items: ["เอกสารประกอบโปรแกรมจะช่วยอธิบายถึงจุดประสงค์ของโปรแกรม", "อัลกอริทึมในที่นี้หมายถึงสูตรทางคณิตศาสตร์ที่ใช้สำหรับในการแก้ปัญญา", "การวางแผนการเขียนโปรแกรม ด้วยการออกแบบให้มีเวลาการประมวลผล คือผังงาน(Flowchart)"]
+      }
     },
     {
       article: 2,
       type: 'TextField',
-      data: item2
+      data: {
+        title: '2. เขียนโค้ดที่แสดงถึง MVC'
+      }
     },
     {
       article: 3,
       type: 'CheckBox',
-      data: item3
+      data: {
+        title: '3. ข้อใดบ้างที่เกี่ยวของกับ React',
+        items: ["Fontend", "Library", "Client"]
+      }
     }
   ]
 

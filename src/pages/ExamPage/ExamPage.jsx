@@ -57,7 +57,7 @@ const ExamPage = (props) => {
     }
   }
 
-  function renderExamByType(type, detail, index) {
+  function getExamByType(type, detail, index) {
     let onHover = false;
 
     function getCurrentTime() {
@@ -142,7 +142,7 @@ const ExamPage = (props) => {
             const detail = data.data
 
             return (
-              renderExamByType(type, detail, index)
+              getExamByType(type, detail, index)
             )
           })
         }

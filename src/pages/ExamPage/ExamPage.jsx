@@ -57,38 +57,40 @@ const ExamPage = (props) => {
 
   return (
     <React.Fragment>
-      <div className="title-card">
-        <HeaderWithIcon
-          title="แบบทดสอบ"
-          description="วิชา ศาสตร์การเขียนโปรแกรมขั้นสูง"
-          icon={studentIcon}
-        />
+      <div className={show ? "noClick" : ""}>
+        <div className="title-card">
+          <HeaderWithIcon
+            title="แบบทดสอบ"
+            description="วิชา ศาสตร์การเขียนโปรแกรมขั้นสูง"
+            icon={studentIcon}
+          />
+        </div>
+
+        <div className="head-card">
+          <InfoCard
+            title={<div className="head"> แบบทดสอบก่อนเรียน</div>}
+            description={
+              <div className="head">
+                ชุดกิจกรรมการเรียนรู้ที่ 1 เรื่อง คอมพิวเตอร์ครอบจักรวาล
+              </div>
+            }
+            icon={null}
+            marginTop={100}
+            input={null}
+          />
+        </div>
+
+        {
+          allItems.map((data, _) => {
+            const type = data.type
+            const detail = data.data
+
+            return (
+              renderExamByType(type, detail)
+            )
+          })
+        }
       </div>
-
-      <div className="head-card">
-        <InfoCard
-          title={<div className="head"> แบบทดสอบก่อนเรียน</div>}
-          description={
-            <div className="head">
-              ชุดกิจกรรมการเรียนรู้ที่ 1 เรื่อง คอมพิวเตอร์ครอบจักรวาล
-            </div>
-          }
-          icon={null}
-          marginTop={100}
-          input={null}
-        />
-      </div>
-
-      {
-        allItems.map((data, _) => {
-          const type = data.type
-          const detail = data.data
-
-          return (
-            renderExamByType(type, detail)
-          )
-        })
-      }
 
       <div className="exam-button">
         <Button

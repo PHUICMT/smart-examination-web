@@ -77,3 +77,8 @@ div {
   border-radius: 30px;
   box-shadow: inset 4.7px 10px 25px -5px #f0f0f03a;
 }
+
+.noClick {
+  pointer-events: none;
+  user-select: none;
+}

@@ -29,7 +29,6 @@ export default function HandleRecorder() {
         var videoBlob = recordVideo.blob;
         recording = false;
         uploading = true;
-
         VideoSender.uploadVideo(videoBlob, fileName).then((res) => {
           return res;
         });

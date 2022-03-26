@@ -1,7 +1,7 @@
 import "./ExamPage.scss";
 import "bulma";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderWithIcon from "../../components/header-with-icon/header-with-icon";
 import InfoCard from "../../components/info-card/info-card";
 import { CheckBoxExam, RadioBoxExam, TextFieldExam } from "../../components/exam-item/exam-item";
@@ -9,6 +9,8 @@ import { CheckBoxExam, RadioBoxExam, TextFieldExam } from "../../components/exam
 import studentIcon from "../../assets/image/student-icon.png";
 import Button from "@material-ui/core/Button";
 import Modal from "../../components/modal-notification/moodal-notification";
+import HandleRecorder from "../../services/video-record"
+import { handleOnSendExamResult } from "../../services/result-sender"
 
 let scopeTimePerItem = [];
 let startHoverTimeStamp = [];
@@ -17,8 +19,39 @@ let examItemsTimeStamp = [];
 let resultPerItems = [];
 let startAndEndTime = [-1, -1];
 
+let handleRecorder = HandleRecorder()
+
 const ExamPage = (props) => {
   const [show, setShow] = useState(false);
+
+  const [exampin, setExampin] = useState("ABC1234");
+  const [studentId, setStudentId] = useState("07610497");
+  const [subject, setSubject] = useState("Computer");
+
+  useEffect(() => {
+    if (
+      props.studentId !== undefined &&
+      props.subject !== undefined &&
+      props.exampin !== undefined
+    ) {
+      setStudentId(props.studentId);
+      setSubject(props.subject);
+      setExampin(props.exampin);
+    }
+  }, [])
+
+  useEffect(() => {
+    handleRecorder.setUpStudentId(studentId)
+    handleRecorder.setUpSupject(subject)
+    handleRecorder.setUpExamPin(exampin)
+    // handleRecorder.startRecord() //TODO Mock to start webcam
+    startAndEndTime[0] = getCurrentTime()
+  }, [])
+
+  function getCurrentTime() {
+    var now = Math.round((new Date()).getTime());
+    return now;
+  }
 
   //TODO Data From Database should get this data from props
   const allItems = [
@@ -60,11 +93,6 @@ const ExamPage = (props) => {
 
   function getExamByType(type, detail, index) {
     let onHover = false;
-
-    function getCurrentTime() {
-      var now = Math.round((new Date()).getTime());
-      return now;
-    }
 
     const handleOnMouseOver = () => {
       if (!onHover) {
@@ -115,6 +143,22 @@ const ExamPage = (props) => {
     return undefined;
   }
 
+  function handleOnConfirm() {
+    startAndEndTime[1] = getCurrentTime()
+    handleRecorder.stopRecord()
+
+    const packedData = {
+      examPin: exampin,
+      studentId: studentId,
+      resultPerItems: resultPerItems,
+      startAndEndTime: startAndEndTime,
+      examItemsTimeStamp: examItemsTimeStamp,
+    }
+    const jsonData = JSON.stringify(packedData);
+    console.log(packedData);
+    handleOnSendExamResult(jsonData);
+  }
+
   return (
     <React.Fragment>
       <div className={show ? "noClick" : ""}>
@@ -161,7 +205,11 @@ const ExamPage = (props) => {
         >
           ยืนยัน
         </Button>
-        <Modal title="แจ้งเตือน" onClose={() => setShow(false)} show={show}>
+        <Modal
+          title="แจ้งเตือน"
+          onConfirm={() => handleOnConfirm()}
+          onClose={() => setShow(false)}
+          show={show}>
           <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
         </Modal>
       </div>

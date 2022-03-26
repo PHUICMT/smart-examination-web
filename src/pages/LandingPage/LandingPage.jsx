@@ -1,5 +1,4 @@
 import "./LandingPage.scss";
-import HandleRecorder from "../../services/video-record"
 
 import silpakornIcon from '../../assets/icons/silpakorn-icon.svg'
 import maintenanceIcon from '../../assets/icons/process-01.svg'
@@ -11,7 +10,7 @@ import HeaderWithIcon from "../../components/header-with-icon/header-with-icon"
 import InfoCard from "../../components/info-card/info-card"
 import LoginPage from "../../components/login-page/login-page"
 
-import React, { useEffect } from "react";
+import React from "react";
 import Stack from '@mui/material/Stack';
 import PropTypes from 'prop-types';
 import Backdrop from '@mui/material/Backdrop';
@@ -22,17 +21,6 @@ import { useSpring, animated } from 'react-spring';
 
 
 const LandingPage = () => {
-    let studentId = "07610497"
-    let subject = "Computer"
-    let exampin = "ABC1234"
-    let handleRecorder = HandleRecorder()
-
-    useEffect(() => {
-        handleRecorder.setUpStudentId(studentId)
-        handleRecorder.setUpSupject(subject)
-        handleRecorder.setUpExamPin(exampin)
-        handleRecorder.startRecord() //TODO Mock to start webcam
-    }, [])
     const [isStudent, setIsStudent] = React.useState(true);
     const [openLogin, setOpenLogin] = React.useState(false);
     const handleOpenLogin = () => setOpenLogin(true);
@@ -119,7 +107,6 @@ const LandingPage = () => {
                         variant="contained"
                         className="student"
                         onClick={() => {
-                            handleRecorder.stopRecord()
                             setIsStudent(true)
                             handleOpenLogin()
                         }}
@@ -131,7 +118,6 @@ const LandingPage = () => {
                         variant="contained"
                         className="teacher"
                         onClick={() => {
-                            handleRecorder.stopRecord()
                             setIsStudent(false)
                             handleOpenLogin()
                         }}

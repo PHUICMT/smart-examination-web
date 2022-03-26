@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createRef } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import "./moodal-notification.scss";
@@ -19,48 +19,6 @@ const Modal = (props) => {
     };
   }, []);
 
-  async function handleOnSendExamResult(data) { //For student on finish exam
-    const json = JSON.stringify({
-      examPin: data.examPin,
-      examItems: data.examItems,
-      studentId: data.studentId,
-      startAndEndTime: data.startAndEndTime,
-      examItemsTimeStamp: data.examItemsTimeStamp,
-      clickTimeStamp: data.clickTimeStamp,
-      hoverTime: data.hoverTime,
-    });
-    return await axios
-      .post("/save-result", json, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then(function () {
-        //TODO do when post api success
-        // history.push("/index"); 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  async function handleOnSaveExamCreated(data) { // For teacher on create exam
-    const json = JSON.stringify({
-      examPin: data.examPin,
-      examItems: data.examItems,
-      teacherId: data.teacherId
-    });
-    return await axios
-      .post("/save-exam", json, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then(function () {
-        //TODO do when post api success
-        // history.push("/index"); 
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   return ReactDOM.createPortal(
     <CSSTransition
       className="modal modal-content"
@@ -78,7 +36,7 @@ const Modal = (props) => {
           <button onClick={props.onClose} className="button button-cancel">
             ยกเลิก
           </button>
-          <button onClick={props.onClose} className="button button-submit">
+          <button onClick={props.onConfirm} className="button button-submit">
             ยืนยัน
           </button>
         </div>

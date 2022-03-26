@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
 import "./moodal-notification.scss";
+import axios from "axios";
+
 
 const Modal = (props) => {
   const closeOnEscapeKeyDown = (e) => {
@@ -16,6 +18,48 @@ const Modal = (props) => {
       document.body.removeEventListener("keydown", closeOnEscapeKeyDown);
     };
   }, []);
+
+  async function handleOnSendExamResult(data) { //For student on finish exam
+    const json = JSON.stringify({
+      examPin: data.examPin,
+      examItems: data.examItems,
+      studentId: data.studentId,
+      startAndEndTime: data.startAndEndTime,
+      examItemsTimeStamp: data.examItemsTimeStamp,
+      clickTimeStamp: data.clickTimeStamp,
+      hoverTime: data.hoverTime,
+    });
+    return await axios
+      .post("/save-result", json, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function () {
+        //TODO do when post api success
+        // history.push("/index"); 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  async function handleOnSaveExamCreated(data) { // For teacher on create exam
+    const json = JSON.stringify({
+      examPin: data.examPin,
+      examItems: data.examItems,
+      teacherId: data.teacherId
+    });
+    return await axios
+      .post("/save-exam", json, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(function () {
+        //TODO do when post api success
+        // history.push("/index"); 
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   return ReactDOM.createPortal(
     <CSSTransition

@@ -22,12 +22,12 @@ export function CheckBoxExam(props) {
             icon={null}
             marginTop={100}
             input={
-                < div div >
+                <div>
                     <FormGroup>
                         {
-                            items.map((data, _) => {
+                            items.map((data, index) => {
                                 return (
-                                    <FormControlLabel control={<Checkbox />} label={data} />
+                                    <FormControlLabel control={<Checkbox />} label={data} key={index} />
                                 )
                             })
                         }
@@ -61,6 +61,7 @@ export function RadioBoxExam(props) {
                                     value={`${index}`}
                                     control={< Radio />}
                                     label={data}
+                                    key={index}
                                 />
                             )
                         })}

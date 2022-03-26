@@ -10,6 +10,12 @@ import studentIcon from "../../assets/image/student-icon.png";
 import Button from "@material-ui/core/Button";
 import Modal from "../../components/modal-notification/moodal-notification";
 
+let scopeTimePerItem = [];
+let startHoverTimeStamp = [];
+
+let examItemsTimeStamp = [];
+let startAndEndTime = [-1, -1];
+
 const ExamPage = (props) => {
   const [show, setShow] = useState(false);
 
@@ -40,19 +46,69 @@ const ExamPage = (props) => {
     }
   ]
 
-  function renderExamByType(type, detail) {
-    if (type != undefined) {
-      switch (type) {
-        case 'Radio':
-          return <RadioBoxExam title={detail.title} items={detail.items} />
-        case 'CheckBox':
-          return <CheckBoxExam title={detail.title} items={detail.items} />
-        case 'TextField':
-          return <TextFieldExam title={detail.title} />
-        default:
-          return null
+  const totalItems = allItems.length;
+  console.log(totalItems);
+  //Prepairing default data
+  if (scopeTimePerItem.length !== totalItems) {
+    for (let i = 0; i < totalItems; i++) {
+      scopeTimePerItem.push(0);
+      startHoverTimeStamp.push(0);
+      examItemsTimeStamp.push([]);
+    }
+  }
+
+  function renderExamByType(type, detail, index) {
+    let onHover = false;
+
+    function getCurrentTime() {
+      var now = Math.round((new Date()).getTime());
+      return now;
+    }
+
+    const handleOnMouseOver = () => {
+      if (!onHover) {
+        onHover = true;
+        startHoverTimeStamp[index] = getCurrentTime();
       }
     }
+    const handleOnMouseLeave = () => {
+      if (onHover) {
+        onHover = false;
+        var before = (startHoverTimeStamp[index] - startAndEndTime[0]);
+        var now = (getCurrentTime() - startAndEndTime[0]);
+        var sumTime = now - before;
+        scopeTimePerItem[index] += sumTime;
+        console.log(examItemsTimeStamp)
+        examItemsTimeStamp[index] = [...examItemsTimeStamp[index], [before, now]];
+      }
+    }
+
+    const ExamItem = () => {
+      if (type !== undefined) {
+        switch (type) {
+          case 'Radio':
+            return <RadioBoxExam title={detail.title} items={detail.items} />
+          case 'CheckBox':
+            return <CheckBoxExam title={detail.title} items={detail.items} />
+          case 'TextField':
+            return <TextFieldExam title={detail.title} />
+          default:
+            return undefined
+        }
+      } else {
+        return undefined
+      }
+    }
+
+    if (ExamItem !== undefined) {
+      return (
+        <div key={index} id={`id_${index}`} onMouseOver={handleOnMouseOver} onMouseLeave={handleOnMouseLeave} >
+          <ExamItem />
+        </div>
+      )
+    }
+
+    return undefined;
   }
 
   return (
@@ -81,12 +137,12 @@ const ExamPage = (props) => {
         </div>
 
         {
-          allItems.map((data, _) => {
+          allItems.map((data, index) => {
             const type = data.type
             const detail = data.data
 
             return (
-              renderExamByType(type, detail)
+              renderExamByType(type, detail, index)
             )
           })
         }

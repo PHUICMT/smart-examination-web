@@ -20,8 +20,11 @@ export async function handleOnSaveExamCreated(data) {
   // For teacher on create exam
   const json = JSON.stringify({
     examPin: data.examPin,
-    examItems: data.examItems,
+    examName: data.examName,
     teacherId: data.teacherId,
+    itemCount: data.examItems.length,
+    examItems: data.examItems,
+    score: data.score,
   });
   return await axios
     .post("http://localhost:5000/save-exam", json, {

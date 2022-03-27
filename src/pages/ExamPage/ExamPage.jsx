@@ -49,8 +49,7 @@ const ExamPage = (props) => {
   }, [])
 
   function getCurrentTime() {
-    var now = Math.round((new Date()).getTime());
-    return now;
+    return Math.round((new Date()).getTime());
   }
 
   //TODO Data From Database should get this data from props

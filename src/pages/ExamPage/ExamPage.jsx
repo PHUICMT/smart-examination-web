@@ -44,7 +44,7 @@ const ExamPage = (props) => {
     handleRecorder.setUpStudentId(studentId)
     handleRecorder.setUpSupject(subject)
     handleRecorder.setUpExamPin(exampin)
-    // handleRecorder.startRecord() //TODO Mock to start webcam
+    handleRecorder.startRecord() //TODO Mock to start webcam
     startAndEndTime[0] = getCurrentTime()
   }, [])
 

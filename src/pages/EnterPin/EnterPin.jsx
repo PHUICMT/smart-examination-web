@@ -1,12 +1,27 @@
 import "./EnterPin.scss";
 import { useHistory } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import InfoCard from "../../components/info-card/info-card";
+import { handleOnGetExam } from "../../services/get-exam-item"
 
 import { Button } from "@material-ui/core";
 
 const EnterPin = () => {
   const history = useHistory();
+  const [examPin, setExamPin] = useState("");
+
+  async function handleOnConfirm() {
+    handleOnGetExam(examPin).then(res => {
+      if (res !== false) {
+        history.push("/student/exampage",
+          {
+            examPin: examPin,
+            data: res
+          });
+      }
+    });
+  }
+
   return (
     <React.Fragment>
       <div className="title">
@@ -24,6 +39,7 @@ const EnterPin = () => {
                     name="enter-pin"
                     placeholder="กรอกรหัส"
                     maxLength="12"
+                    onChange={(e) => setExamPin(e.target.value)}
                   />
                 </div>
                 <div className="exam-button">
@@ -31,7 +47,7 @@ const EnterPin = () => {
                     variant="contained"
                     size="large"
                     className="submit-exam"
-                    onClick={() => history.push("/student/exampage")}
+                    onClick={() => handleOnConfirm()}
                   >
                     ยืนยัน
                   </Button>

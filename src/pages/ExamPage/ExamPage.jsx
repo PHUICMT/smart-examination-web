@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "../../components/modal-notification/moodal-notification";
 import HandleRecorder from "../../services/video-record"
 import { handleOnSendExamResult } from "../../services/result-sender"
+import { useLocation } from "react-router-dom";
 
 let scopeTimePerItem = [];
 let startHoverTimeStamp = [];
@@ -22,13 +23,19 @@ let startAndEndTime = [-1, -1];
 let handleRecorder = HandleRecorder()
 
 const ExamPage = (props) => {
+  const location = useLocation();
   const [show, setShow] = useState(false);
 
-  const [exampin, setExampin] = useState("ABC1234");
+  const [exampin, setExampin] = useState(null);
   const [studentId, setStudentId] = useState("07610497");
   const [subject, setSubject] = useState("Computer");
+  const [allItems, setItems] = useState([]);
+  const [totalItems, setTotalItems] = useState(undefined);
 
   useEffect(() => {
+    setExampin(location.state.examPin);
+    setItems(location.state.data);
+    setTotalItems(location.state.data.length);
     if (
       props.studentId !== undefined &&
       props.subject !== undefined &&
@@ -38,13 +45,16 @@ const ExamPage = (props) => {
       setSubject(props.subject);
       setExampin(props.exampin);
     }
-  }, [])
+  }, [
+    location.state,
+    totalItems
+  ])
 
   useEffect(() => {
     handleRecorder.setUpStudentId(studentId)
     handleRecorder.setUpSupject(subject)
     handleRecorder.setUpExamPin(exampin)
-    handleRecorder.startRecord() //TODO Mock to start webcam
+    handleRecorder.startRecord()
     startAndEndTime[0] = getCurrentTime()
   }, [])
 
@@ -52,36 +62,8 @@ const ExamPage = (props) => {
     return Math.round((new Date()).getTime());
   }
 
-  //TODO Data From Database should get this data from props
-  const allItems = [
-    {
-      article: 1,
-      type: 'Radio',
-      data: {
-        title: '1. ขั้นตอนการพัฒนาอัลกอริทึมเพื่อแก้ปัญหา(Develops the algorithm for solution) หมายถึงข้อใด',
-        items: ["เอกสารประกอบโปรแกรมจะช่วยอธิบายถึงจุดประสงค์ของโปรแกรม", "อัลกอริทึมในที่นี้หมายถึงสูตรทางคณิตศาสตร์ที่ใช้สำหรับในการแก้ปัญญา", "การวางแผนการเขียนโปรแกรม ด้วยการออกแบบให้มีเวลาการประมวลผล คือผังงาน(Flowchart)"]
-      }
-    },
-    {
-      article: 2,
-      type: 'TextField',
-      data: {
-        title: '2. เขียนโค้ดที่แสดงถึง MVC'
-      }
-    },
-    {
-      article: 3,
-      type: 'CheckBox',
-      data: {
-        title: '3. ข้อใดบ้างที่เกี่ยวของกับ React',
-        items: ["Fontend", "Library", "Client"]
-      }
-    }
-  ]
-
-  const totalItems = allItems.length;
   //Prepairing default data
-  if (scopeTimePerItem.length !== totalItems) {
+  if (totalItems !== undefined && scopeTimePerItem.length !== totalItems) {
     for (let i = 0; i < totalItems; i++) {
       scopeTimePerItem.push(0);
       startHoverTimeStamp.push(0);
@@ -154,7 +136,6 @@ const ExamPage = (props) => {
       examItemsTimeStamp: examItemsTimeStamp,
     }
     const jsonData = JSON.stringify(packedData);
-    console.log(packedData);
     handleOnSendExamResult(jsonData);
   }
 
@@ -182,7 +163,6 @@ const ExamPage = (props) => {
             input={null}
           />
         </div>
-
         {
           allItems.map((data, index) => {
             const type = data.type
@@ -194,7 +174,6 @@ const ExamPage = (props) => {
           })
         }
       </div>
-
       <div className="exam-button">
         <Button
           variant="contained"

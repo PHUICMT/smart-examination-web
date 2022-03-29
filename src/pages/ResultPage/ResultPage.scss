@@ -16,7 +16,19 @@
       color: white;
       word-spacing: 10px;
     }
-
+    .result-body {
+      table {
+        width: 1028px;
+        text-align: center;
+      }
+      th {
+        color: white;
+      }
+      td {
+        justify-items: center;
+        color: white;
+      }
+    }
     .form-enter-pin input {
       border-radius: 10px;
       width: 555px;

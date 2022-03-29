@@ -33,6 +33,8 @@ const ExamPage = (props) => {
   const [totalItems, setTotalItems] = useState(undefined);
 
   useEffect(() => {
+    handleRecorder.setUpExamPin(location.state.examPin);
+
     setExampin(location.state.examPin);
     setItems(location.state.data);
     setTotalItems(location.state.data.length);
@@ -53,7 +55,6 @@ const ExamPage = (props) => {
   useEffect(() => {
     handleRecorder.setUpStudentId(studentId)
     handleRecorder.setUpSupject(subject)
-    handleRecorder.setUpExamPin(exampin)
     handleRecorder.startRecord()
     startAndEndTime[0] = getCurrentTime()
   }, [])

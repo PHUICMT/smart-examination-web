@@ -57,13 +57,20 @@ export function RadioBoxExam(props) {
 
   const handleChange = (event) => {
     let result = event.target.value;
-    props.onValueChange(result);
+    if (!props.question) {
+      props.onValueChange(result);
+    } else {
+      props.onChangeResult(event);
+    }
   };
 
   return (
     <InfoCard
       className="exam-card"
       title={title}
+      onChange={props.onValueChangeQuestion}
+      value={props.value}
+      question={props.question}
       description={null}
       icon={null}
       marginTop={100}

@@ -105,6 +105,7 @@ const ExamPage = (props) => {
 
     function handleOnValueChange(valueCallback) {
       resultPerItems[index] = valueCallback;
+      console.log(resultPerItems[index]);
     }
 
     const ExamItem = () => {

@@ -15,13 +15,13 @@ const InfoCard = (props) => {
         <div className="info-card-text">
           {!props.question ? (
             // title !== null || description !== null || input !== null ? (
-              <div>
-                <div className="info-card-text title-1">{title}</div>
-                <div className="info-card-text title-2">{description}</div>
-                <div className="info-card-text title-3">{input}</div>
-              </div>
-            // ) : null
-          ) : title !== null ? (
+            <div>
+              <div className="info-card-text title-1">{title}</div>
+              <div className="info-card-text title-2">{description}</div>
+              <div className="info-card-text title-3">{input}</div>
+            </div>
+          ) : // ) : null
+          title !== null ? (
             <div>
               <TitleWithInput
                 blackTitle={true}

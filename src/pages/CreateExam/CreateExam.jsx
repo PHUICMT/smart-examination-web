@@ -49,19 +49,29 @@ const CreateExam = () => {
         question: question,
         result: result,
       };
-      cardList.push(card);
-      setCardList(cardList);
-      console.log(cardList);
+    }else if (type === "Radio"){
+      card = {
+        type: type,
+        question: question,
+        result: result,
+        items: [ "Newii","Sukorn","PhuICMT" ],
+      };
     }
+    
+    cardList.push(card);
+    setCardList(cardList);
+    console.log(cardList);
   };
 
   const onChangeTitle = () => (event) => {};
 
   const onChangeQuestion = (event) => {
+    console.log(event.target.value);
     setQuestion(event.target.value);
   };
 
   const onChangeResult = (event) => {
+    console.log(event.target.value);
     setResult(event.target.value);
   };
 
@@ -141,18 +151,28 @@ const CreateExam = () => {
             ) : type === TextFieldType ? (
               <TextFieldExam
                 title="คำถาม"
-                onChangeResult={onChangeResult}
+                onValueChange={(event) => {
+                  console.log(event.target);
+                }}
                 onValueChangeQuestion={onChangeQuestion}
                 question={true}
               />
             ) : type === RadioBoxType ? (
               <RadioBoxExam
                 title="คำถาม"
-                onChangeResult={() => {}}
-                onValueChangeQuestion={() => {}}
+                onChangeResult={onChangeResult}
+                onValueChangeQuestion={onChangeQuestion}
+                question={true}
+                items={[1, 2, 3, 4, 5]}
               />
             ) : type === CheckBoxType ? (
-              <CheckBoxExam title="Add Exams" onValueChange={() => {}} />
+              <CheckBoxExam
+                title="Add Exams"
+                onChangeResult={onChangeResult}
+                onValueChangeQuestion={onChangeQuestion}
+                question={true}
+                items={[1, 2, 3, 4, 5]}
+              />
             ) : (
               <div className="form-select-type">
                 <Button
@@ -228,11 +248,26 @@ const CreateExam = () => {
           console.log(data);
           return (
             <div key={index}>
-              <TextFieldExam
-                title={data.question}
-                description={data.result}
-                question={false}
-              />
+              {data.type === "TextField" ? (
+                <TextFieldExam
+                  title={data.question}
+                  description={data.result}
+                  question={false}
+                />
+              ) : data.type === "Radio" ? (
+                <RadioBoxExam
+                  title={data.question}
+                  item={data.items}
+                  value={data.result}
+                  question={false}
+                />
+              ) : data.type === "CheckBox" ? (
+                <CheckBoxType
+                  title={data.question}
+                  item={[1, 2, 3, 4, 5]}
+                  onChangeResult={onChangeResult}
+                  question={false}
+                />): null}
             </div>
           );
         })}

@@ -6,8 +6,8 @@ import { Button, TableCell } from "@material-ui/core";
 import { data } from "jquery";
 
 const ResultPage = () => {
-  let heading = ["Item Question", "Click Time", "Reaction Time", "Emotion"];
-  let body = [["1"], ["2"], ["3"], ["4"]];
+  let heading = ["Item Question", "Reaction Time", "Emotion"];
+  let body = [["1"], ["2"], ["3"]];
   return (
     <React.Fragment>
       <div className="card-result-page">

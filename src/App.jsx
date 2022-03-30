@@ -28,7 +28,7 @@ function App() {
           <Route path="/student/exampage" component={ExamPage} />
           <Route path="/teacher/dashboard" component={DashBoard} />
           <Route path="/teacher/create-exam" component={CreateExam} />
-          <Route path="/resultpage" component={ResultPage} />
+          <Route path="/teacher/resultpage" component={ResultPage} />
           <Route path="*" exact>
             <Redirect from="*" to="/index" />
           </Route>

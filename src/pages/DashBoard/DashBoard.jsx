@@ -21,6 +21,10 @@ const DashBoard = () => {
     history.push("/teacher/create-exam");
   };
 
+  const onClickResultExamButton = () => {
+    history.push("/teacher/resultpage");
+  };
+
   return (
     <React.Fragment>
       <HeaderWithIcon
@@ -39,7 +43,12 @@ const DashBoard = () => {
             <img src={createExamIcon}></img>
             <p>สร้างข้อสอบ</p>
           </Button>
-          <Button variant="contained" className="result-exam" sx={textStyle}>
+          <Button
+            variant="contained"
+            className="result-exam"
+            onClick={onClickResultExamButton}
+            sx={textStyle}
+          >
             <img src={resultExamIcon}></img>
             <p>ผลการทดสอบ</p>
           </Button>

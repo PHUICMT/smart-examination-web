@@ -40,8 +40,8 @@ const ExamPage = (props) => {
     handleRecorder.setUpExamPin(location.state.examPin);
 
     setExampin(location.state.examPin);
-    setItems(location.state.data);
-    setTotalItems(location.state.data.length);
+    setItems(location.state.data.exam);
+    setTotalItems(location.state.data.exam.length);
     if (
       props.studentId !== undefined &&
       props.subject !== undefined &&

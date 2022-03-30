@@ -4,13 +4,17 @@ import "bulma";
 import React, { useState, useEffect } from "react";
 import HeaderWithIcon from "../../components/header-with-icon/header-with-icon";
 import InfoCard from "../../components/info-card/info-card";
-import { CheckBoxExam, RadioBoxExam, TextFieldExam } from "../../components/exam-item/exam-item";
+import {
+  CheckBoxExam,
+  RadioBoxExam,
+  TextFieldExam,
+} from "../../components/exam-item/exam-item";
 
 import studentIcon from "../../assets/image/student-icon.png";
 import Button from "@material-ui/core/Button";
 import Modal from "../../components/modal-notification/moodal-notification";
-import HandleRecorder from "../../services/video-record"
-import { handleOnSendExamResult } from "../../services/result-sender"
+import HandleRecorder from "../../services/video-record";
+import { handleOnSendExamResult } from "../../services/result-sender";
 import { useLocation } from "react-router-dom";
 
 let scopeTimePerItem = [];
@@ -20,7 +24,7 @@ let examItemsTimeStamp = [];
 let resultPerItems = [];
 let startAndEndTime = [-1, -1];
 
-let handleRecorder = HandleRecorder()
+let handleRecorder = HandleRecorder();
 
 const ExamPage = (props) => {
   const location = useLocation();
@@ -49,18 +53,21 @@ const ExamPage = (props) => {
     }
   }, [
     location.state,
-    totalItems
-  ])
+    props.exampin,
+    props.studentId,
+    props.subject,
+    totalItems,
+  ]);
 
   useEffect(() => {
-    handleRecorder.setUpStudentId(studentId)
-    handleRecorder.setUpSupject(subject)
-    handleRecorder.startRecord()
-    startAndEndTime[0] = getCurrentTime()
-  }, [])
+    handleRecorder.setUpStudentId(studentId);
+    handleRecorder.setUpSupject(subject);
+    handleRecorder.startRecord();
+    startAndEndTime[0] = getCurrentTime();
+  }, [studentId, subject]);
 
   function getCurrentTime() {
-    return Math.round((new Date()).getTime());
+    return Math.round(new Date().getTime());
   }
 
   //Prepairing default data
@@ -81,17 +88,20 @@ const ExamPage = (props) => {
         onHover = true;
         startHoverTimeStamp[index] = getCurrentTime();
       }
-    }
+    };
     const handleOnMouseLeave = () => {
       if (onHover) {
         onHover = false;
-        var before = (startHoverTimeStamp[index] - startAndEndTime[0]);
-        var now = (getCurrentTime() - startAndEndTime[0]);
+        var before = startHoverTimeStamp[index] - startAndEndTime[0];
+        var now = getCurrentTime() - startAndEndTime[0];
         var sumTime = now - before;
         scopeTimePerItem[index] += sumTime;
-        examItemsTimeStamp[index] = [...examItemsTimeStamp[index], [before, now]];
+        examItemsTimeStamp[index] = [
+          ...examItemsTimeStamp[index],
+          [before, now],
+        ];
       }
-    }
+    };
 
     function handleOnValueChange(valueCallback) {
       resultPerItems[index] = valueCallback;
@@ -100,34 +110,56 @@ const ExamPage = (props) => {
     const ExamItem = () => {
       if (type !== undefined) {
         switch (type) {
-          case 'Radio':
-            return <RadioBoxExam onValueChange={handleOnValueChange} title={detail.title} items={detail.items} />
-          case 'CheckBox':
-            return <CheckBoxExam onValueChange={handleOnValueChange} title={detail.title} items={detail.items} />
-          case 'TextField':
-            return <TextFieldExam onValueChange={handleOnValueChange} title={detail.title} />
+          case "Radio":
+            return (
+              <RadioBoxExam
+                onValueChange={handleOnValueChange}
+                title={detail.title}
+                items={detail.items}
+              />
+            );
+          case "CheckBox":
+            return (
+              <CheckBoxExam
+                onValueChange={handleOnValueChange}
+                title={detail.title}
+                items={detail.items}
+              />
+            );
+          case "TextField":
+            return (
+              <TextFieldExam
+                onValueChange={handleOnValueChange}
+                title={detail.title}
+              />
+            );
           default:
-            return undefined
+            return undefined;
         }
       } else {
-        return undefined
+        return undefined;
       }
-    }
+    };
 
     if (ExamItem !== undefined) {
       return (
-        <div key={index} id={`${index}`} onMouseOver={handleOnMouseOver} onMouseLeave={handleOnMouseLeave} >
+        <div
+          key={index}
+          id={`${index}`}
+          onMouseOver={handleOnMouseOver}
+          onMouseLeave={handleOnMouseLeave}
+        >
           <ExamItem />
         </div>
-      )
+      );
     }
 
     return undefined;
   }
 
   function handleOnConfirm() {
-    startAndEndTime[1] = getCurrentTime()
-    handleRecorder.stopRecord()
+    startAndEndTime[1] = getCurrentTime();
+    handleRecorder.stopRecord();
 
     const packedData = {
       examPin: exampin,
@@ -135,7 +167,7 @@ const ExamPage = (props) => {
       resultPerItems: resultPerItems,
       startAndEndTime: startAndEndTime,
       examItemsTimeStamp: examItemsTimeStamp,
-    }
+    };
     const jsonData = JSON.stringify(packedData);
     handleOnSendExamResult(jsonData);
   }
@@ -164,16 +196,12 @@ const ExamPage = (props) => {
             input={null}
           />
         </div>
-        {
-          allItems.map((data, index) => {
-            const type = data.type
-            const detail = data.data
+        {allItems.map((data, index) => {
+          const type = data.type;
+          const detail = data.data;
 
-            return (
-              getExamByType(type, detail, index)
-            )
-          })
-        }
+          return getExamByType(type, detail, index);
+        })}
       </div>
       <div className="exam-button">
         <Button
@@ -188,7 +216,8 @@ const ExamPage = (props) => {
           title="แจ้งเตือน"
           onConfirm={() => handleOnConfirm()}
           onClose={() => setShow(false)}
-          show={show}>
+          show={show}
+        >
           <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
         </Modal>
       </div>

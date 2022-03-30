@@ -5,6 +5,12 @@ import React, { useState, useEffect } from "react";
 import HeaderForTeacher from "../../components/header-for-teacher/header-for-teacher";
 import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
+import Modal from "../../components/modal-notification/moodal-notification";
+import {
+  CheckBoxExam,
+  RadioBoxExam,
+  TextFieldExam,
+} from "../../components/exam-item/exam-item";
 
 import {
   Container,
@@ -15,28 +21,48 @@ import {
   Button,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import Modal from "../../components/modal-notification/moodal-notification";
 
 const CreateExam = () => {
   const CreateExam = 0;
   const Exam = 1;
+  const CheckBoxType = "CheckBox";
+  const RadioBoxType = "Radio";
+  const TextFieldType = "TextField";
   const [tab, setTab] = useState(CreateExam);
   const [pin, setPIN] = useState();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [type, setType] = useState();
+  const [question, setQuestion] = useState("");
+  const [result, setResult] = useState("");
+  const [cardList, setCardList] = useState([]);
 
   const addCardButtonStyled = {
     width: "100%",
     height: 100,
   };
 
-  const cardButtonStyled = {
-    width: "100%",
-    height: 400,
-    padding: "12px",
+  const AddCard = (type, question, result) => {
+    let card;
+    if (type === "TextField") {
+      card = {
+        type: type,
+        question: question,
+        result: result,
+      };
+      cardList.push(card);
+      setCardList(cardList);
+      console.log(cardList);
+    }
   };
 
-  const onChangeTitle = () => (event) => {
-    //to do ...
+  const onChangeTitle = () => (event) => {};
+
+  const onChangeQuestion = (event) => {
+    setQuestion(event.target.value);
+  };
+
+  const onChangeResult = (event) => {
+    setResult(event.target.value);
   };
 
   const autoGeneratePIN = () => {
@@ -54,6 +80,12 @@ const CreateExam = () => {
   const handleOpen = () => {
     setShow(true);
   };
+
+  const onClickExamType = (type) => {
+    console.log(type);
+    setType(type);
+  };
+
   useEffect(() => {
     autoGeneratePIN();
   }, []);
@@ -106,55 +138,47 @@ const CreateExam = () => {
                   </IconButton>
                 </Button>
               </div>
+            ) : type === TextFieldType ? (
+              <TextFieldExam
+                title="คำถาม"
+                onChangeResult={onChangeResult}
+                onValueChangeQuestion={onChangeQuestion}
+                question={true}
+              />
+            ) : type === RadioBoxType ? (
+              <RadioBoxExam
+                title="คำถาม"
+                onChangeResult={() => {}}
+                onValueChangeQuestion={() => {}}
+              />
+            ) : type === CheckBoxType ? (
+              <CheckBoxExam title="Add Exams" onValueChange={() => {}} />
             ) : (
-              <div className="card-container">
-                <Box sx={cardButtonStyled}>
-                  <TitleWithInput
-                    title="คำถาม"
-                    onClick={() => {}}
-                    disabled={false}
-                    blackTitle={true}
-                  />
-                  {/* <div>
-                    <form>
-                      <div className="form-group">
-                        <textarea
-                          class="textarea has-fixed-size"
-                          placeholder="เขียนคำตอบ"
-                        ></textarea>
-                      </div>
-                    </form>
-                  </div> */}
-
-                  <Box
-                    sx={{
-                      display: "flex",
-                      marginTop: "200px",
-                      justifyContent: "right",
-                    }}
-                  >
-                    <Button
-                      variant="outlined"
-                      sx={{
-                        height: "40px",
-                        width: "150px",
-                        marginRight: "10px",
-                      }}
-                      onClick={() => {
-                        setIsCollapsed(false);
-                      }}
-                    >
-                      ยกเลิก
-                    </Button>
-                    <Button
-                      variant="contained"
-                      sx={{ height: "40px", width: "150px" }}
-                      onClick={() => {}}
-                    >
-                      เพิ่มการ์ด
-                    </Button>
-                  </Box>
-                </Box>
+              <div className="form-select-type">
+                <Button
+                  className="select-textfield"
+                  onClick={() => {
+                    onClickExamType(TextFieldType);
+                  }}
+                >
+                  Textfield
+                </Button>
+                <Button
+                  className="select-radio"
+                  onClick={() => {
+                    onClickExamType(RadioBoxType);
+                  }}
+                >
+                  Radio
+                </Button>
+                <Button
+                  className="select-checkbox"
+                  onClick={() => {
+                    onClickExamType(CheckBoxType);
+                  }}
+                >
+                  Checkboxes
+                </Button>
               </div>
             )}
           </Box>
@@ -162,6 +186,57 @@ const CreateExam = () => {
           <Typography>ข้อสอบ</Typography>
         )}
       </Container>
+      <div>
+        <Button
+          variant="outlined"
+          sx={{
+            height: "50px",
+            width: "150px",
+            marginTop: "20px",
+            backgroundColor: "#fff",
+          }}
+          onClick={() => {
+            console.log("type : " + type);
+            console.log("คำถาม : " + question);
+            console.log("คำตอบ : " + result);
+            AddCard(type, question, result);
+            setIsCollapsed(false);
+            setType();
+          }}
+        >
+          เพิ่มการ์ด
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            height: "50px",
+            width: "150px",
+            marginTop: "20px",
+            backgroundColor: "#fff",
+          }}
+          onClick={() => {
+            setIsCollapsed(false);
+            setType();
+          }}
+        >
+          ยกเลิก
+        </Button>
+      </div>
+
+      <div>
+        {cardList.map((data, index) => {
+          console.log(data);
+          return (
+            <div key={index}>
+              <TextFieldExam
+                title={data.question}
+                description={data.result}
+                question={false}
+              />
+            </div>
+          );
+        })}
+      </div>
       <div className="exam-button">
         <Button
           variant="contained"

@@ -1,6 +1,7 @@
 import "./info-card.scss";
 
 import { Container } from "react-bulma-components";
+import TitleWithInput from "../../components/title-with-input/title-with-input";
 
 const InfoCard = (props) => {
   let marginTop = props.marginTop;
@@ -12,15 +13,32 @@ const InfoCard = (props) => {
     <Container>
       <div className="info-card" style={{ marginTop: `${marginTop}px` }}>
         <div className="info-card-text">
-          {title !== null ? (
-            <div className="info-card-text title-1">{title}</div>
+          {!props.question ? (
+            // title !== null || description !== null || input !== null ? (
+              <div>
+                <div className="info-card-text title-1">{title}</div>
+                <div className="info-card-text title-2">{description}</div>
+                <div className="info-card-text title-3">{input}</div>
+              </div>
+            // ) : null
+          ) : title !== null ? (
+            <div>
+              <TitleWithInput
+                blackTitle={true}
+                title={title}
+                onChange={props.onChange}
+                value={props.valueTi}
+              />
+              <div className="info-card-text title-2">{description}</div>
+              <div className="info-card-text title-3">{input}</div>
+            </div>
           ) : null}
-          {description !== null ? (
+          {/* {description !== null ? (
             <div className="info-card-text title-2">{description}</div>
           ) : null}
           {input !== null ? (
             <div className="info-card-text title-3">{input}</div>
-          ) : null}
+          ) : null} */}
         </div>
 
         {props.icon !== null ? (

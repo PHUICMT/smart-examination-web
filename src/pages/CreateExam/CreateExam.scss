@@ -34,3 +34,35 @@
   justify-content: "right";
   justify-items: end;
 }
+.form-select-type {
+  button {
+    width: 25%;
+    height: 200px;
+    margin: 20px;
+    text-align:start;
+    background-color: #ffffff;
+    opacity: 0.7;
+    border-radius: 10px;
+  }
+  .select-textfield {
+    background-image: url("../../assets/icons/textfield-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    //background-position-y: 70%;
+   
+  }
+  .select-radio {
+    background-image: url("../../assets/icons/radio-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .select-checkbox {
+    background-image: url("../../assets/icons/checkbox-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  button:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  
+}

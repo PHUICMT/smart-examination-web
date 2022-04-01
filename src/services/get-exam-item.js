@@ -4,8 +4,7 @@ export async function handleOnGetExam(examPin) {
   return await axios
     .get("http://localhost:5000/get-exam", { params: { exampin: examPin } })
     .then(function (result) {
-      const response = result.data.exam_items;
-      console.log(response);
+      const response = result.data;
       if (response !== false) {
         return response;
       }

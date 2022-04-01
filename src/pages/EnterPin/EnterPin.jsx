@@ -16,7 +16,7 @@ const EnterPin = () => {
         history.push("/student/exampage",
           {
             examPin: examPin,
-            data: res
+            data: res.exam_items
           });
       }
     });

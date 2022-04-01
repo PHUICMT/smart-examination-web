@@ -38,18 +38,13 @@ const ExamPage = (props) => {
 
   useEffect(() => {
     handleRecorder.setUpExamPin(location.state.examPin);
-
     setExampin(location.state.examPin);
     setItems(location.state.data.exam);
     setTotalItems(location.state.data.exam.length);
-    if (
-      props.studentId !== undefined &&
-      props.subject !== undefined &&
-      props.exampin !== undefined
-    ) {
+    setSubject(location.state.data.exam_subject);
+    setExampin(location.state.examPin);
+    if (props.studentId !== undefined) {
       setStudentId(props.studentId);
-      setSubject(props.subject);
-      setExampin(props.exampin);
     }
   }, [
     location.state,

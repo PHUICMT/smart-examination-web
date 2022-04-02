@@ -49,18 +49,30 @@ const CreateExam = () => {
         question: question,
         result: result,
       };
-    }else if (type === "Radio"){
+    } else if (type === "Radio") {
       card = {
         type: type,
         question: question,
         result: result,
-        items: [ "Newii","Sukorn","PhuICMT" ],
+        items: ["Newii", "Sukorn", "PhuICMT"],
+      };
+    } else if (type === "TextField") {
+      card = {
+        type: type,
+        question: question,
+        result: result,
+        items: ["Newii", "Sukorn", "PhuICMT"],
       };
     }
-    
+
     cardList.push(card);
     setCardList(cardList);
     console.log(cardList);
+  };
+
+  const addRadio = (item) => {
+    let optionRadio;
+    optionRadio = { item };
   };
 
   const onChangeTitle = () => (event) => {};
@@ -171,7 +183,18 @@ const CreateExam = () => {
                 onChangeResult={onChangeResult}
                 onValueChangeQuestion={onChangeQuestion}
                 question={true}
-                items={[1, 2, 3, 4, 5]}
+                items={[
+                  <Button
+                    sx={{
+                      height: "50px",
+                      width: "150px",
+                      marginTop: "20px",
+                      backgroundColor: "#fff",
+                      border: "50%",
+                    }}
+                    onClick={addRadio}
+                  ></Button>,
+                ]}
               />
             ) : (
               <div className="form-select-type">
@@ -264,10 +287,11 @@ const CreateExam = () => {
               ) : data.type === "CheckBox" ? (
                 <CheckBoxType
                   title={data.question}
-                  item={[1, 2, 3, 4, 5]}
+                  item={data.items}
                   onChangeResult={onChangeResult}
                   question={false}
-                />): null}
+                />
+              ) : null}
             </div>
           );
         })}

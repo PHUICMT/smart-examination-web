@@ -34,12 +34,21 @@
   justify-content: "right";
   justify-items: end;
 }
+
+.form-checkbox-type {
+  .button-add-option {
+    height: "50px";
+    width: "150px";
+    background-color: "#fff";
+  }
+}
+
 .form-select-type {
   button {
     width: 25%;
     height: 200px;
     margin: 20px;
-    text-align:start;
+    text-align: start;
     background-color: #ffffff;
     opacity: 0.7;
     border-radius: 10px;
@@ -49,7 +58,6 @@
     background-repeat: no-repeat;
     background-position: center;
     //background-position-y: 70%;
-   
   }
   .select-radio {
     background-image: url("../../assets/icons/radio-icon.svg");
@@ -64,5 +72,4 @@
   button:hover {
     background-color: rgba(255, 255, 255, 0.7);
   }
-  
 }

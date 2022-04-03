@@ -13,8 +13,14 @@ import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
+import { login } from "../../services/login";
+
 const InputField = (props) => {
   let color = props.isStudent ? "#009182" : "#64FF";
+
+  function handleOnValueChange(e) {
+    return props.onValueChange(e.target.value);
+  }
 
   return (
     <Box
@@ -28,7 +34,7 @@ const InputField = (props) => {
       }}
     >
       {props.isUserId ? <AccountCircle /> : <LockIcon />}
-      <TextField label={props.label} variant="standard" fullWidth />
+      <TextField onChange={(e) => handleOnValueChange(e)} label={props.label} variant="standard" fullWidth />
     </Box>
   );
 };
@@ -40,7 +46,21 @@ const LoginPage = (props) => {
   let className = props.isStudent ? "student" : "teacher";
   let pathName = props.isStudent ? "/student/enter-pin" : "/teacher/dashboard";
   let icons = props.isStudent ? studentIcon : teacherIcon;
-  let data = props.data;
+  let userId = ""
+
+  function handleLogin() {
+    login(userId).then(res => {
+      if (res !== false) {
+        history.push(pathName, { userId: userId });
+      }
+    });
+  }
+
+  function handleUserIdChange(value) {
+    if (value !== undefined) {
+      userId = value;
+    }
+  }
 
   return (
     <React.Fragment>
@@ -51,6 +71,7 @@ const LoginPage = (props) => {
           <InputField
             isStudent={props.isStudent}
             label="รหัสประจำตัว"
+            onValueChange={(value) => handleUserIdChange(value)}
             isUserId={true}
           />
           <InputField
@@ -61,7 +82,7 @@ const LoginPage = (props) => {
           <Button
             variant="contained"
             endIcon={<LoginIcon />}
-            onClick={() => history.push(pathName)}
+            onClick={() => handleLogin()}
           >
             <p>ลงชื่อเข้าใช้</p>
           </Button>

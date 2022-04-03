@@ -12,7 +12,7 @@ const EnterPin = () => {
 
   async function handleOnConfirm() {
     handleOnGetExam(examPin).then(res => {
-      if (res !== false) {
+      if (res.exam_items !== false && res.exam_items !== undefined) {
         history.push("/student/exampage",
           {
             examPin: examPin,

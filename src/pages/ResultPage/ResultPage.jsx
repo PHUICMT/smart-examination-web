@@ -8,7 +8,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
 import { makeStyles } from "@material-ui/core/styles";
 const ResultPage = () => {
   let heading = ["Item Question", "Reaction Time", "Emotion"];

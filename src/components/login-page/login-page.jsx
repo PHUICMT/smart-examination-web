@@ -50,7 +50,8 @@ const LoginPage = (props) => {
 
   function handleLogin() {
     login(userId).then(res => {
-      if (res !== false) {
+      console.log();
+      if (res.login !== false && res.login !== undefined) {
         history.push(pathName, { userId: userId });
       }
     });

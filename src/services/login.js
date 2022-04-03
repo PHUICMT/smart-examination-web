@@ -11,9 +11,7 @@ export async function login(userId) {
       headers: { "Content-Type": "application/json" },
     })
     .then(function (result) {
-      console.log(result);
-      //TODO do when post api success
-      // history.push("/index");
+      return result.data;
     })
     .catch(function (error) {
       console.log(error);

@@ -116,6 +116,12 @@ export function RadioBoxExam(props) {
 
 export function TextFieldExam(props) {
   const title = props.title;
+
+  const handleChange = (event) => {
+    let result = event.target.value;
+    props.onValueChange(result);
+  };
+
   return (
     <InfoCard
       className="exam-card"
@@ -129,7 +135,7 @@ export function TextFieldExam(props) {
             <textarea
               className="textarea has-fixed-size"
               placeholder="เขียนคำตอบ"
-              onChange={props.onChangeResult}
+              onChange={(e) => (props.onChangeResult, handleChange(e))}
             ></textarea>
           </div>
         </form>

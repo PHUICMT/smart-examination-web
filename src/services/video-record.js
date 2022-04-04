@@ -35,8 +35,23 @@ export default function HandleRecorder() {
       let date = dateObject.getDate();
       let month = dateObject.getMonth() + 1;
       let year = dateObject.getFullYear();
+      let hours = dateObject.getHours();
+      let minutes = dateObject.getMinutes();
+      let seconds = dateObject.getSeconds();
 
-      return year + "_" + month + "_" + date;
+      return (
+        year +
+        "_" +
+        month +
+        "_" +
+        date +
+        "_" +
+        hours +
+        "_" +
+        minutes +
+        "_" +
+        seconds
+      );
     };
     return (
       "[" +

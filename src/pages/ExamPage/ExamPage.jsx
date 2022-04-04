@@ -43,9 +43,7 @@ const ExamPage = (props) => {
     setTotalItems(location.state.data.exam.length);
     setSubject(location.state.data.exam_subject);
     setExampin(location.state.examPin);
-    if (props.studentId !== undefined) {
-      setStudentId(props.studentId);
-    }
+    setStudentId(sessionStorage.getItem("userId"));
   }, [
     location.state,
     props.exampin,

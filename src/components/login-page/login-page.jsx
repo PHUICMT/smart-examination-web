@@ -52,6 +52,7 @@ const LoginPage = (props) => {
     login(userId).then(res => {
       console.log();
       if (res.login !== false && res.login !== undefined) {
+        sessionStorage.setItem("userId", userId);
         history.push(pathName, { userId: userId });
       }
     });

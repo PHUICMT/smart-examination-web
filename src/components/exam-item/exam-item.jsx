@@ -1,14 +1,15 @@
 import "./exam-item.scss";
 
-import React from "react";
+import React, { useEffect } from "react";
 import InfoCard from "../../components/info-card/info-card";
-import { Checkbox, FormGroup } from "@mui/material/";
+import { Checkbox, FormGroup, Button } from "@mui/material/";
 import {
   RadioGroup,
   FormControlLabel,
   FormControl,
   Radio,
 } from "@material-ui/core";
+import { PropaneRounded } from "@mui/icons-material";
 
 export function CheckBoxExam(props) {
   const title = props.title;
@@ -57,6 +58,7 @@ export function RadioBoxExam(props) {
 
   const handleChange = (event) => {
     let result = event.target.value;
+    console.log("call handleChange");
     if (!props.question) {
       props.onValueChange(result);
     } else {
@@ -92,6 +94,20 @@ export function RadioBoxExam(props) {
               );
             })}
           </RadioGroup>
+          {props.question ? (
+            <Button
+              sx={{
+                height: "50px",
+                width: "150px",
+                marginTop: "20px",
+                backgroundColor: "#fff !important",
+                border: "50%",
+              }}
+              onClick={props.onClickAddRadio}
+            >
+              เพิ่ม
+            </Button>
+          ) : null}
         </FormControl>
       }
     />

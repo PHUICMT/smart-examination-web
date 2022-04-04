@@ -3,6 +3,7 @@ import "./CreateExam.scss";
 import React, { useState, useEffect } from "react";
 
 import HeaderForTeacher from "../../components/header-for-teacher/header-for-teacher";
+import InputText from "../../components/input-text/input-text";
 import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
@@ -35,6 +36,7 @@ const CreateExam = () => {
   const [question, setQuestion] = useState("");
   const [result, setResult] = useState("");
   const [cardList, setCardList] = useState([]);
+  const [itemRadio, setItemRadio] = useState(["1"]);
 
   const addCardButtonStyled = {
     width: "100%",
@@ -56,7 +58,7 @@ const CreateExam = () => {
         result: result,
         items: ["Newii", "Sukorn", "PhuICMT"],
       };
-    } else if (type === "TextField") {
+    } else if (type === "CheckBox") {
       card = {
         type: type,
         question: question,
@@ -70,9 +72,10 @@ const CreateExam = () => {
     console.log(cardList);
   };
 
-  const addRadio = (item) => {
-    let optionRadio;
-    optionRadio = { item };
+  const addRadio = () => {
+    itemRadio.push("3");
+    console.log(itemRadio);
+    setItemRadio(itemRadio);
   };
 
   const onChangeTitle = () => (event) => {};
@@ -170,13 +173,14 @@ const CreateExam = () => {
                 question={true}
               />
             ) : type === RadioBoxType ? (
-              <RadioBoxExam
-                title="คำถาม"
-                onChangeResult={onChangeResult}
-                onValueChangeQuestion={onChangeQuestion}
-                question={true}
-                items={[1, 2, 3, 4, 5]}
-              />
+                <RadioBoxExam
+                  title="คำถาม"
+                  onChangeResult={onChangeResult}
+                  onValueChangeQuestion={onChangeQuestion}
+                  question={true}
+                  items={itemRadio}
+                  onClickAddRadio={addRadio}
+                />
             ) : type === CheckBoxType ? (
               <CheckBoxExam
                 title="Add Exams"
@@ -191,6 +195,7 @@ const CreateExam = () => {
                       marginTop: "20px",
                       backgroundColor: "#fff",
                       border: "50%",
+                      zIndex: "100",
                     }}
                     onClick={addRadio}
                   ></Button>,

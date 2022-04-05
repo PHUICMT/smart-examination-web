@@ -1,6 +1,5 @@
 import "./exam-item.scss";
 
-import React, { useEffect } from "react";
 import InfoCard from "../../components/info-card/info-card";
 import { Checkbox, FormGroup, Button } from "@mui/material/";
 import {
@@ -9,7 +8,6 @@ import {
   FormControl,
   Radio,
 } from "@material-ui/core";
-import { PropaneRounded } from "@mui/icons-material";
 
 export function CheckBoxExam(props) {
   const title = props.title;
@@ -58,7 +56,7 @@ export function RadioBoxExam(props) {
 
   const handleChange = (event) => {
     let result = event.target.value;
-    console.log("call handleChange");
+    // console.log("call handleChange");
     if (!props.question) {
       props.onValueChange(result);
     } else {
@@ -95,18 +93,21 @@ export function RadioBoxExam(props) {
             })}
           </RadioGroup>
           {props.question ? (
-            <Button
-              sx={{
-                height: "50px",
-                width: "150px",
-                marginTop: "20px",
-                backgroundColor: "#fff !important",
-                border: "50%",
-              }}
-              onClick={props.onClickAddRadio}
-            >
-              เพิ่ม
-            </Button>
+            <div>
+              <input type="text" value={props.valueRadio} onChange={props.onChangeTextAddRadio} />
+              <Button
+                sx={{
+                  height: "50px",
+                  width: "150px",
+                  marginTop: "20px",
+                  backgroundColor: "#fff !important",
+                  border: "50%",
+                }}
+                onClick={props.onClickAddRadio}
+              >
+                เพิ่ม
+              </Button>
+            </div>
           ) : null}
         </FormControl>
       }
@@ -135,7 +136,7 @@ export function TextFieldExam(props) {
             <textarea
               className="textarea has-fixed-size"
               placeholder="เขียนคำตอบ"
-              onChange={(e) => (props.onChangeResult, handleChange(e))}
+              onChange={(e) => handleChange(e)}
             ></textarea>
           </div>
         </form>

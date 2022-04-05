@@ -3,7 +3,6 @@ import "./CreateExam.scss";
 import React, { useState, useEffect } from "react";
 
 import HeaderForTeacher from "../../components/header-for-teacher/header-for-teacher";
-import InputText from "../../components/input-text/input-text";
 import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
@@ -36,7 +35,8 @@ const CreateExam = () => {
   const [question, setQuestion] = useState("");
   const [result, setResult] = useState("");
   const [cardList, setCardList] = useState([]);
-  const [itemRadio, setItemRadio] = useState(["1"]);
+  const [itemRadio, setItemRadio] = useState([]);
+  const [valueRadio, setValueRadio] = useState("");
 
   const addCardButtonStyled = {
     width: "100%",
@@ -52,11 +52,13 @@ const CreateExam = () => {
         result: result,
       };
     } else if (type === "Radio") {
+      console.log("add card radio");
+      console.log(itemRadio);
       card = {
         type: type,
         question: question,
         result: result,
-        items: ["Newii", "Sukorn", "PhuICMT"],
+        items: itemRadio,
       };
     } else if (type === "CheckBox") {
       card = {
@@ -73,21 +75,24 @@ const CreateExam = () => {
   };
 
   const addRadio = () => {
-    itemRadio.push("3");
-    console.log(itemRadio);
-    setItemRadio(itemRadio);
+    if (valueRadio !== "") {
+      console.log(valueRadio);
+      setItemRadio([...itemRadio, valueRadio]);
+      setValueRadio("");
+    }
+  };
+
+  const onChangeTextAddRadio = (event) => {
+    setValueRadio(event.target.value);
   };
 
   const onChangeTitle = () => (event) => {};
-
   const onChangeQuestion = (event) => {
-    console.log(event.target.value);
     setQuestion(event.target.value);
   };
 
   const onChangeResult = (event) => {
-    console.log(event.target.value);
-    setResult(event.target.value);
+    setResult(event);
   };
 
   const autoGeneratePIN = () => {
@@ -107,7 +112,6 @@ const CreateExam = () => {
   };
 
   const onClickExamType = (type) => {
-    console.log(type);
     setType(type);
   };
 
@@ -173,14 +177,18 @@ const CreateExam = () => {
                 question={true}
               />
             ) : type === RadioBoxType ? (
-                <RadioBoxExam
-                  title="คำถาม"
-                  onChangeResult={onChangeResult}
-                  onValueChangeQuestion={onChangeQuestion}
-                  question={true}
-                  items={itemRadio}
-                  onClickAddRadio={addRadio}
-                />
+              <RadioBoxExam
+                title="คำถาม"
+                onChangeResult={(event) => {
+                  onChangeResult(event.target.value);
+                }}
+                onValueChangeQuestion={onChangeQuestion}
+                question={true}
+                items={itemRadio}
+                onClickAddRadio={addRadio}
+                onChangeTextAddRadio={onChangeTextAddRadio}
+                valueRadio={valueRadio}
+              />
             ) : type === CheckBoxType ? (
               <CheckBoxExam
                 title="Add Exams"
@@ -273,7 +281,6 @@ const CreateExam = () => {
 
       <div>
         {cardList.map((data, index) => {
-          console.log(data);
           return (
             <div key={index}>
               {data.type === "TextField" ? (
@@ -287,12 +294,13 @@ const CreateExam = () => {
                   title={data.question}
                   item={data.items}
                   value={data.result}
+                  onValueChange={data.result}
                   question={false}
                 />
               ) : data.type === "CheckBox" ? (
                 <CheckBoxType
                   title={data.question}
-                  item={data.items}
+                  item={["1", "2", "3"]}
                   onChangeResult={onChangeResult}
                   question={false}
                 />

@@ -22,7 +22,7 @@ const DashBoard = () => {
   };
 
   const onClickResultExamButton = () => {
-    history.push("/teacher/resultpage");
+    history.push("/teacher/enter-pin");
   };
 
   return (

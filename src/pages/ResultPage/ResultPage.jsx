@@ -9,7 +9,27 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 const ResultPage = () => {
+  const location = useLocation();
+  const [examPin, setExamPin] = useState("");
+  const [subject, setSubject] = useState("");
+  const [date, setDate] = useState("");
+  const [averageTimePerQuestion, setAverageTimePerQuestion] = useState("");
+  const [percentageEmotePerQuestion, setPercentageEmotePerQuestion] = useState("");
+
+  useEffect(() => {
+    setExamPin(location.state.examPin);
+    setSubject(location.state.data.subject_name);
+    setDate(location.state.data.created_at);
+    setAverageTimePerQuestion(location.state.data.average_time_per_question);
+    setPercentageEmotePerQuestion(location.state.data.percent_of_emote_per_question);
+
+    console.log(location.state)
+  }, [location.state]);
+
   let heading = ["Item Question", "Reaction Time", "Emotion"];
   let rows = [
     [["1"], ["2"], ["3"]],
@@ -32,8 +52,8 @@ const ResultPage = () => {
             <div className="result-header">
               <h1>รายงานวิเคราะห์การทำข้อสอบโดยรวม</h1>
               <label>
-                วิชา <br />
-                วันที่ <br />
+                วิชา {subject}<br />
+                วันที่ {date}<br />
               </label>
               <hr />
             </div>

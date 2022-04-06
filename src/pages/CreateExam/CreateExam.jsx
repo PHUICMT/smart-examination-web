@@ -1,6 +1,6 @@
 import "./CreateExam.scss";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 import HeaderForTeacher from "../../components/header-for-teacher/header-for-teacher";
 import TitleWithInput from "../../components/title-with-input/title-with-input";

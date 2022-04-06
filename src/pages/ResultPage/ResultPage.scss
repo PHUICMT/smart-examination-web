@@ -16,24 +16,61 @@
       color: white;
       word-spacing: 10px;
     }
+
+    .result-header {
+      display: grid;
+      grid-template-columns: auto auto;
+
+      .form-emotion {
+        min-width: max-content;
+        background: #ffffff;
+        box-shadow: 3px 2px 6px 1px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+
+        display: flex;
+        flex-direction: column;
+
+        .icon-symbol {
+          padding: 15px;
+          display: grid;
+          grid-template-columns: 50px auto;
+          justify-items: center;
+        }
+
+        p {
+          font-size: 15px;
+        }
+
+        
+      }
+    }
     .result-body {
+
+      .table-container{
+        border-radius: 20px;
+      }
+
       table {
-        width: 1028px;
         text-align: center;
-        border-radius: 8px !important;
       }
       thead {
         background-color: #c2c2c2;
       }
       tbody {
-        background-color: #838383;
+        background-color: #dddddd;
       }
       th {
-        color: white;
+        color: #838383;
       }
       td {
         justify-items: center;
-        color: white;
+        color: #838383;
+      }
+
+      .MuiTableCell-head {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2d3436;
       }
 
       .emote-container {

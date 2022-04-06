@@ -98,12 +98,22 @@ const ResultPage = () => {
       <div className="card-result-page">
         <InfoCard
           title={
-            <div className="result-header">
-              <h1>รายงานวิเคราะห์การทำข้อสอบโดยรวม</h1>
-              <label>
-                วิชา {subject}<br />
-                วันที่ {date}<br />
-              </label>
+            <div>
+              <div className="result-header">
+                <div>
+                  <h1>รายงานวิเคราะห์การทำข้อสอบโดยรวม</h1>
+                  <label>
+                    วิชา {subject}<br />
+                    วันที่ {date}<br />
+                  </label>
+                </div>
+                <div className="form-emotion">
+                  <div className="icon-symbol"><img alt='emote' src={Angry} /><p style={{ color: '#B5453C' }}>Angry</p></div>
+                  <div className="icon-symbol"><img alt='emote' src={Happy} /><p style={{ color: '#00D4D4' }}>Happy</p></div>
+                  <div className="icon-symbol"><img alt='emote' src={Neutral} /><p style={{ color: '#699DEE' }}>Neutral</p></div>
+                  <div className="icon-symbol"><img alt='emote' src={Sad} /><p style={{ color: '#2E3552' }}>Sad</p></div>
+                </div>
+              </div>
               <hr />
             </div>
           }
@@ -114,7 +124,7 @@ const ResultPage = () => {
                   <Table className={classes.table} aria-label="customized table" >
 
                     <TableHead>
-                      <TableRow>
+                      <TableRow className="table-head">
                         <TableCell>ITEM QUESTION</TableCell>
                         <TableCell align="center">REACTION TIME (Sec.)</TableCell>
                         <TableCell align="center">EMOTION</TableCell>
@@ -128,17 +138,15 @@ const ResultPage = () => {
                   </Table>
                 </TableContainer>
               </div>
-              <center>
-                <div className="result-button">
-                  <Button
-                    variant="contained"
-                    size="large"
-                    className="submit-exam"
-                  >
-                    บันทึกผลทดสอบ
-                  </Button>
-                </div>
-              </center>
+              {/* <div className="result-button">
+                <Button
+                  variant="contained"
+                  size="large"
+                  className="submit-exam"
+                >
+                  บันทึกผลทดสอบ
+                </Button>
+              </div> */}
             </div>
           }
           icon={null}

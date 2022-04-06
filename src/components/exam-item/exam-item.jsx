@@ -23,7 +23,6 @@ export function CheckBoxExam(props) {
     if (!props.question) {
       props.onValueChange(result);
     } else {
-      console.log(event);
       props.onChangeResult(event);
     }
   };

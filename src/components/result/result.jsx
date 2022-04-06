@@ -117,7 +117,6 @@ function Result(props) {
         history.push("/index");
       })
       .catch(function (error) {
-        console.log(error);
       });
   }
 

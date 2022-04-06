@@ -38,7 +38,7 @@ const CreateExam = () => {
   const [itemRadio, setItemRadio] = useState([]);
   const [valueRadio, setValueRadio] = useState("");
   const [itemCheckBox, setItemCheckBox] = useState([]);
-  const [resultCheckBox, setResultCheckBox] = useState([]);
+  const [resultCheckBox, setResultCheckBox] = useState({});
   const [valueCheckBox, setValueCheckBox] = useState([]);
 
   const addCardButtonStyled = {
@@ -97,7 +97,7 @@ const CreateExam = () => {
     setValueCheckBox(event.target.value);
   };
 
-  const onChangeTitle = () => (event) => {};
+  const onChangeTitle = () => (event) => { };
   const onChangeQuestion = (event) => {
     setQuestion(event.target.value);
   };
@@ -107,9 +107,10 @@ const CreateExam = () => {
   };
 
   const onChangeResultCheckBox = (event) => {
-    console.log(event.target.id);
-
-    setResultCheckBox([...resultCheckBox, event.target.id]);
+    setResultCheckBox({
+      ...resultCheckBox,
+      [event.target.id]: event.target.checked
+    })
   };
 
   const autoGeneratePIN = () => {
@@ -267,7 +268,7 @@ const CreateExam = () => {
             setType();
             setItemRadio([]);
             setItemCheckBox([]);
-            setResultCheckBox([]);
+            setResultCheckBox({});
             setResult();
           }}
         >
@@ -286,7 +287,7 @@ const CreateExam = () => {
             setType();
             setItemRadio([]);
             setItemCheckBox([]);
-            setResultCheckBox([]);
+            setResultCheckBox({});
             setResult();
           }}
         >

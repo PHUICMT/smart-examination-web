@@ -83,7 +83,6 @@ const CustomSelectionAnimation = (props) => {
                     variant="fullWidth"
                     className={value === 0 ? "Mui-selected-1" : "Mui-selected-2"}
                 >
-                    {console.log(value)}
                     <Tab label="นักศึกษา" />
                     <Tab label="อาจารย์" />
                 </Tabs>

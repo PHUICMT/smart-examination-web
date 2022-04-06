@@ -3,6 +3,8 @@ import Angry from '../../assets/icons/angry-icon.svg'
 import Happy from '../../assets/icons/happy-icon.svg'
 import Neutral from '../../assets/icons/neutral-icon.svg'
 import Sad from '../../assets/icons/sad-icon.svg'
+import Download from '../../assets/icons/download-icon.svg'
+
 import React from "react";
 import InfoCard from "../../components/info-card/info-card";
 
@@ -15,6 +17,8 @@ import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 const ResultPage = () => {
   const location = useLocation();
@@ -93,9 +97,21 @@ const ResultPage = () => {
     return question.toUpperCase().replace('_', ' ');
   }
 
+  const handleOnSaveResult = () => {
+    var container = document.getElementById('report-paper');
+    domtoimage.toBlob(container, {
+      style: {
+        'font-family': 'Open Sans, sans-serif'
+      }
+    })
+      .then(function (blob) {
+        saveAs(blob, 'Result.png');
+      });
+  }
+
   return (
     <React.Fragment>
-      <div className="card-result-page">
+      <div className="card-result-page" id="report-paper">
         <InfoCard
           title={
             <div>
@@ -118,7 +134,7 @@ const ResultPage = () => {
             </div>
           }
           description={
-            <div>
+            <div className="report-container">
               <div className="result-body">
                 <TableContainer className="table-container">
                   <Table className={classes.table} aria-label="customized table" >
@@ -138,15 +154,12 @@ const ResultPage = () => {
                   </Table>
                 </TableContainer>
               </div>
-              {/* <div className="result-button">
-                <Button
-                  variant="contained"
-                  size="large"
-                  className="submit-exam"
-                >
-                  บันทึกผลทดสอบ
-                </Button>
-              </div> */}
+              <Button
+                onClick={() => handleOnSaveResult()}
+                variant="contained"
+                size="large"
+                className="result-button"><img alt='download' src={Download} />&nbsp;บันทึกผลการทดสอบ
+              </Button>
             </div>
           }
           icon={null}

@@ -3,6 +3,7 @@
 html {
   min-height: 100%;
   position: relative;
+  overflow-y: hidden !important;
 }
 body {
   height: 100vh;

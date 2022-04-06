@@ -10,7 +10,9 @@ const InfoCard = (props) => {
   let input = props.input;
 
   return (
-    <Container>
+    <Container
+      id={props.id}
+    >
       <div className="info-card" style={{ marginTop: `${marginTop}px` }}>
         <div className="info-card-text">
           {!props.question ? (
@@ -21,18 +23,18 @@ const InfoCard = (props) => {
               <div className="info-card-text title-3">{input}</div>
             </div>
           ) : // ) : null
-          title !== null ? (
-            <div>
-              <TitleWithInput
-                blackTitle={true}
-                title={title}
-                onChange={props.onChange}
-                value={props.valueTi}
-              />
-              <div className="info-card-text title-2">{description}</div>
-              <div className="info-card-text title-3">{input}</div>
-            </div>
-          ) : null}
+            title !== null ? (
+              <div>
+                <TitleWithInput
+                  blackTitle={true}
+                  title={title}
+                  onChange={props.onChange}
+                  value={props.valueTi}
+                />
+                <div className="info-card-text title-2">{description}</div>
+                <div className="info-card-text title-3">{input}</div>
+              </div>
+            ) : null}
         </div>
 
         {props.icon !== null ? (

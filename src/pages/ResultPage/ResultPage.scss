@@ -22,8 +22,7 @@
       grid-template-columns: auto auto;
 
       .form-emotion {
-        min-width: max-content;
-        background: #ffffff;
+        background: #fffde8d5;
         box-shadow: 3px 2px 6px 1px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
 
@@ -45,7 +44,6 @@
       }
     }
     .result-body {
-
       .table-container{
         border-radius: 20px;
       }
@@ -112,13 +110,21 @@
       text-align: center;
       box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.15);
     }
-    .result-button button {
-      margin-top: 20px;
-      margin-bottom: 10px;
-      width: 555px;
-      height: 70px;
-      border: none;
-      border-radius: 10px;
+
+    .result-button {
+      margin-top: 50px;
+      font-size: 24px;
+      border-radius: 50px;
+      background-color: #111111;
+      color: #e4e4e4;
+    }
+    .result-button:hover {
+      background-color: #535353;
+    }
+
+    .report-container{
+      display: grid;
+      justify-items: center
     }
   }
 }

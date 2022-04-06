@@ -41,7 +41,7 @@ const CreateExam = () => {
   const [resultCheckBox, setResultCheckBox] = useState({});
   const [valueCheckBox, setValueCheckBox] = useState([]);
   const [content, setContent] = useState();
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(20);
   const span = useRef();
 
   const addCardButtonStyled = {
@@ -93,20 +93,17 @@ const CreateExam = () => {
     }
   };
 
-  const [minWidth, setMinWidth] = useState(200);
-
   const onChangeTextAddRadio = (event) => {
-    //var sumWidth = minWidth + 2;
     setValueRadio(event.target.value);
-    //setMinWidth(sumWidth);
-    setWidth(event.target.value.length);
-    console.log(span.current.offsetWidth);
+    if (event.target.value.length > 20) {
+      setWidth(event.target.value.length);
+    } else {
+      setWidth(20);
+    }
   };
 
   const onChangeTextAddCheckBox = (event) => {
     setValueCheckBox(event.target.value);
-    // setContent(event.target.value);
-    setWidth(event.target.value.length);
   };
 
   const onChangeTitle = () => (event) => {};
@@ -218,7 +215,7 @@ const CreateExam = () => {
                 onClickAddRadio={addRadio}
                 onChangeTextAddRadio={onChangeTextAddRadio}
                 valueRadio={valueRadio}
-                style={{width:width+'ch'}}
+                style={width}
               />
             ) : type === CheckBoxType ? (
               <CheckBoxExam

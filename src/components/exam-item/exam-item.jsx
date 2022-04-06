@@ -65,7 +65,7 @@ export function CheckBoxExam(props) {
               <div>
                 <FormControlLabel checked={false} control={<Checkbox />} />
                 <input
-                  style={props.style}
+                  style={{ width: `${props.style + "ch"}` }}
                   className="input-addItem"
                   type="text"
                   value={props.valueCheckBox}
@@ -141,7 +141,7 @@ export function RadioBoxExam(props) {
             <div>
               <FormControlLabel checked={false} control={<Radio />} />
               <input
-                style={{ width: `${props.style}px` }}
+                style={{ width: `${props.style}ch` }}
                 className="input-addItem"
                 type="text"
                 placeholder="add item"

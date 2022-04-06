@@ -1,6 +1,6 @@
 import "./CreateExam.scss";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import HeaderForTeacher from "../../components/header-for-teacher/header-for-teacher";
 import TitleWithInput from "../../components/title-with-input/title-with-input";
@@ -40,6 +40,9 @@ const CreateExam = () => {
   const [itemCheckBox, setItemCheckBox] = useState([]);
   const [resultCheckBox, setResultCheckBox] = useState({});
   const [valueCheckBox, setValueCheckBox] = useState([]);
+  const [content, setContent] = useState();
+  const [width, setWidth] = useState(0);
+  const span = useRef();
 
   const addCardButtonStyled = {
     width: "100%",
@@ -83,21 +86,30 @@ const CreateExam = () => {
   };
 
   const addCheckBox = () => {
+    console.log(valueCheckBox);
     if (valueCheckBox !== "") {
       setItemCheckBox([...itemCheckBox, valueCheckBox]);
       setValueCheckBox("");
     }
   };
 
+  const [minWidth, setMinWidth] = useState(200);
+
   const onChangeTextAddRadio = (event) => {
+    //var sumWidth = minWidth + 2;
     setValueRadio(event.target.value);
+    //setMinWidth(sumWidth);
+    setWidth(event.target.value.length);
+    console.log(span.current.offsetWidth);
   };
 
   const onChangeTextAddCheckBox = (event) => {
     setValueCheckBox(event.target.value);
+    // setContent(event.target.value);
+    setWidth(event.target.value.length);
   };
 
-  const onChangeTitle = () => (event) => { };
+  const onChangeTitle = () => (event) => {};
   const onChangeQuestion = (event) => {
     setQuestion(event.target.value);
   };
@@ -109,8 +121,8 @@ const CreateExam = () => {
   const onChangeResultCheckBox = (event) => {
     setResultCheckBox({
       ...resultCheckBox,
-      [event.target.id]: event.target.checked
-    })
+      [event.target.id]: event.target.checked,
+    });
   };
 
   const autoGeneratePIN = () => {
@@ -206,6 +218,7 @@ const CreateExam = () => {
                 onClickAddRadio={addRadio}
                 onChangeTextAddRadio={onChangeTextAddRadio}
                 valueRadio={valueRadio}
+                style={{width:width+'ch'}}
               />
             ) : type === CheckBoxType ? (
               <CheckBoxExam

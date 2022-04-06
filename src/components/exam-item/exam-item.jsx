@@ -1,5 +1,4 @@
 import "./exam-item.scss";
-
 import InfoCard from "../../components/info-card/info-card";
 import { Checkbox, FormGroup, Button } from "@mui/material/";
 import {
@@ -64,7 +63,10 @@ export function CheckBoxExam(props) {
             })}
             {props.question ? (
               <div>
+                <FormControlLabel checked={false} control={<Checkbox />} />
                 <input
+                  style={props.style}
+                  className="input-addItem"
                   type="text"
                   value={props.valueCheckBox}
                   onChange={props.onChangeTextAddCheckBox}
@@ -104,6 +106,8 @@ export function RadioBoxExam(props) {
     }
   };
 
+  console.log(props.style);
+
   return (
     <InfoCard
       className="exam-card"
@@ -135,28 +139,27 @@ export function RadioBoxExam(props) {
           </RadioGroup>
           {props.question ? (
             <div>
-              <RadioGroup value={null}>
-                <FormControlLabel control={<Radio />} />
-                <input
-                  className="input-addItem"
-                  type="text"
-                  placeholder="add item"
-                  value={props.valueRadio}
-                  onChange={props.onChangeTextAddRadio}
-                />
-                <Button
-                  sx={{
-                    height: "50px",
-                    width: "150px",
-                    marginTop: "20px",
-                    backgroundColor: "#fff !important",
-                    border: "50%",
-                  }}
-                  onClick={props.onClickAddRadio}
-                >
-                  เพิ่ม
-                </Button>
-              </RadioGroup>
+              <FormControlLabel checked={false} control={<Radio />} />
+              <input
+                style={{ width: `${props.style}px` }}
+                className="input-addItem"
+                type="text"
+                placeholder="add item"
+                value={props.valueRadio}
+                onChange={props.onChangeTextAddRadio}
+              />
+              <Button
+                sx={{
+                  height: "50px",
+                  width: "150px",
+                  marginTop: "20px",
+                  backgroundColor: "#fff !important",
+                  border: "50%",
+                }}
+                onClick={props.onClickAddRadio}
+              >
+                เพิ่ม
+              </Button>
             </div>
           ) : null}
         </FormControl>

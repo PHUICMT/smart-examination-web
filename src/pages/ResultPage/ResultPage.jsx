@@ -4,6 +4,7 @@ import Happy from '../../assets/icons/happy-icon.svg'
 import Neutral from '../../assets/icons/neutral-icon.svg'
 import Sad from '../../assets/icons/sad-icon.svg'
 import Download from '../../assets/icons/download-icon.svg'
+import Back from '../../assets/icons/retry.svg'
 
 import React from "react";
 import InfoCard from "../../components/info-card/info-card";
@@ -19,9 +20,11 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import { useHistory } from "react-router-dom";
 
 const ResultPage = () => {
   const location = useLocation();
+  const history = useHistory();
   const [examPin, setExamPin] = useState("");
   const [subject, setSubject] = useState("");
   const [date, setDate] = useState("");
@@ -150,12 +153,20 @@ const ResultPage = () => {
                   </Table>
                 </TableContainer>
               </div>
-              <Button
-                onClick={() => handleOnSaveResult()}
-                variant="contained"
-                size="large"
-                className="result-button"><img alt='download' src={Download} />&nbsp;บันทึกผลการทดสอบ
-              </Button>
+              <div className="result-button-container">
+                <Button
+                  onClick={() => handleOnSaveResult()}
+                  variant="contained"
+                  size="large"
+                  className="result-button"><img alt='download' src={Download} />&nbsp;บันทึกผลการทดสอบ
+                </Button>
+                <Button
+                  onClick={() => { history.push("/teacher/dashboard") }}
+                  variant="contained"
+                  size="large"
+                  className="back-button"><img alt='back' src={Back} />&nbsp;กลับสู่ Dashboard
+                </Button>
+              </div>
             </div>
           }
           icon={null}

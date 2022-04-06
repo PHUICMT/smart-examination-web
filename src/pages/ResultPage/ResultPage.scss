@@ -120,15 +120,36 @@
       box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.15);
     }
 
-    .result-button {
-      margin-top: 50px;
-      font-size: 24px;
-      border-radius: 50px;
-      background-color: #111111;
-      color: #e4e4e4;
-    }
-    .result-button:hover {
-      background-color: #535353;
+    .result-button-container {
+      display: grid;
+      grid-template-columns: auto auto;
+
+      button {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .result-button {
+        margin-top: 50px;
+        font-size: 24px;
+        border-radius: 50px;
+        background-color: #111111;
+        color: #e4e4e4;
+      }
+      .result-button:hover {
+        background-color: #535353;
+      }
+
+      .back-button {
+        margin-top: 50px;
+        font-size: 24px;
+        border-radius: 50px;
+        background-color: #cacaca;
+        color: #111;
+      }
+      .back-button:hover {
+        background-color: #ffffff;
+      }
     }
 
     .report-container{

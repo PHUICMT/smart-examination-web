@@ -26,7 +26,7 @@ function App() {
 
           <Route path="/student/enter-pin" render={(props) => <EnterPin {...props} isStudent={true} title={"กรุณากรอกรหัสเพื่อเข้าสอบ"} />} />
           <Route path="/student/exampage" component={ExamPage} />
-          <Route path="/teacher/enter-pin" render={(props) => <EnterPin {...props} isStudent={false} title={"กรุณากรอกรหัสเพื่อดูผลลัพธ์"} />} />
+          <Route path="/teacher/enter-pin" render={(props) => <EnterPin {...props} isStudent={false} title={"กรุณากรอกรหัสเพื่อดูผลลัพธ์ข้อสอบ"} />} />
           <Route path="/teacher/dashboard" component={DashBoard} />
           <Route path="/teacher/create-exam" component={CreateExam} />
           <Route path="/teacher/resultpage" component={ResultPage} />

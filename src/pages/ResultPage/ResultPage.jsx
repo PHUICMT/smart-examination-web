@@ -1,4 +1,8 @@
 import "./ResultPage.scss";
+import Angry from '../../assets/icons/angry-icon.svg'
+import Happy from '../../assets/icons/happy-icon.svg'
+import Neutral from '../../assets/icons/neutral-icon.svg'
+import Sad from '../../assets/icons/sad-icon.svg'
 import React from "react";
 import InfoCard from "../../components/info-card/info-card";
 
@@ -17,8 +21,8 @@ const ResultPage = () => {
   const [examPin, setExamPin] = useState("");
   const [subject, setSubject] = useState("");
   const [date, setDate] = useState("");
-  const [averageTimePerQuestion, setAverageTimePerQuestion] = useState("");
-  const [percentageEmotePerQuestion, setPercentageEmotePerQuestion] = useState("");
+  const [averageTimePerQuestion, setAverageTimePerQuestion] = useState(Object);
+  const [percentageEmotePerQuestion, setPercentageEmotePerQuestion] = useState(Object);
 
   useEffect(() => {
     setExamPin(location.state.examPin);
@@ -26,16 +30,16 @@ const ResultPage = () => {
     setDate(location.state.data.created_at);
     setAverageTimePerQuestion(location.state.data.average_time_per_question);
     setPercentageEmotePerQuestion(location.state.data.percent_of_emote_per_question);
+  },
+    [
+      location.state,
+      examPin,
+      subject,
+      date,
+      averageTimePerQuestion,
+      percentageEmotePerQuestion
+    ]);
 
-    console.log(location.state)
-  }, [location.state]);
-
-  let heading = ["Item Question", "Reaction Time", "Emotion"];
-  let rows = [
-    [["1"], ["2"], ["3"]],
-    [["1"], ["2"], ["3"]],
-    [["1"], ["2"], ["3"]],
-  ];
   const useStyles = makeStyles({
     table: {
       minWidth: 700,
@@ -43,6 +47,51 @@ const ResultPage = () => {
     },
   });
   const classes = useStyles();
+
+  const EmotePercent = (emotions) => {
+    return (
+      <div className="emote-container">
+        {
+          Object.entries(emotions).map(([key, value]) => {
+            let className = `emote ${key}`;
+
+            if (key === 'happy') {
+              return <div key={key} className={className}><img src={Happy} alt="happy" /> {value}%</div>
+            } else if (key === 'sad') {
+              return <div key={key} className={className}><img src={Sad} alt="sad" /> {value}%</div>
+            } else if (key === 'angry') {
+              return <div key={key} className={className}><img src={Angry} alt="angry" /> {value}%</div>
+            } else if (key === 'neutral') {
+              return <div key={key} className={className}><img src={Neutral} alt="neutral" /> {value}%</div>
+            }
+          })
+        }
+      </div>
+    )
+
+  }
+
+  const RowsData = () => {
+    return (
+      Object.entries(averageTimePerQuestion).map(([key, value]) => {
+        return (
+          <TableRow key={key}>
+            <TableCell component="th" scope="row">{getQuestionTitle(key)}</TableCell>
+            <TableCell align="center">{convertMillisecondsToSeconds(value)}</TableCell>
+            <TableCell align="center">{EmotePercent(percentageEmotePerQuestion[key])}</TableCell>
+          </TableRow>
+        );
+      }
+      ));
+  }
+
+  const convertMillisecondsToSeconds = (milliseconds) => {
+    return milliseconds / 1000;
+  }
+
+  const getQuestionTitle = (question) => {
+    return question.toUpperCase().replace('_', ' ');
+  }
 
   return (
     <React.Fragment>
@@ -61,50 +110,21 @@ const ResultPage = () => {
           description={
             <div>
               <div className="result-body">
-                {/* <table className="result-table">
-                  <thead>
-                    <tr role="row">
-                      {heading.map((head) => (
-                        <th>{head}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      {body.map((val) => (
-                        <tr>{val}</tr>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table> */}
                 <TableContainer className="table-container">
-                  <Table
-                    className={classes.table}
-                    aria-label="customized table"
-                  >
+                  <Table className={classes.table} aria-label="customized table" >
+
                     <TableHead>
                       <TableRow>
                         <TableCell>ITEM QUESTION</TableCell>
-                        <TableCell align="center">
-                          REACTION TIME (Sec.)
-                        </TableCell>
+                        <TableCell align="center">REACTION TIME (Sec.)</TableCell>
                         <TableCell align="center">EMOTION</TableCell>
                       </TableRow>
                     </TableHead>
+
                     <TableBody>
-                      {rows.map((row) => (
-                        <TableRow key={row.ItemQuestion}>
-                          <TableCell component="th" scope="row">
-                            {row.ItemQuestion}
-                          </TableCell>
-                          <TableCell align="center">{row.ClickTime}</TableCell>
-                          <TableCell align="center">
-                            {row.ReactionTime}
-                          </TableCell>
-                          <TableCell align="center">{row.Emotion}</TableCell>
-                        </TableRow>
-                      ))}
+                      <RowsData />
                     </TableBody>
+
                   </Table>
                 </TableContainer>
               </div>

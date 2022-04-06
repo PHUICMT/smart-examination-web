@@ -99,11 +99,7 @@ const ResultPage = () => {
 
   const handleOnSaveResult = () => {
     var container = document.getElementById('report-paper');
-    domtoimage.toBlob(container, {
-      style: {
-        'font-family': 'Open Sans, sans-serif'
-      }
-    })
+    domtoimage.toBlob(container)
       .then(function (blob) {
         saveAs(blob, 'Result.png');
       });

@@ -37,13 +37,16 @@ const CreateExam = () => {
   const [cardList, setCardList] = useState([]);
   const [itemRadio, setItemRadio] = useState([]);
   const [valueRadio, setValueRadio] = useState("");
+  const [itemCheckBox, setItemCheckBox] = useState([]);
+  const [resultCheckBox, setResultCheckBox] = useState([]);
+  const [valueCheckBox, setValueCheckBox] = useState([]);
 
   const addCardButtonStyled = {
     width: "100%",
     height: 100,
   };
 
-  const AddCard = (type, question, result) => {
+  const AddCard = (type, question, result, resultCheckBox) => {
     let card;
     if (type === "TextField") {
       card = {
@@ -52,8 +55,6 @@ const CreateExam = () => {
         result: result,
       };
     } else if (type === "Radio") {
-      console.log("add card radio");
-      console.log(itemRadio);
       card = {
         type: type,
         question: question,
@@ -64,14 +65,13 @@ const CreateExam = () => {
       card = {
         type: type,
         question: question,
-        result: result,
-        items: ["Newii", "Sukorn", "PhuICMT"],
+        result: resultCheckBox,
+        items: itemCheckBox,
       };
     }
 
     cardList.push(card);
     setCardList(cardList);
-    console.log(cardList);
   };
 
   const addRadio = () => {
@@ -82,8 +82,19 @@ const CreateExam = () => {
     }
   };
 
+  const addCheckBox = () => {
+    if (valueCheckBox !== "") {
+      setItemCheckBox([...itemCheckBox, valueCheckBox]);
+      setValueCheckBox("");
+    }
+  };
+
   const onChangeTextAddRadio = (event) => {
     setValueRadio(event.target.value);
+  };
+
+  const onChangeTextAddCheckBox = (event) => {
+    setValueCheckBox(event.target.value);
   };
 
   const onChangeTitle = () => (event) => {};
@@ -93,6 +104,12 @@ const CreateExam = () => {
 
   const onChangeResult = (event) => {
     setResult(event);
+  };
+
+  const onChangeResultCheckBox = (event) => {
+    console.log(event.target.id);
+
+    setResultCheckBox([...resultCheckBox, event.target.id]);
   };
 
   const autoGeneratePIN = () => {
@@ -191,23 +208,16 @@ const CreateExam = () => {
               />
             ) : type === CheckBoxType ? (
               <CheckBoxExam
-                title="Add Exams"
-                onChangeResult={onChangeResult}
+                title="คำถาม"
+                onChangeResult={(event) => {
+                  onChangeResultCheckBox(event);
+                }}
                 onValueChangeQuestion={onChangeQuestion}
                 question={true}
-                items={[
-                  <Button
-                    sx={{
-                      height: "50px",
-                      width: "150px",
-                      marginTop: "20px",
-                      backgroundColor: "#fff",
-                      border: "50%",
-                      zIndex: "100",
-                    }}
-                    onClick={addRadio}
-                  ></Button>,
-                ]}
+                items={itemCheckBox}
+                onClickAddCheckBox={addCheckBox}
+                onChangeTextAddCheckBox={onChangeTextAddCheckBox}
+                valueCheckBox={valueCheckBox}
               />
             ) : (
               <div className="form-select-type">
@@ -252,12 +262,13 @@ const CreateExam = () => {
             backgroundColor: "#fff",
           }}
           onClick={() => {
-            console.log("type : " + type);
-            console.log("คำถาม : " + question);
-            console.log("คำตอบ : " + result);
-            AddCard(type, question, result);
+            AddCard(type, question, result, resultCheckBox);
             setIsCollapsed(false);
             setType();
+            setItemRadio([]);
+            setItemCheckBox([]);
+            setResultCheckBox([]);
+            setResult();
           }}
         >
           เพิ่มการ์ด
@@ -273,6 +284,10 @@ const CreateExam = () => {
           onClick={() => {
             setIsCollapsed(false);
             setType();
+            setItemRadio([]);
+            setItemCheckBox([]);
+            setResultCheckBox([]);
+            setResult();
           }}
         >
           ยกเลิก
@@ -292,16 +307,15 @@ const CreateExam = () => {
               ) : data.type === "Radio" ? (
                 <RadioBoxExam
                   title={data.question}
-                  item={data.items}
+                  items={data.items}
                   value={data.result}
-                  onValueChange={data.result}
                   question={false}
                 />
               ) : data.type === "CheckBox" ? (
-                <CheckBoxType
+                <CheckBoxExam
                   title={data.question}
-                  item={["1", "2", "3"]}
-                  onChangeResult={onChangeResult}
+                  items={data.items}
+                  value={data.result}
                   question={false}
                 />
               ) : null}

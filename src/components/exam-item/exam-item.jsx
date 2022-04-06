@@ -19,15 +19,21 @@ export function CheckBoxExam(props) {
   }
 
   const handleChange = (event) => {
-    const index = event.target.id;
-    result[index] = event.target.checked;
-    props.onValueChange(result);
+    let result = event.target.value;
+    if (!props.question) {
+      props.onValueChange(result);
+    } else {
+      console.log(event);
+      props.onChangeResult(event);
+    }
   };
 
   return (
     <InfoCard
       className="exam-card"
       title={title}
+      onChange={props.onValueChangeQuestion}
+      question={props.question}
       description={null}
       icon={null}
       marginTop={100}
@@ -37,12 +43,47 @@ export function CheckBoxExam(props) {
             {items.map((data, index) => {
               return (
                 <FormControlLabel
-                  control={<Checkbox onChange={handleChange} id={`${index}`} />}
+                  control={
+                    props.value !== undefined ? (
+                      <Checkbox
+                        onChange={handleChange}
+                        id={`${index}`}
+                        checked={
+                          props.value[index] !== undefined
+                            ? props.value[index]
+                            : false
+                        }
+                      />
+                    ) : (
+                      <Checkbox onChange={handleChange} id={`${index}`} />
+                    )
+                  }
                   label={data}
                   key={index}
                 />
               );
             })}
+            {props.question ? (
+              <div>
+                <input
+                  type="text"
+                  value={props.valueCheckBox}
+                  onChange={props.onChangeTextAddCheckBox}
+                />
+                <Button
+                  sx={{
+                    height: "50px",
+                    width: "150px",
+                    marginTop: "20px",
+                    backgroundColor: "#fff !important",
+                    border: "50%",
+                  }}
+                  onClick={props.onClickAddCheckBox}
+                >
+                  เพิ่ม
+                </Button>
+              </div>
+            ) : null}
           </FormGroup>
         </div>
       }
@@ -79,6 +120,7 @@ export function RadioBoxExam(props) {
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="radio-buttons-group"
+            value={props.value}
           >
             {items.map((data, index) => {
               return (
@@ -94,19 +136,28 @@ export function RadioBoxExam(props) {
           </RadioGroup>
           {props.question ? (
             <div>
-              <input type="text" value={props.valueRadio} onChange={props.onChangeTextAddRadio} />
-              <Button
-                sx={{
-                  height: "50px",
-                  width: "150px",
-                  marginTop: "20px",
-                  backgroundColor: "#fff !important",
-                  border: "50%",
-                }}
-                onClick={props.onClickAddRadio}
-              >
-                เพิ่ม
-              </Button>
+              <RadioGroup value={null}>
+                <FormControlLabel control={<Radio />} />
+                <input
+                  className="input-addItem"
+                  type="text"
+                  placeholder="add item"
+                  value={props.valueRadio}
+                  onChange={props.onChangeTextAddRadio}
+                />
+                <Button
+                  sx={{
+                    height: "50px",
+                    width: "150px",
+                    marginTop: "20px",
+                    backgroundColor: "#fff !important",
+                    border: "50%",
+                  }}
+                  onClick={props.onClickAddRadio}
+                >
+                  เพิ่ม
+                </Button>
+              </RadioGroup>
             </div>
           ) : null}
         </FormControl>

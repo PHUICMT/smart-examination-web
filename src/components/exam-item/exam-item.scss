@@ -31,6 +31,7 @@
     }
   }
   
+  
   .info-card {
     margin-left: auto;
     margin-right: auto;
@@ -49,7 +50,17 @@
   
     background-color: rgba(255, 255, 255, 0.7);
     filter: drop-shadow(3px 8px 13px rgba(0, 0, 0, 0.25));
-  
+
+  .input-addItem {
+    height: 50px;
+    width: 150px;
+    background-color: transparent;
+    border-bottom-color: black;
+    border:none;
+    text-align: center;
+    font-size:18px;
+
+  }
     .form-group {
       .textarea {
         border-radius: 20px;
@@ -78,5 +89,5 @@
         padding-left: 10%;
         padding-right: 10%;
       }
-    }
   }
+} 

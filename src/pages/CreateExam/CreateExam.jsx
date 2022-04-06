@@ -40,9 +40,7 @@ const CreateExam = () => {
   const [itemCheckBox, setItemCheckBox] = useState([]);
   const [resultCheckBox, setResultCheckBox] = useState({});
   const [valueCheckBox, setValueCheckBox] = useState([]);
-  const [content, setContent] = useState();
   const [width, setWidth] = useState(20);
-  const span = useRef();
 
   const addCardButtonStyled = {
     width: "100%",
@@ -79,14 +77,12 @@ const CreateExam = () => {
 
   const addRadio = () => {
     if (valueRadio !== "") {
-      console.log(valueRadio);
       setItemRadio([...itemRadio, valueRadio]);
       setValueRadio("");
     }
   };
 
   const addCheckBox = () => {
-    console.log(valueCheckBox);
     if (valueCheckBox !== "") {
       setItemCheckBox([...itemCheckBox, valueCheckBox]);
       setValueCheckBox("");

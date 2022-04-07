@@ -97,7 +97,11 @@ const ExamPage = (props) => {
     };
 
     function handleOnValueChange(valueCallback) {
-      resultPerItems[index] = valueCallback;
+      let value = valueCallback;
+      if (typeof (valueCallback) !== typeof ("")) {
+        value = valueCallback.target.value;
+      }
+      resultPerItems[index] = value;
     }
 
     const ExamItem = () => {

@@ -102,7 +102,7 @@ const CreateExam = () => {
     setValueCheckBox(event.target.value);
   };
 
-  const onChangeTitle = () => (event) => {};
+  const onChangeTitle = () => (event) => { };
   const onChangeQuestion = (event) => {
     setQuestion(event.target.value);
   };
@@ -172,30 +172,25 @@ const CreateExam = () => {
           <Box sx={{ marginTop: 10 }}>
             <TitleWithInput
               title="ชื่อเรื่อง"
-              onChange={onChangeTitle("title")}
+              onChange={() => onChangeTitle("title")}
               disabled={false}
             />
             <TitleWithInput title="PIN" value={pin} disabled={true} />
 
             {!isCollapsed ? (
               <div className="add-card-container">
-                <Button
+                <IconButton
+                  size="large"
                   sx={addCardButtonStyled}
                   onClick={() => {
                     setIsCollapsed(true);
-                  }}
-                >
-                  <IconButton size="large" disabled={true}>
-                    <AddIcon fontSize="large" />
-                  </IconButton>
-                </Button>
+                  }}>
+                  <AddIcon fontSize="large" />
+                </IconButton>
               </div>
             ) : type === TextFieldType ? (
               <TextFieldExam
                 title="คำถาม"
-                onValueChange={(event) => {
-                  console.log(event.target);
-                }}
                 onValueChangeQuestion={onChangeQuestion}
                 question={true}
               />

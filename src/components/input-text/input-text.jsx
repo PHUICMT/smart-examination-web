@@ -15,7 +15,7 @@ const InputText = (props) => {
   };
 
   return (
-    <FormControl variant="outline" focus="false">
+    <FormControl variant="outlined" focus="false">
       <OutlinedInput
         sx={titleTextFieldStyled}
         type="text"

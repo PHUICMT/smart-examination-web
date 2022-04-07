@@ -1,5 +1,6 @@
 import InputText from "../../components/input-text/input-text";
 import { Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
 
 const TitleWithInput = (props) => {
   //style
@@ -11,7 +12,7 @@ const TitleWithInput = (props) => {
     alignItems: "center",
     display: "flex",
     paddingLeft: 4,
-    color: props.blackTitle ? "#000" : "#fff",
+    color: (props.blackTitle) ? "#000" : "#fff",
   };
 
   return (

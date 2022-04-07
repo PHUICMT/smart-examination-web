@@ -3,6 +3,8 @@ import { Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 const TitleWithInput = (props) => {
+
+  const [value, setValue] = useState("");
   //style
   const titleStyled = {
     width: 200,
@@ -12,19 +14,24 @@ const TitleWithInput = (props) => {
     alignItems: "center",
     display: "flex",
     paddingLeft: 4,
-    color: (props.blackTitle) ? "#000" : "#fff",
+    color: (props.blackTitle || false) ? "#000" : "#fff",
+  };
+
+  const handleChange = (e) => {
+    setValue(e.target.value)
+    props.onChange(e);
   };
 
   return (
     <Grid container spacing={2} sx={{ marginTop: "1px" }}>
       <Grid item xs={2}>
-        <Typography sx={titleStyled}>{props.title}</Typography>
+        <Typography sx={titleStyled}>{props.title || ""}</Typography>
       </Grid>
       <Grid item container xs={10}>
         <InputText
-          onChange={props.onChange}
-          value={props.value}
-          disabled={props.disabled}
+          onChange={handleChange}
+          value={props.value || value}
+          disabled={props.disabled || false}
         />
       </Grid>
     </Grid>

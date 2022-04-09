@@ -6,6 +6,8 @@ import HeaderForTeacher from "../../components/header-for-teacher/header-for-tea
 import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
+import { saveExam } from "../../services/save-exam";
+
 import {
   CheckBoxExam,
   RadioBoxExam,
@@ -28,8 +30,11 @@ const CreateExam = () => {
   const CheckBoxType = "CheckBox";
   const RadioBoxType = "Radio";
   const TextFieldType = "TextField";
+  const teacherID = "07610442";
+  const examSubject = "Computer";
   const [tab, setTab] = useState(CreateExam);
   const [pin, setPIN] = useState();
+  const [examTitle, setExamTitle] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [type, setType] = useState();
   const [question, setQuestion] = useState("");
@@ -51,29 +56,50 @@ const CreateExam = () => {
     let card;
     if (type === "TextField") {
       card = {
+        data: {
+          title: question,
+        },
         type: type,
-        question: question,
-        result: result,
+        article: cardList.length + 1,
       };
     } else if (type === "Radio") {
       card = {
-        type: type,
-        question: question,
+        data: {
+          title: question,
+          items: itemRadio,
+        },
         result: result,
-        items: itemRadio,
+        type: type,
+        article: cardList.length + 1,
       };
     } else if (type === "CheckBox") {
       card = {
-        type: type,
-        question: question,
+        data: {
+          title: question,
+          items: itemCheckBox,
+        },
         result: resultCheckBox,
-        items: itemCheckBox,
+        type: type,
+        article: cardList.length + 1,
       };
     }
 
     cardList.push(card);
     setCardList(cardList);
+    handleOnCreateExam();
   };
+
+  async function handleOnCreateExam() {
+    const data = {
+      exam_pin: pin,
+      exam_subject: examSubject,
+      exam_title: examTitle,
+      exam_description: "",
+      teacher_id: teacherID,
+      exam_items: cardList,
+    };
+    await saveExam(data);
+  }
 
   const addRadio = () => {
     if (valueRadio !== "") {
@@ -102,7 +128,6 @@ const CreateExam = () => {
     setValueCheckBox(event.target.value);
   };
 
-  const onChangeTitle = () => (event) => { };
   const onChangeQuestion = (event) => {
     setQuestion(event.target.value);
   };
@@ -172,7 +197,9 @@ const CreateExam = () => {
           <Box sx={{ marginTop: 10 }}>
             <TitleWithInput
               title="ชื่อเรื่อง"
-              onChange={() => onChangeTitle("title")}
+              onChange={(event) => {
+                setExamTitle(event.target.value);
+              }}
               disabled={false}
             />
             <TitleWithInput title="PIN" value={pin} disabled={true} />
@@ -184,7 +211,8 @@ const CreateExam = () => {
                   sx={addCardButtonStyled}
                   onClick={() => {
                     setIsCollapsed(true);
-                  }}>
+                  }}
+                >
                   <AddIcon fontSize="large" />
                 </IconButton>
               </div>
@@ -297,27 +325,27 @@ const CreateExam = () => {
       </div>
 
       <div>
-        {cardList.map((data, index) => {
+        {cardList.map((card, index) => {
           return (
             <div key={index}>
-              {data.type === "TextField" ? (
+              {card.type === "TextField" ? (
                 <TextFieldExam
-                  title={data.question}
-                  description={data.result}
+                  title={card.data.title}
+                  description={card.result}
                   question={false}
                 />
-              ) : data.type === "Radio" ? (
+              ) : card.type === "Radio" ? (
                 <RadioBoxExam
-                  title={data.question}
-                  items={data.items}
-                  value={data.result}
+                  title={card.data.title}
+                  items={card.data.items}
+                  value={card.result}
                   question={false}
                 />
-              ) : data.type === "CheckBox" ? (
+              ) : card.type === "CheckBox" ? (
                 <CheckBoxExam
-                  title={data.question}
-                  items={data.items}
-                  value={data.result}
+                  title={card.data.title}
+                  items={card.data.items}
+                  value={card.result}
                   question={false}
                 />
               ) : null}

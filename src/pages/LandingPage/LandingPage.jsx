@@ -112,7 +112,7 @@ const LandingPage = () => {
                         }}
                     >
                         <p>นักศึกษา</p>
-                        <img src={studentIcon}></img>
+                        <img alt="studentIcon" src={studentIcon}></img>
                     </Button>
                     <Button
                         variant="contained"
@@ -123,7 +123,7 @@ const LandingPage = () => {
                         }}
                     >
                         <p>อาจารย์</p>
-                        <img src={teacherIcon}></img>
+                        <img alt="teacherIcon" src={teacherIcon}></img>
                     </Button>
                 </Stack>
             </div>

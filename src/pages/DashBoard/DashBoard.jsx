@@ -40,7 +40,7 @@ const DashBoard = () => {
             onClick={onClickCreateExamButton}
             sx={textStyle}
           >
-            <img src={createExamIcon}></img>
+            <img alt="createExamIcon" src={createExamIcon}></img>
             <p>สร้างข้อสอบ</p>
           </Button>
           <Button
@@ -49,7 +49,7 @@ const DashBoard = () => {
             onClick={onClickResultExamButton}
             sx={textStyle}
           >
-            <img src={resultExamIcon}></img>
+            <img alt="resultExamIcon" src={resultExamIcon}></img>
             <p>ผลการทดสอบ</p>
           </Button>
         </Stack>

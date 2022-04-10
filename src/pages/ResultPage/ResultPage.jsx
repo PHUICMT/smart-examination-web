@@ -70,6 +70,8 @@ const ResultPage = () => {
               return <div key={key} className={className}><img src={Angry} alt="angry" /> {value}%</div>
             } else if (key === 'neutral') {
               return <div key={key} className={className}><img src={Neutral} alt="neutral" /> {value}%</div>
+            } else {
+              return <div></div>
             }
           })
         }

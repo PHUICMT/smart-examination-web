@@ -9,7 +9,7 @@ const HeaderWithIcon = (props) => {
       <Container>
         <div className="header-with-icon">
           {props.icon != null ? (
-            <img src={props.icon} className="header-icon" />
+            <img alt="header-icon" src={props.icon} className="header-icon" />
           ) : null}
           <div className="title-box">
             <h1 className="title-1">{props.title}</h1>

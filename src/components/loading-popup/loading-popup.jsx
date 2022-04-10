@@ -47,4 +47,4 @@ export const LoadingPopup = (props) => {
 
 }
 
-export default { LoadingPopup };
+export default LoadingPopup;

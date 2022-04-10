@@ -23,7 +23,7 @@ const TabBar = (props) => {
       justifyContent="center"
       onClick={props.onClick}
     >
-      <Typography sx={tabStyled}>{props.title}</Typography>
+      <Typography component={'span'} sx={tabStyled}>{props.title}</Typography>
     </Grid>
   );
 };

@@ -25,7 +25,7 @@ const TitleWithInput = (props) => {
   return (
     <Grid container spacing={2} sx={{ marginTop: "1px" }}>
       <Grid item xs={2}>
-        <Typography sx={titleStyled}>{props.title || ""}</Typography>
+        <Typography component={'span'} sx={titleStyled}>{props.title || ""}</Typography>
       </Grid>
       <Grid item container xs={10}>
         <InputText

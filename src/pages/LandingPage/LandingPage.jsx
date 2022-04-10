@@ -67,7 +67,7 @@ const LandingPage = () => {
         p: 4,
     };
 
-    const ShowModal = () => {
+    const ShowLoginModal = () => {
         return (<div id="modal-container-layout">
             <Modal
                 className="modal-container"
@@ -127,7 +127,7 @@ const LandingPage = () => {
                     </Button>
                 </Stack>
             </div>
-            {openLogin ? <ShowModal /> : <></>}
+            <ShowLoginModal />
         </React.Fragment>
     );
 };

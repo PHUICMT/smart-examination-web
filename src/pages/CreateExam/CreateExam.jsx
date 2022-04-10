@@ -279,7 +279,7 @@ const CreateExam = () => {
             )}
           </Box>
         ) : (
-          <Typography>ข้อสอบ</Typography>
+          <Typography component={'span'}>ข้อสอบ</Typography>
         )}
       </Container>
       <div>

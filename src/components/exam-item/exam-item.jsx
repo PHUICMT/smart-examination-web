@@ -98,7 +98,6 @@ export function RadioBoxExam(props) {
 
   const handleChange = (event) => {
     let result = event.target.value;
-    // console.log("call handleChange");
     if (!props.question) {
       props.onValueChange(result);
     } else {
@@ -106,7 +105,6 @@ export function RadioBoxExam(props) {
     }
   };
 
-  console.log(props.style);
 
   return (
     <InfoCard

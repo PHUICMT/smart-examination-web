@@ -1,8 +1,8 @@
 import './loading-popup.scss';
 
 import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 import { TailSpin } from "react-loader-spinner";
 
 export const LoadingPopup = (props) => {

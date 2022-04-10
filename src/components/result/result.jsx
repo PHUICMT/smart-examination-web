@@ -4,8 +4,8 @@ import Send from "../../assets/icons/send.svg";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Container } from "react-bulma-components";
-import Button from "@material-ui/core/Button";
-import Radio from "@material-ui/core/Radio";
+import Button from '@mui/material/Button';
+import Radio from '@mui/material/Radio';
 import axios from "axios";
 
 function Result(props) {

@@ -14,7 +14,7 @@ import { LoadingPopup } from "../../components/loading-popup/loading-popup"
 
 
 import studentIcon from "../../assets/image/student-icon.png";
-import Button from "@material-ui/core/Button";
+import Button from '@mui/material/Button';
 import Modal from "../../components/modal-notification/moodal-notification";
 import HandleRecorder from "../../services/video-record";
 import { handleOnSendExamResult } from "../../services/result-sender";

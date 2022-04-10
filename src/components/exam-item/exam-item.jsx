@@ -1,12 +1,15 @@
 import "./exam-item.scss";
 import InfoCard from "../../components/info-card/info-card";
-import { Checkbox, FormGroup, Button } from "@mui/material/";
 import {
+  Checkbox,
+  FormGroup,
+  Button,
   RadioGroup,
   FormControlLabel,
   FormControl,
   Radio,
-} from "@material-ui/core";
+} from "@mui/material/";
+
 
 export function CheckBoxExam(props) {
   const title = props.title;

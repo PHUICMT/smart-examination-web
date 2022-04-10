@@ -7,7 +7,7 @@ import ScreenDeActive from "../../assets/icons/screen-deactive.svg";
 import { React, useState } from "react";
 import { Container } from "react-bulma-components";
 import Toggle from "react-toggle";
-import Button from "@material-ui/core/Button";
+import Button from '@mui/material/Button';
 import { useHistory } from "react-router-dom";
 
 import AcceptCard from "../../components/accept-card/accept-card";

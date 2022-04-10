@@ -4,8 +4,7 @@ import React, { useState, useEffect } from "react";
 import InfoCard from "../../components/info-card/info-card";
 import { LoadingPopup } from "../../components/loading-popup/loading-popup"
 import { handleOnGetExam, handleOnGetResult } from "../../services/get-exam-item"
-
-import { Button } from "@material-ui/core";
+import Button from '@mui/material/Button';
 
 const EnterPin = (props) => {
   const history = useHistory();

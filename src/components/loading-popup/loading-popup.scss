@@ -1,33 +1,8 @@
 .loading-popup {
-  text-align: center;
   .MuiPaper-root {
-    background-color: rgba(45, 0, 56, 0.452);
-  }
-  .MuiPaper-rounded {
-    border-radius: 30px;
-  }
-  .text-loding {
-    font-size: 24px;
-    color: #e5b8ff;
-  }
-}
-
-.mail-popup {
-  width: auto;
-  height: auto;
-  overflow: visible;
-  .MuiPaper-root {
-    background-color: transparent;
-  }
-  .MuiDialogContent-root {
-    overflow: hidden;
-    padding: 0;
-  }
-  .MuiPaper-elevation24 {
+    background-color: rgba(0, 0, 0, 0);
+    display: grid;
+    justify-content: center;
     box-shadow: none;
-  }
-  .mail-animation {
-    width: 640px;
-    height: 640px;
   }
 }

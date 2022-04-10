@@ -2,6 +2,7 @@ import "./ExamPage.scss";
 import "bulma";
 
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import HeaderWithIcon from "../../components/header-with-icon/header-with-icon";
 import InfoCard from "../../components/info-card/info-card";
 import {
@@ -9,6 +10,8 @@ import {
   RadioBoxExam,
   TextFieldExam,
 } from "../../components/exam-item/exam-item";
+import { LoadingPopup } from "../../components/loading-popup/loading-popup"
+
 
 import studentIcon from "../../assets/image/student-icon.png";
 import Button from "@material-ui/core/Button";
@@ -28,7 +31,10 @@ let handleRecorder = HandleRecorder();
 
 const ExamPage = (props) => {
   const location = useLocation();
+  const history = useHistory();
+
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [exampin, setExampin] = useState(null);
   const [studentId, setStudentId] = useState("07610497");
@@ -55,7 +61,11 @@ const ExamPage = (props) => {
   useEffect(() => {
     handleRecorder.setUpStudentId(studentId);
     handleRecorder.setUpSupject(subject);
+
+    setLoading(true);
     handleRecorder.startRecord();
+    setTimeout(() => { setLoading(false) }, 2500);
+
     startAndEndTime[0] = getCurrentTime();
   }, [studentId, subject]);
 
@@ -166,11 +176,18 @@ const ExamPage = (props) => {
       examItemsTimeStamp: examItemsTimeStamp,
     };
     const jsonData = JSON.stringify(packedData);
-    handleOnSendExamResult(jsonData);
+    setLoading(true);
+    handleOnSendExamResult(jsonData).then((res) => {
+      if (res === true) {
+        setLoading(false)
+        history.push("/index");
+      }
+    });
   }
 
   return (
     <React.Fragment>
+      <LoadingPopup open={loading} />
       <div className={show ? "noClick" : ""}>
         <div className="title-card">
           <HeaderWithIcon

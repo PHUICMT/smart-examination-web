@@ -9,7 +9,7 @@ export async function handleOnSendExamResult(data) {
     .then(function (result) {
       console.log(result);
       //TODO do when post api success
-      // history.push("/index");
+      return true;
     })
     .catch(function (error) {
       console.log(error);
@@ -33,7 +33,6 @@ export async function handleOnSaveExamCreated(data) {
     .then(function (result) {
       console.log(result);
       //TODO do when post api success
-      // history.push("/index");
     })
     .catch(function (error) {
       console.log(error);

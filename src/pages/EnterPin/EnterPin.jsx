@@ -2,6 +2,7 @@ import "./EnterPin.scss";
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import InfoCard from "../../components/info-card/info-card";
+import { LoadingPopup } from "../../components/loading-popup/loading-popup"
 import { handleOnGetExam, handleOnGetResult } from "../../services/get-exam-item"
 
 import { Button } from "@material-ui/core";
@@ -12,6 +13,7 @@ const EnterPin = (props) => {
   const [isStudent, setStudent] = useState(true);
   const [title, setTitle] = useState("");
   const [className, setClassName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (props.isStudent !== undefined) {
@@ -30,9 +32,12 @@ const EnterPin = (props) => {
 
 
   async function handleOnConfirm() {
+    setLoading(true);
     if (isStudent) {
       handleOnGetExam(examPin).then(res => {
+        console.log(res.exam_items)
         if (res.exam_items !== false && res.exam_items !== undefined) {
+          setLoading(false);
           history.push("/student/exampage",
             {
               examPin: examPin,
@@ -43,6 +48,7 @@ const EnterPin = (props) => {
     } else {
       handleOnGetResult(examPin).then(res => {
         if (res.result !== undefined) {
+          setLoading(false);
           history.push("/teacher/resultpage",
             {
               examPin: examPin,
@@ -56,6 +62,7 @@ const EnterPin = (props) => {
 
   return (
     <React.Fragment>
+      <LoadingPopup open={loading} />
       <div className="title">
         <h1>{title}</h1>
       </div>

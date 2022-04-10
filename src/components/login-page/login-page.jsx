@@ -13,6 +13,7 @@ import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
+import { LoadingPopup } from "../../components/loading-popup/loading-popup"
 import { login } from "../../services/login";
 
 const InputField = (props) => {
@@ -40,6 +41,7 @@ const InputField = (props) => {
 };
 
 const LoginPage = (props) => {
+  const [loading, setLoading] = React.useState(false);
   let history = useHistory();
 
   let fieldName = props.isStudent ? "นักศึกษา" : "อาจารย์";
@@ -49,9 +51,10 @@ const LoginPage = (props) => {
   let userId = ""
 
   function handleLogin() {
+    setLoading(true);
     login(userId).then(res => {
-      console.log();
       if (res.login !== false && res.login !== undefined) {
+        setLoading(false);
         sessionStorage.setItem("userId", userId);
         history.push(pathName, { userId: userId });
       }
@@ -66,6 +69,7 @@ const LoginPage = (props) => {
 
   return (
     <React.Fragment>
+      <LoadingPopup open={loading} />
       <div className="login-page">
         <div className={className}>
           <Avatar src={icons} sx={{ width: 100, height: 100 }} />

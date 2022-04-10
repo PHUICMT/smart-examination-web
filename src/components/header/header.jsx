@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+import HomeIcon from '@mui/icons-material/Home';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
@@ -40,8 +40,8 @@ const Header = () => {
                 <p className="header-title"> CPSU Smart Examination </p>
                 <img src={examLogo} className="logo" alt="logo" />
             </div>
+            <HomeIcon sx={{ width: 50, height: 50, color: '#FFFF' }} />
             <div className="profile" onClick={handleClick}>
-                {/* <p>สวัสดี : 07610497</p> */}
                 <Avatar src={icons} sx={{ width: 50, height: 50 }} />
             </div>
             <MenuHeader
@@ -62,19 +62,10 @@ const MenuHeader = (props) => {
             onClick={props.handleClose}
             className="menu-header"
         >
-            <MenuItem>
-                <Avatar /> Profile
-            </MenuItem>
-            <MenuItem>
-                <Avatar /> My account
+            <MenuItem disabled>
+                <p>สวัสดีคุณ อันดามัน</p>
             </MenuItem>
             <Divider />
-            <MenuItem>
-                <ListItemIcon>
-                    <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Add another account
-            </MenuItem>
             <MenuItem>
                 <ListItemIcon>
                     <Settings fontSize="small" />

@@ -2,7 +2,6 @@ import "./CreateExam.scss";
 
 import React, { useState, useEffect } from "react";
 
-import HeaderForTeacher from "../../components/header-for-teacher/header-for-teacher";
 import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
@@ -32,6 +31,7 @@ const CreateExam = () => {
   const TextFieldType = "TextField";
   const teacherID = "07610442";
   const examSubject = "Computer";
+
   const [tab, setTab] = useState(CreateExam);
   const [pin, setPIN] = useState();
   const [examTitle, setExamTitle] = useState("");
@@ -169,9 +169,6 @@ const CreateExam = () => {
 
   return (
     <React.Fragment>
-      <Box>
-        <HeaderForTeacher />
-      </Box>
       <Container maxWidth="lg">
         <Box sx={{ marginTop: 20 }}>
           <Grid container spacing={2}>

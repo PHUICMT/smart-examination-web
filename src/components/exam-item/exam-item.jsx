@@ -10,7 +10,6 @@ import {
   Radio,
 } from "@mui/material/";
 
-
 export function CheckBoxExam(props) {
   const title = props.title;
   const items = props.items;
@@ -66,7 +65,11 @@ export function CheckBoxExam(props) {
             })}
             {props.question ? (
               <div>
-                <FormControlLabel checked={false} control={<Checkbox />} />
+                <FormControlLabel
+                  checked={false}
+                  label={""}
+                  control={<Checkbox />}
+                />
                 <input
                   style={{ width: `${props.style + "ch"}` }}
                   className="input-addItem"
@@ -108,7 +111,6 @@ export function RadioBoxExam(props) {
     }
   };
 
-
   return (
     <InfoCard
       className="exam-card"
@@ -140,7 +142,11 @@ export function RadioBoxExam(props) {
           </RadioGroup>
           {props.question ? (
             <div>
-              <FormControlLabel checked={false} control={<Radio />} />
+              <FormControlLabel
+                checked={false}
+                label={""}
+                control={<Radio />}
+              />
               <input
                 style={{ width: `${props.style}ch` }}
                 className="input-addItem"

@@ -7,10 +7,10 @@ const TitleWithInput = (props) => {
   const [value, setValue] = useState("");
   //style
   const titleStyled = {
-    width: 200,
-    height: 60,
+    width: "200px !important",
+    height: "60px !important",
     borderRadius: 5,
-    fontSize: 24,
+    fontSize: "24px !important",
     alignItems: "center",
     display: "flex",
     paddingLeft: 4,

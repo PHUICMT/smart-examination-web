@@ -163,6 +163,54 @@ const CreateExam = () => {
     setType(type);
   };
 
+  const AddCardButton = () => {
+    return (
+      <div>
+        <Button
+          variant="outlined"
+          sx={{
+            height: "50px",
+            width: "150px",
+            marginTop: "20px !important",
+            backgroundColor: "#fff !important",
+            borderRadius: "10px !important",
+          }}
+          onClick={() => {
+            AddCard(type, question, result, resultCheckBox);
+            setIsCollapsed(false);
+            setType();
+            setItemRadio([]);
+            setItemCheckBox([]);
+            setResultCheckBox({});
+            setResult();
+          }}
+        >
+          เพิ่มการ์ด
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            height: "50px",
+            width: "150px",
+            marginTop: "20px !important",
+            backgroundColor: "#fff !important",
+            borderRadius: "10px !important",
+          }}
+          onClick={() => {
+            setIsCollapsed(false);
+            setType();
+            setItemRadio([]);
+            setItemCheckBox([]);
+            setResultCheckBox({});
+            setResult();
+          }}
+        >
+          ยกเลิก
+        </Button>
+      </div>
+    );
+  };
+
   useEffect(() => {
     autoGeneratePIN();
   }, []);
@@ -214,38 +262,47 @@ const CreateExam = () => {
                 </IconButton>
               </div>
             ) : type === TextFieldType ? (
-              <TextFieldExam
-                title="คำถาม"
-                onValueChangeQuestion={onChangeQuestion}
-                question={true}
-              />
+              <>
+                <TextFieldExam
+                  title="คำถาม"
+                  onValueChangeQuestion={onChangeQuestion}
+                  question={true}
+                />
+                <AddCardButton />
+              </>
             ) : type === RadioBoxType ? (
-              <RadioBoxExam
-                title="คำถาม"
-                onChangeResult={(event) => {
-                  onChangeResult(event.target.value);
-                }}
-                onValueChangeQuestion={onChangeQuestion}
-                question={true}
-                items={itemRadio}
-                onClickAddRadio={addRadio}
-                onChangeTextAddRadio={onChangeTextAddRadio}
-                valueRadio={valueRadio}
-                style={width}
-              />
+              <>
+                <RadioBoxExam
+                  title="คำถาม"
+                  onChangeResult={(event) => {
+                    onChangeResult(event.target.value);
+                  }}
+                  onValueChangeQuestion={onChangeQuestion}
+                  question={true}
+                  items={itemRadio}
+                  onClickAddRadio={addRadio}
+                  onChangeTextAddRadio={onChangeTextAddRadio}
+                  valueRadio={valueRadio}
+                  style={width}
+                />
+                <AddCardButton />
+              </>
             ) : type === CheckBoxType ? (
-              <CheckBoxExam
-                title="คำถาม"
-                onChangeResult={(event) => {
-                  onChangeResultCheckBox(event);
-                }}
-                onValueChangeQuestion={onChangeQuestion}
-                question={true}
-                items={itemCheckBox}
-                onClickAddCheckBox={addCheckBox}
-                onChangeTextAddCheckBox={onChangeTextAddCheckBox}
-                valueCheckBox={valueCheckBox}
-              />
+              <>
+                <CheckBoxExam
+                  title="คำถาม"
+                  onChangeResult={(event) => {
+                    onChangeResultCheckBox(event);
+                  }}
+                  onValueChangeQuestion={onChangeQuestion}
+                  question={true}
+                  items={itemCheckBox}
+                  onClickAddCheckBox={addCheckBox}
+                  onChangeTextAddCheckBox={onChangeTextAddCheckBox}
+                  valueCheckBox={valueCheckBox}
+                />
+                <AddCardButton />
+              </>
             ) : (
               <div className="form-select-type">
                 <Button
@@ -274,95 +331,54 @@ const CreateExam = () => {
                 </Button>
               </div>
             )}
+
+            <div>
+              {cardList.map((card, index) => {
+                return (
+                  <div key={index}>
+                    {card.type === "TextField" ? (
+                      <TextFieldExam
+                        title={card.data.title}
+                        description={card.result}
+                        question={false}
+                      />
+                    ) : card.type === "Radio" ? (
+                      <RadioBoxExam
+                        title={card.data.title}
+                        items={card.data.items}
+                        value={card.result}
+                        question={false}
+                      />
+                    ) : card.type === "CheckBox" ? (
+                      <CheckBoxExam
+                        title={card.data.title}
+                        items={card.data.items}
+                        value={card.result}
+                        question={false}
+                      />
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="exam-button">
+              <Button
+                variant="contained"
+                size="large"
+                className="submit-exam"
+                onClick={handleOpen}
+              >
+                ยืนยัน
+              </Button>
+              <Modal title="แจ้งเตือน" show={show}>
+                <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
+              </Modal>
+            </div>
           </Box>
         ) : (
-          <Typography component={'span'}>ข้อสอบ</Typography>
+          <Typography component={"span"}>ข้อสอบ</Typography>
         )}
       </Container>
-      <div>
-        <Button
-          variant="outlined"
-          sx={{
-            height: "50px",
-            width: "150px",
-            marginTop: "20px",
-            backgroundColor: "#fff",
-          }}
-          onClick={() => {
-            AddCard(type, question, result, resultCheckBox);
-            setIsCollapsed(false);
-            setType();
-            setItemRadio([]);
-            setItemCheckBox([]);
-            setResultCheckBox({});
-            setResult();
-          }}
-        >
-          เพิ่มการ์ด
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            height: "50px",
-            width: "150px",
-            marginTop: "20px",
-            backgroundColor: "#fff",
-          }}
-          onClick={() => {
-            setIsCollapsed(false);
-            setType();
-            setItemRadio([]);
-            setItemCheckBox([]);
-            setResultCheckBox({});
-            setResult();
-          }}
-        >
-          ยกเลิก
-        </Button>
-      </div>
-
-      <div>
-        {cardList.map((card, index) => {
-          return (
-            <div key={index}>
-              {card.type === "TextField" ? (
-                <TextFieldExam
-                  title={card.data.title}
-                  description={card.result}
-                  question={false}
-                />
-              ) : card.type === "Radio" ? (
-                <RadioBoxExam
-                  title={card.data.title}
-                  items={card.data.items}
-                  value={card.result}
-                  question={false}
-                />
-              ) : card.type === "CheckBox" ? (
-                <CheckBoxExam
-                  title={card.data.title}
-                  items={card.data.items}
-                  value={card.result}
-                  question={false}
-                />
-              ) : null}
-            </div>
-          );
-        })}
-      </div>
-      <div className="exam-button">
-        <Button
-          variant="contained"
-          size="large"
-          className="submit-exam"
-          onClick={handleOpen}
-        >
-          ยืนยัน
-        </Button>
-        <Modal title="แจ้งเตือน" show={show}>
-          <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
-        </Modal>
-      </div>
     </React.Fragment>
   );
 };

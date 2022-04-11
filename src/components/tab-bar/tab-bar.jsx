@@ -3,10 +3,10 @@ import { Grid, Typography } from "@mui/material";
 const TabBar = (props) => {
   //style
   const tabStyled = {
-    width: 200,
-    height: 60,
+    width: "200px !important",
+    height: "60px !important",
     borderRadius: 5,
-    fontSize: 28,
+    fontSize: "28px !important",
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
@@ -23,7 +23,9 @@ const TabBar = (props) => {
       justifyContent="center"
       onClick={props.onClick}
     >
-      <Typography component={'span'} sx={tabStyled}>{props.title}</Typography>
+      <Typography component={"span"} sx={tabStyled}>
+        {props.title}
+      </Typography>
     </Grid>
   );
 };

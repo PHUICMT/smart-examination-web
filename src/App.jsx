@@ -11,6 +11,7 @@ import EnterPin from "./pages/EnterPin/EnterPin";
 import CreateExam from "./pages/CreateExam/CreateExam";
 import ExamPage from "./pages/ExamPage/ExamPage";
 import ResultPage from "./pages/ResultPage/ResultPage";
+import SelectSubject from "./pages/SelectSubject/SelectSubject";
 
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
@@ -28,6 +29,7 @@ function App() {
           <Route path="/student/exampage" component={ExamPage} />
           <Route path="/teacher/enter-pin" render={(props) => <EnterPin {...props} isStudent={false} title={"กรุณากรอกรหัสเพื่อดูผลลัพธ์ข้อสอบ"} />} />
           <Route path="/teacher/dashboard" component={DashBoard} />
+          <Route path="/teacher/select-subject" component={SelectSubject} />
           <Route path="/teacher/create-exam" component={CreateExam} />
           <Route path="/teacher/resultpage" component={ResultPage} />
           <Route path="*" exact>

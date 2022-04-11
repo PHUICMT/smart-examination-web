@@ -18,7 +18,7 @@ const DashBoard = () => {
   };
 
   const onClickCreateExamButton = () => {
-    history.push("/teacher/create-exam");
+    history.push("/teacher/select-subject");
   };
 
   const onClickResultExamButton = () => {

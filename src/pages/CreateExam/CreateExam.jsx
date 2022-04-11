@@ -1,7 +1,7 @@
 import "./CreateExam.scss";
 
 import React, { useState, useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
@@ -24,13 +24,14 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 
 const CreateExam = () => {
+  const location = useLocation();
   const CreateExam = 0;
   const Exam = 1;
   const CheckBoxType = "CheckBox";
   const RadioBoxType = "Radio";
   const TextFieldType = "TextField";
   const teacherID = "07610442";
-  const examSubject = "Computer";
+  const examSubject = location.state.data;
 
   const [tab, setTab] = useState(CreateExam);
   const [pin, setPIN] = useState();

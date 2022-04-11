@@ -1,0 +1,31 @@
+.subject-container{
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.button-select-subject{
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    justify-content: left !important;
+    align-items: center !important;
+    margin-top: 10px !important;
+    color: #2d3436 !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    
+    .button-select-subject-color {
+        background-color: #f9f9f9 !important;
+    }
+    .button-select-subject-color:hover {
+        background-color: #6c5ce7 !important;
+    }
+}
+
+.text-style{
+    color: #2d3436;
+    font-size: 32px;
+    font-weight: bold;
+}

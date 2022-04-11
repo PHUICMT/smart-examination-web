@@ -24,7 +24,6 @@ const SelectSubject = () => {
   }, []);
 
   const onClickSelect = (subject) => {
-    console.log(subject);
     history.push({
       pathname: "/teacher/create-exam",
       state: {

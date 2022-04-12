@@ -48,7 +48,7 @@ const EnterPin = (props) => {
       handleOnGetResult(examPin).then(res => {
         if (res.result !== undefined) {
           setLoading(false);
-          history.push("/teacher/resultpage",
+          history.push("/teacher/result-page",
             {
               examPin: examPin,
               data: res.result

@@ -31,7 +31,7 @@ function App() {
           <Route path="/teacher/dashboard" component={DashBoard} />
           <Route path="/teacher/select-subject" component={SelectSubject} />
           <Route path="/teacher/create-exam" component={CreateExam} />
-          <Route path="/teacher/resultpage" component={ResultPage} />
+          <Route path="/teacher/result-page" component={ResultPage} />
           <Route path="*" exact>
             <Redirect from="*" to="/index" />
           </Route>

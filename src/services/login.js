@@ -11,7 +11,16 @@ export async function login(userId) {
       headers: { "Content-Type": "application/json" },
     })
     .then(function (result) {
-      return result.data;
+      const data = result.data.login[0];
+      const isStudent = data[4] === 1;
+      const resultObject = {
+        userId: data[0],
+        name: data[1],
+        surname: data[2],
+        startAt: data[3],
+        isStudent: isStudent,
+      };
+      return resultObject;
     })
     .catch(function (error) {
       console.log(error);

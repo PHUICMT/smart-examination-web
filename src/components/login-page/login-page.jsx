@@ -53,7 +53,7 @@ const LoginPage = (props) => {
   function handleLogin() {
     setLoading(true);
     login(userId).then(res => {
-      if (res.login !== false && res.login !== undefined) {
+      if (res.isStudent !== false && res !== undefined) {
         setLoading(false);
         sessionStorage.setItem("userId", userId);
         history.push(pathName, { userId: userId });

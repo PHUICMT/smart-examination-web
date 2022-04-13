@@ -1,9 +1,9 @@
 .button-group {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  display: grid;
+  padding-top          : 50px;
+  padding-bottom       : 50px;
+  display              : grid;
   grid-template-columns: auto auto;
-  justify-content: center;
+  justify-content      : center;
 
   .student {
     background-color: #007569ea;
@@ -26,16 +26,64 @@
   }
 
   p {
-    font-size: 50px;
+    font-size  : 50px;
     margin-left: 20px;
   }
 
   button {
-    margin-left: 20px;
-    margin-right: 20px;
-    border-radius: 30px;
-    width: 100%;
-    display: flex;
+    margin-left   : 20px;
+    margin-right  : 20px;
+    border-radius : 30px;
+    width         : 100%;
+    display       : flex;
     flex-direction: column;
+  }
+}
+
+.button-group-student {
+  display        : flex;
+  justify-content: center;
+  margin-bottom  : 50px;
+
+  .MuiButton-root {
+    max-width       : 50%;
+    margin-top      : 50px;
+    border-radius   : 30px;
+    width           : 100%;
+    display         : flex;
+    flex-direction  : row;
+    background-color: #007569ea;
+
+    p {
+      font-size: 50px;
+    }
+  }
+
+  .MuiButton-root:hover {
+    background-color: #004e46;
+  }
+}
+
+.button-group-teacher {
+  display        : flex;
+  justify-content: center;
+  margin-bottom  : 50px;
+
+  .MuiButton-root {
+    max-width       : 50%;
+    margin-top      : 50px;
+    border-radius   : 30px;
+    width           : 100%;
+    display         : flex;
+    flex-direction  : row;
+    background-color: #6c5ce7ea;
+
+    p {
+      font-size: 50px;
+    }
+  }
+
+  .MuiButton-root:hover {
+    background-color: #4c419e;
   }
 }

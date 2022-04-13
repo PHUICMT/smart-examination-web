@@ -18,7 +18,6 @@ const MenuHeader = (props) => {
 
     const logout = () => {
         window.sessionStorage.clear();
-        console.log("logout");
         props.history.push({
             pathname: "/",
             state: { data: null },
@@ -55,6 +54,7 @@ const Header = () => {
     const [isStudent, setIsStudent] = useState(null);
     const [name, setName] = useState(null);
     const [icons, setIcon] = useState(null);
+    const [className, setClassName] = useState(null);
 
     useEffect(() => {
         let sessionUserId = window.sessionStorage.getItem("userId");
@@ -68,8 +68,10 @@ const Header = () => {
 
             if (sessionIsStudent === "true") {
                 setIcon(studentIcon);
+                setClassName("student");
             } else {
                 setIcon(teacherIcon);
+                setClassName("teacher");
             }
         }
     }, [location, userId, isStudent, name]);
@@ -92,7 +94,7 @@ const Header = () => {
             return (
                 <>
                     <div className="profile" onClick={handleClick}>
-                        <Avatar src={icons} sx={{ width: 50, height: 50 }} />
+                        <Avatar src={icons} sx={{ width: 50, height: 50 }} className={`${className}`} />
                     </div>
                     <MenuHeader
                         anchorEl={anchorEl}
@@ -108,7 +110,7 @@ const Header = () => {
         }
     }
 
-    if (window.sessionStorage.getItem("userId") !== null) {
+    if (window.sessionStorage.getItem("isStudent") !== null) {
         return (
             <header className="header header-content">
                 <div className="logo-title" onClick={gotoIndex}>

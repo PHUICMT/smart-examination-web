@@ -53,12 +53,12 @@ const LoginPage = (props) => {
   function handleLogin() {
     setLoading(true);
     login(userId).then(res => {
-      if (res.isStudent !== false && res !== undefined) {
+      if (res !== undefined) {
         window.sessionStorage.setItem("userId", res.userId);
         window.sessionStorage.setItem("name", res.name);
         window.sessionStorage.setItem("isStudent", res.isStudent);
         setLoading(false);
-        history.push(pathName, { userId: userId });
+        history.push(pathName);
       }
     });
   }

@@ -8,10 +8,18 @@
   filter          : drop-shadow(0px 2px 4px rgba(5, 5, 5, 0.16)) drop-shadow(0px 4px 8px rgba(21, 24, 26, 0.08));
   z-index         : 1000;
 
-  background-image   : url("../../assets/image/center-line-student.svg");
+  background-image   : url("../../assets/image/center-line-nologin.svg");
   background-repeat  : no-repeat;
   background-position: center 100%;
   background-size    : 100% 80vh;
+
+  &.student {
+    background-image: url("../../assets/image/center-line-student.svg");
+  }
+
+  &.teacher {
+    background-image: url("../../assets/image/center-line-teacher.svg");
+  }
 
   &.header-content {
     display              : grid;
@@ -69,21 +77,47 @@
 
 .menu-header {
 
-  hr {
-    background-color: #00f0d8ea;
+  &.student {
+    hr {
+      background-color: #00f0d8ea;
+    }
   }
 
-  .MuiListItemIcon-root {
-    color: #00e0caea;
+  &.teacher {
+    hr {
+      background-color: #64FF;
+    }
+  }
+
+  &.student {
+    .MuiListItemIcon-root {
+      color: #00e0caea;
+    }
+  }
+
+  &.teacher {
+    .MuiListItemIcon-root {
+      color: #64FF;
+    }
   }
 
   .MuiPaper-root {
     background-color: #2c2c2c;
-    color           : #00e0caea;
+  }
+
+  &.student {
+    .MuiPaper-root {
+      color: #00e0caea;
+    }
+  }
+
+  &.teacher {
+    .MuiPaper-root {
+      color: #64FF;
+    }
   }
 
   .Mui-disabled {
-    color      : #00bba8ea;
     opacity    : 1 !important;
     font-size  : 1.2rem;
     font-weight: bold;

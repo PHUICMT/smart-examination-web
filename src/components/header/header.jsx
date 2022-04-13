@@ -30,7 +30,7 @@ const MenuHeader = (props) => {
             open={props.open}
             onClose={props.handleClose}
             onClick={props.handleClose}
-            className="menu-header"
+            className={`menu-header ${props.className}`}
         >
             <MenuItem disabled>
                 <p>สวัสดีคุณ {props.name}</p>
@@ -69,9 +69,11 @@ const Header = () => {
             if (sessionIsStudent === "true") {
                 setIcon(studentIcon);
                 setClassName("student");
-            } else {
+            } else if (sessionIsStudent === "false") {
                 setIcon(teacherIcon);
                 setClassName("teacher");
+            } else {
+                setClassName("");
             }
         }
     }, [location, userId, isStudent, name]);
@@ -93,10 +95,11 @@ const Header = () => {
         if (userId !== null) {
             return (
                 <>
-                    <div className="profile" onClick={handleClick}>
+                    <div className={`profile ${className}`} onClick={handleClick}>
                         <Avatar src={icons} sx={{ width: 50, height: 50 }} className={`${className}`} />
                     </div>
                     <MenuHeader
+                        className={className}
                         anchorEl={anchorEl}
                         open={open}
                         handleClose={handleClose}
@@ -112,7 +115,7 @@ const Header = () => {
 
     if (window.sessionStorage.getItem("isStudent") !== null) {
         return (
-            <header className="header header-content">
+            <header className={`header header-content ${className}`}>
                 <div className="logo-title" onClick={gotoIndex}>
                     <p className="header-title"> CPSU Smart Examination </p>
                     <img src={examLogo} className="logo" alt="logo" />

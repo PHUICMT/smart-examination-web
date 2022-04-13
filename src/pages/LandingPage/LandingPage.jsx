@@ -147,7 +147,6 @@ const LandingPage = () => {
     }
 
     const ButtonGroupStudent = () => {
-
         const gotoStudentExamPin = () => {
             history.push("/student/enter-pin")
         }
@@ -166,7 +165,6 @@ const LandingPage = () => {
     }
 
     const ButtonGroupTeacher = () => {
-
         const gotoTeacherDashBoard = () => {
             history.push("/teacher/dashboard")
         }
@@ -196,7 +194,7 @@ const LandingPage = () => {
                 icon={maintenanceIcon}
             />
             {isStudent !== null ?
-                isStudent ?
+                isStudent === "true" ?
                     <ButtonGroupStudent />
                     :
                     <ButtonGroupTeacher />

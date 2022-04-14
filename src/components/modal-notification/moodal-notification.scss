@@ -1,4 +1,4 @@
-.modal {
+.modal-notification {
   position       : sticky !important;
   height         : 100%;
   width          : 100%;
@@ -6,7 +6,8 @@
   top            : 0;
   right          : 0;
   bottom         : 0;
-  display        : flex !important;
+  display        : flex;
+  flex-direction : column;
   align-items    : center;
   justify-content: center;
   opacity        : 0;
@@ -16,14 +17,69 @@
   -webkit-box-shadow: 0 8px 6px 1000px rgba(0, 0, 0, 0.3);
   -moz-box-shadow   : 0 8px 6px 1000px rgba(0, 0, 0, 0.3);
   box-shadow        : 0 8px 6px 1000px rgba(0, 0, 0, 0.3);
+
+  .modal-detail {
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    width           : 100%;
+    background-color: rgba(0, 0, 0, 0.719);
+
+    .modal-header {
+      color      : rgb(255, 131, 131);
+      font-weight: bold;
+    }
+
+    .modal-title {
+      margin      : 0;
+      padding-top : 26px;
+      padding-left: 15px;
+      font-weight : 700;
+      font-size   : 30px;
+      word-break  : break-all;
+    }
+
+    .modal-body {
+      padding   : 30px;
+      font-size : 24px;
+      color     : antiquewhite;
+      word-break: break-all;
+    }
+  }
+
+
+
+  .modal-footer {
+    display              : grid;
+    grid-template-columns: auto auto;
+    grid-gap             : 10px;
+    width                : 100%;
+    padding              : 10px;
+
+    .button-submit {
+      &.MuiButton-root {
+        margin: 10px;
+        float : right;
+      }
+
+    }
+
+    .button-cancel {
+      &.MuiButton-root {
+        margin: 10px;
+        float : left;
+      }
+    }
+  }
+
 }
 
-.modal.enter-done {
+.modal-notification.enter-done {
   opacity       : 1;
   pointer-events: visible;
 }
 
-.modal.exit {
+.modal-notification.exit {
   opacity: 0;
 }
 
@@ -31,50 +87,16 @@
   width           : 500px;
   height          : max-content;
   border-radius   : 16px;
-  background-color: #fff;
+  background-color: rgba(22, 22, 22, 0.7);
   transition      : all 0.3s ease-in-out;
   transform       : translateY(-200px);
+  backdrop-filter : blur(5px);
 }
 
-.modal.enter-done .modal-content {
+.modal-notification.enter-done .modal-content {
   transform: translateY(0);
 }
 
-.modal.exit .modal-content {
+.modal-notification.exit .modal-content {
   transform: translateY(-200px);
-}
-
-.modal-header {
-  background-color: #fff;
-}
-
-.modal-title {
-  margin      : 0;
-  padding-top : 26px;
-  padding-left: 15px;
-  font-weight : 700;
-  font-size   : 30px;
-  word-break  : break-all;
-}
-
-.modal-body {
-  padding         : 30px;
-  background-color: #fff;
-  word-break      : break-all;
-}
-
-.modal-footer {
-  padding         : 8px;
-  background-color: rgb(131, 131, 131);
-  height          : 75px;
-}
-
-.button-submit {
-  margin: 10px;
-  float : right;
-}
-
-.button-cancel {
-  margin: 10px;
-  float : left;
 }

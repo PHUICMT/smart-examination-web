@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
+import Button from '@mui/material/Button';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import "./moodal-notification.scss";
 
 
@@ -20,24 +23,27 @@ const Modal = (props) => {
 
   return ReactDOM.createPortal(
     <CSSTransition
-      className="modal modal-content"
+      className="modal-notification modal-content"
       in={props.show}
       unmountOnExit
       timeout={{ enter: 0, exit: 300 }}
       onClick={props.onClose}
     >
       <div onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h4 className="modal-title">{props.title}</h4>
+        <div className="modal-detail">
+          <div className="modal-header">
+            <h4 className="modal-title">{props.title}</h4>
+          </div>
+          <div className="modal-body">{props.children}</div>
         </div>
-        <div className="modal-body">{props.children}</div>
+
         <div className="modal-footer">
-          <button onClick={props.onClose} className="button button-cancel">
+          <Button variant="contained" color="error" onClick={props.onClose} className="button-cancel" endIcon={<CancelIcon />}>
             ยกเลิก
-          </button>
-          <button onClick={props.onConfirm} className="button button-submit">
+          </Button>
+          <Button variant="contained" color="success" onClick={props.onConfirm} className="button-submit" endIcon={<CheckCircleIcon />}>
             ยืนยัน
-          </button>
+          </Button>
         </div>
       </div>
     </CSSTransition>,

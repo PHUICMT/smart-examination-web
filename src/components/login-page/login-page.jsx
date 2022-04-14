@@ -35,13 +35,21 @@ const InputField = (props) => {
       }}
     >
       {props.isUserId ? <AccountCircle /> : <LockIcon />}
-      <TextField onChange={(e) => handleOnValueChange(e)} label={props.label} variant="standard" fullWidth />
+      <TextField
+        error={props.loginFail}
+        onChange={(e) => handleOnValueChange(e)}
+        label={props.label}
+        variant="standard"
+        fullWidth
+        helperText={props.loginFail ? "รหัสประจำตัวหรือรหัสผ่านไม่ถูกต้อง" : ""}
+      />
     </Box>
   );
 };
 
 const LoginPage = (props) => {
   const [loading, setLoading] = React.useState(false);
+  const [loginFail, setLoginFail] = React.useState(false);
   let history = useHistory();
 
   let fieldName = props.isStudent ? "นักศึกษา" : "อาจารย์";
@@ -53,12 +61,15 @@ const LoginPage = (props) => {
   function handleLogin() {
     setLoading(true);
     login(userId).then(res => {
-      if (res !== undefined) {
+      if (res !== undefined && res !== false) {
         window.sessionStorage.setItem("userId", res.userId);
         window.sessionStorage.setItem("name", res.name);
         window.sessionStorage.setItem("isStudent", res.isStudent);
         setLoading(false);
         history.push(pathName);
+      } else {
+        setLoginFail(true);
+        setLoading(false);
       }
     });
   }
@@ -66,6 +77,7 @@ const LoginPage = (props) => {
   function handleUserIdChange(value) {
     if (value !== undefined) {
       userId = value;
+      setLoginFail(false);
     }
   }
 
@@ -75,17 +87,20 @@ const LoginPage = (props) => {
       <div className="login-page">
         <div className={className}>
           <Avatar src={icons} sx={{ width: 100, height: 100 }} />
-          <p>{fieldName}</p>
+          <p className="login-title">{fieldName}</p>
           <InputField
             isStudent={props.isStudent}
             label="รหัสประจำตัว"
             onValueChange={(value) => handleUserIdChange(value)}
             isUserId={true}
+            loginFail={loginFail}
           />
           <InputField
             isStudent={props.isStudent}
             label="รหัสผ่าน"
+            onValueChange={(value) => (value)}
             isUserId={false}
+            loginFail={loginFail}
           />
           <Button
             variant="contained"

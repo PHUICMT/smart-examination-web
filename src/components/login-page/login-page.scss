@@ -1,21 +1,22 @@
 .login-page {
-  height: 100%;
-  width: 100%;
-  padding: 20px;
+  height       : 100%;
+  width        : 100%;
+  padding      : 20px;
   border-radius: 30px;
 
-  display: grid;
+  display        : grid;
   justify-content: center;
-  align-content: center;
+  align-content  : center;
 
   background-color: #303030b0;
-  animation: fadeIn 5s;
-  backdrop-filter: blur(10px);
+  animation       : fadeIn 5s;
+  backdrop-filter : blur(10px);
 
   @-webkit-keyframes fadeIn {
     from {
       backdrop-filter: blur(0px);
     }
+
     to {
       backdrop-filter: blur(10px);
     }
@@ -25,66 +26,75 @@
     from {
       backdrop-filter: blur(0px);
     }
+
     to {
       backdrop-filter: blur(10px);
     }
   }
 
-  color: #ffffff;
+  color    : #ffffff;
   font-size: 40px;
 
   .MuiBox-root {
-    margin-top: 5px;
+    margin-top   : 5px;
     margin-bottom: 40px;
   }
 
   .MuiInput-input {
-    color: #ffffff;
-    padding-left: 5px;
+    color        : #ffffff;
+    padding-left : 5px;
     border-bottom: #ffffff !important;
   }
 
   .MuiAvatar-circular {
-    margin-left: auto;
+    margin-left : auto;
     margin-right: auto;
   }
 
   .student {
-    display: flex;
+    display       : flex;
     flex-direction: column;
 
     .MuiAvatar-circular {
       background-color: #004e46;
     }
+
     .MuiButton-root {
       background-color: #004e46;
     }
+
     .MuiButton-root:hover {
       background-color: #009182;
     }
   }
 
   .teacher {
-    display: flex;
+    display       : flex;
     flex-direction: column;
 
     .MuiAvatar-circular {
       background-color: #4c419e;
     }
+
     .MuiButton-root {
       background-color: #4c419e;
     }
+
     .MuiButton-root:hover {
       background-color: #6153cc;
     }
   }
 
-  p {
+  .login-title {
     text-align: center;
   }
 
   label {
-    color: #ffffff;
+    color       : #ffffff;
     padding-left: 5px;
+  }
+
+  .MuiFormHelperText-root {
+    margin-left: 5px;
   }
 }

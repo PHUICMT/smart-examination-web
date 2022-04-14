@@ -22,7 +22,7 @@ export async function login(userId) {
       };
       return resultObject;
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch(function () {
+      return false;
     });
 }

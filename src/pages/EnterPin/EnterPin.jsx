@@ -34,7 +34,6 @@ const EnterPin = (props) => {
     setLoading(true);
     if (isStudent) {
       handleOnGetExam(examPin).then(res => {
-        console.log(res.exam_items)
         if (res.exam_items !== false && res.exam_items !== undefined) {
           setLoading(false);
           history.push("/student/exampage",

@@ -37,8 +37,10 @@ const ExamPage = (props) => {
   const [loading, setLoading] = useState(false);
 
   const [exampin, setExampin] = useState(null);
-  const [studentId, setStudentId] = useState("07610497");
-  const [subject, setSubject] = useState("Computer");
+  const [studentId, setStudentId] = useState("");
+  const [subject, setSubject] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [allItems, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(undefined);
 
@@ -47,8 +49,10 @@ const ExamPage = (props) => {
     setExampin(location.state.examPin);
     setItems(location.state.data.exam);
     setTotalItems(location.state.data.exam.length);
-    setSubject(location.state.data.exam_subject);
     setExampin(location.state.examPin);
+    setSubject(location.state.data.exam_subject);
+    setTitle(location.state.data.exam_title);
+    setDescription(location.state.data.exam_description);
     setStudentId(sessionStorage.getItem("userId"));
   }, [
     location.state,
@@ -192,17 +196,17 @@ const ExamPage = (props) => {
         <div className="title-card">
           <HeaderWithIcon
             title="แบบทดสอบ"
-            description="วิชา ศาสตร์การเขียนโปรแกรมขั้นสูง"
+            description={subject}
             icon={studentIcon}
           />
         </div>
 
         <div className="head-card">
           <InfoCard
-            title={<div className="head"> แบบทดสอบก่อนเรียน</div>}
+            title={<div className="head"> {title}</div>}
             description={
               <div className="head">
-                ชุดกิจกรรมการเรียนรู้ที่ 1 เรื่อง คอมพิวเตอร์ครอบจักรวาล
+                {description}
               </div>
             }
             icon={null}

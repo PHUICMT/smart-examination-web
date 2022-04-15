@@ -10,11 +10,10 @@ import {
   RadioBoxExam,
   TextFieldExam,
 } from "../../components/exam-item/exam-item";
-import { LoadingPopup } from "../../components/loading-popup/loading-popup"
-
+import { LoadingPopup } from "../../components/loading-popup/loading-popup";
 
 import studentIcon from "../../assets/image/student-icon.png";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import Modal from "../../components/modal-notification/moodal-notification";
 import HandleRecorder from "../../services/video-record";
 import { handleOnSendExamResult } from "../../services/result-sender";
@@ -68,7 +67,9 @@ const ExamPage = (props) => {
 
     setLoading(true);
     handleRecorder.startRecord();
-    setTimeout(() => { setLoading(false) }, 2500);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
 
     startAndEndTime[0] = getCurrentTime();
   }, [studentId, subject]);
@@ -112,7 +113,7 @@ const ExamPage = (props) => {
 
     function handleOnValueChange(valueCallback) {
       let value = valueCallback;
-      if (typeof (valueCallback) !== typeof ("")) {
+      if (typeof valueCallback !== typeof "") {
         value = valueCallback.target.value;
       }
       resultPerItems[index] = value;
@@ -183,7 +184,7 @@ const ExamPage = (props) => {
     setLoading(true);
     handleOnSendExamResult(jsonData).then((res) => {
       if (res === true) {
-        setLoading(false)
+        setLoading(false);
         history.push("/index");
       }
     });
@@ -204,11 +205,7 @@ const ExamPage = (props) => {
         <div className="head-card">
           <InfoCard
             title={<div className="head"> {title}</div>}
-            description={
-              <div className="head">
-                {description}
-              </div>
-            }
+            description={<div className="head">{description}</div>}
             icon={null}
             marginTop={100}
             input={null}

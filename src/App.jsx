@@ -34,26 +34,45 @@ const RouteOnLogin = () => {
     }
   }, [status]);
 
-  switch (status) {//ถ้าจะ Dev ให้เปลี่ยน status เป็น null -> switch (null)
+  switch (
+    status //ถ้าจะ Dev ให้เปลี่ยน status เป็น null -> switch (null)
+  ) {
     case "student":
-      return (<StudentRoute />);
+      return <StudentRoute />;
     case "teacher":
-      return (<TeacherRoute />);
+      return <TeacherRoute />;
     case "not-login":
-      return (<DefaultRoute />);
+      return <DefaultRoute />;
     default:
-      return (<AllRoute />);
-
+      return <AllRoute />;
   }
-}
+};
 
 const AllRoute = () => {
   return (
     <Switch>
       <Route path="/index" component={LandingPage} />
-      <Route path="/student/enter-pin" render={(props) => <EnterPin {...props} isStudent={true} title={"กรุณากรอกรหัสเพื่อเข้าสอบ"} />} />
+      <Route
+        path="/student/enter-pin"
+        render={(props) => (
+          <EnterPin
+            {...props}
+            isStudent={true}
+            title={"กรุณากรอกรหัสเพื่อเข้าสอบ"}
+          />
+        )}
+      />
       <Route path="/student/exampage" component={ExamPage} />
-      <Route path="/teacher/enter-pin" render={(props) => <EnterPin {...props} isStudent={false} title={"กรุณากรอกรหัสเพื่อดูผลลัพธ์ข้อสอบ"} />} />
+      <Route
+        path="/teacher/enter-pin"
+        render={(props) => (
+          <EnterPin
+            {...props}
+            isStudent={false}
+            title={"กรุณากรอกรหัสเพื่อดูผลลัพธ์ข้อสอบ"}
+          />
+        )}
+      />
       <Route path="/teacher/dashboard" component={DashBoard} />
       <Route path="/teacher/select-subject" component={SelectSubject} />
       <Route path="/teacher/create-exam" component={CreateExam} />
@@ -63,7 +82,7 @@ const AllRoute = () => {
       </Route>
     </Switch>
   );
-}
+};
 
 const DefaultRoute = () => {
   return (
@@ -74,26 +93,44 @@ const DefaultRoute = () => {
       </Route>
     </Switch>
   );
-}
+};
 
 const StudentRoute = () => {
   return (
     <Switch>
       <Route path="/index" component={LandingPage} />
-      <Route path="/student/enter-pin" render={(props) => <EnterPin {...props} isStudent={true} title={"กรุณากรอกรหัสเพื่อเข้าสอบ"} />} />
+      <Route
+        path="/student/enter-pin"
+        render={(props) => (
+          <EnterPin
+            {...props}
+            isStudent={true}
+            title={"กรุณากรอกรหัสเพื่อเข้าสอบ"}
+          />
+        )}
+      />
       <Route path="/student/exampage" component={ExamPage} />
       <Route path="*" exact>
         <Redirect from="*" to="/index" />
       </Route>
     </Switch>
   );
-}
+};
 
 const TeacherRoute = () => {
   return (
     <Switch>
       <Route path="/index" component={LandingPage} />
-      <Route path="/teacher/enter-pin" render={(props) => <EnterPin {...props} isStudent={false} title={"กรุณากรอกรหัสเพื่อดูผลลัพธ์ข้อสอบ"} />} />
+      <Route
+        path="/teacher/enter-pin"
+        render={(props) => (
+          <EnterPin
+            {...props}
+            isStudent={false}
+            title={"กรุณากรอกรหัสเพื่อดูผลลัพธ์ข้อสอบ"}
+          />
+        )}
+      />
       <Route path="/teacher/dashboard" component={DashBoard} />
       <Route path="/teacher/select-subject" component={SelectSubject} />
       <Route path="/teacher/create-exam" component={CreateExam} />
@@ -103,7 +140,7 @@ const TeacherRoute = () => {
       </Route>
     </Switch>
   );
-}
+};
 
 function App() {
   return (

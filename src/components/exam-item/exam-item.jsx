@@ -20,7 +20,9 @@ export function CheckBoxExam(props) {
   }
 
   const handleChange = (event) => {
-    let result = event.target.id;
+    let index = event.target.id;
+    result[index] = event.target.checked;
+
     if (!props.question) {
       props.onValueChange(result);
     } else {

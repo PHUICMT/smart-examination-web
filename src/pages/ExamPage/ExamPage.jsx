@@ -111,9 +111,9 @@ const ExamPage = (props) => {
       }
     };
 
-    function handleOnValueChange(valueCallback) {
+    function handleOnValueChange(valueCallback, type) {
       let value = valueCallback;
-      if (typeof valueCallback !== typeof "") {
+      if (type === 'textfield') {
         value = valueCallback.target.value;
       }
       resultPerItems[index] = value;
@@ -125,7 +125,7 @@ const ExamPage = (props) => {
           case "Radio":
             return (
               <RadioBoxExam
-                onValueChange={handleOnValueChange}
+                onValueChange={(value) => handleOnValueChange(value, 'radio')}
                 title={detail.title}
                 items={detail.items}
               />
@@ -133,7 +133,7 @@ const ExamPage = (props) => {
           case "CheckBox":
             return (
               <CheckBoxExam
-                onValueChange={handleOnValueChange}
+                onValueChange={(value) => handleOnValueChange(value, 'checkbox')}
                 title={detail.title}
                 items={detail.items}
               />
@@ -141,7 +141,7 @@ const ExamPage = (props) => {
           case "TextField":
             return (
               <TextFieldExam
-                onValueChange={handleOnValueChange}
+                onValueChange={(value) => handleOnValueChange(value, 'textfield')}
                 title={detail.title}
               />
             );

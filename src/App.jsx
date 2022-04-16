@@ -26,7 +26,6 @@ const RouteOnLogin = () => {
   useEffect(() => {
     history.listen(() => {
       let isStudentData = window.sessionStorage.getItem("isStudent");
-      console.log(isStudentData);
       if (isStudentData !== null) {
         if (isStudentData === "true") {
           setStatus("student");

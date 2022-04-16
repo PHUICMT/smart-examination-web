@@ -3,6 +3,7 @@ import "./App.scss";
 import { useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Header from "./components/header/header";
 
@@ -19,23 +20,28 @@ window.onbeforeunload = function () {
 };
 
 const RouteOnLogin = () => {
+  const history = useHistory();
   const [status, setStatus] = useState("not-login");
 
   useEffect(() => {
-    let isStudentData = window.sessionStorage.getItem("isStudent");
-    if (isStudentData !== null) {
-      if (isStudentData === "true") {
-        setStatus("student");
+    history.listen(() => {
+      let isStudentData = window.sessionStorage.getItem("isStudent");
+      console.log(isStudentData);
+      if (isStudentData !== null) {
+        if (isStudentData === "true") {
+          setStatus("student");
+        } else {
+          setStatus("teacher");
+        }
       } else {
-        setStatus("teacher");
+        setStatus("not-login");
       }
-    } else {
-      setStatus("not-login");
-    }
-  }, [status]);
+    })
+
+  }, [status, history]);
 
   switch (
-    status //ถ้าจะ Dev ให้เปลี่ยน status เป็น null -> switch (null)
+  status //ถ้าจะ Dev ให้เปลี่ยน status เป็น null -> switch (null)
   ) {
     case "student":
       return <StudentRoute />;

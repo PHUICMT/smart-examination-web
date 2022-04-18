@@ -10,6 +10,7 @@ import {
   Radio,
 } from "@mui/material/";
 import trash from "../../assets/icons/trash.svg";
+import edit from "../../assets/icons/edit.svg";
 import ButtonWithIcon from "../button-with-icon/button-with-icon";
 
 export function CheckBoxExam(props) {
@@ -208,6 +209,12 @@ export function TextFieldExam(props) {
           <ButtonWithIcon
             // onClick={() => {}}
             icon={trash}
+          >
+            ลบ
+          </ButtonWithIcon>
+          <ButtonWithIcon
+            // onClick={() => {}}
+            icon={edit}
           >
             ลบ
           </ButtonWithIcon>

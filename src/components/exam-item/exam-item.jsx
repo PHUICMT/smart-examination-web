@@ -9,6 +9,8 @@ import {
   FormControl,
   Radio,
 } from "@mui/material/";
+import trash from "../../assets/icons/trash.svg";
+import ButtonWithIcon from "../button-with-icon/button-with-icon";
 
 export function CheckBoxExam(props) {
   const title = props.title;
@@ -201,6 +203,16 @@ export function TextFieldExam(props) {
       icon={null}
       marginTop={100}
       input={null}
+      delete_button={
+        <div className="is-flex is-justify-content-flex-end">
+          <ButtonWithIcon
+            // onClick={() => {}}
+            icon={trash}
+          >
+            ลบ
+          </ButtonWithIcon>
+        </div>
+      }
     />
   );
 }

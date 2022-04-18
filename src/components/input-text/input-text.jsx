@@ -2,7 +2,7 @@ import { OutlinedInput, FormControl } from "@mui/material";
 const InputText = (props) => {
   //style
   const titleTextFieldStyled = {
-    width: "100%",
+    width: "400%",
     fontSize: "20px",
     fontFamily: "IBM Plex Sans, sans-serif",
     fontWeight: "400",

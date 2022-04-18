@@ -241,6 +241,15 @@ const CreateExam = () => {
         </Box>
         {tab === CreateExam ? (
           <Box sx={{ marginTop: 10 }}>
+            <Typography
+              sx={{
+                display: "flex",
+                fontSize: "32px",
+                color: "#fff",
+              }}
+            >
+              วิชา {examSubject}
+            </Typography>
             <TitleWithInput
               title="ชื่อเรื่อง"
               onChange={(event) => {

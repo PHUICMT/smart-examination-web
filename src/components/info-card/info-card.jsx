@@ -29,7 +29,7 @@ const InfoCard = (props) => {
                 blackTitle={true}
                 title={title}
                 onChange={props.onChange}
-                value={props.valueTi}
+                value={props.value}
               />
               <div className="info-card-text title-2">{description}</div>
               <div className="info-card-text title-3">{input}</div>

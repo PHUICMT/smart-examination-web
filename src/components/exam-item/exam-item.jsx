@@ -205,20 +205,16 @@ export function TextFieldExam(props) {
       marginTop={100}
       input={null}
       delete_button={
-        <div className="is-flex is-justify-content-flex-end">
-          <ButtonWithIcon
-            // onClick={() => {}}
-            icon={trash}
-          >
-            ลบ
-          </ButtonWithIcon>
-          <ButtonWithIcon
-            // onClick={() => {}}
-            icon={edit}
-          >
-            ลบ
-          </ButtonWithIcon>
-        </div>
+        props.showModifyButton ? (
+          <div className="is-flex is-justify-content-flex-end">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
+              ลบ
+            </ButtonWithIcon>
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
+              ลบ
+            </ButtonWithIcon>
+          </div>
+        ) : null
       }
     />
   );

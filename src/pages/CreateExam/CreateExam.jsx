@@ -47,6 +47,11 @@ const CreateExam = () => {
   const [resultCheckBox, setResultCheckBox] = useState({});
   const [valueCheckBox, setValueCheckBox] = useState([]);
   const [width, setWidth] = useState(20);
+  const [status, setStatus] = useState("");
+  const [questionUpdate, setQuestionUpdate] = useState("");
+  const [show, setShow] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const [index, setIndex] = useState(0);
 
   const addCardButtonStyled = {
     width: "100%",
@@ -87,6 +92,41 @@ const CreateExam = () => {
 
     cardList.push(card);
     setCardList(cardList);
+    handleOnCreateExam();
+  };
+
+  const UpdateCard = (type, questionUpdate, index) => {
+    let length = cardList.length;
+    console.log(type);
+    console.log(questionUpdate);
+    console.log(index);
+    for (let i = 0; i < length; i++) {
+      if (cardList[i].article === index + 1) {
+        if (type === "TextField") {
+          console.log(questionUpdate);
+          cardList[i].data.title = questionUpdate;
+          console.log(cardList[i].data.title);
+        }
+      }
+    }
+    console.log(cardList);
+    setCardList(cardList);
+    setStatus("create");
+    handleOnCreateExam();
+  };
+
+  const DeleteCard = () => {
+    for (let i = 0; i < cardList.length; i++) {
+      if (cardList[i].article === index + 1) {
+        cardList.splice(i, 1);
+      }
+    }
+    for (let i = 0; i < cardList.length; i++) {
+      cardList[i].article = i + 1;
+    }
+    console.log(cardList);
+    setCardList(cardList);
+    setStatus("create");
     handleOnCreateExam();
   };
 
@@ -154,10 +194,17 @@ const CreateExam = () => {
     setPIN(pin);
   };
 
-  const [show, setShow] = useState(false);
-
   const handleOpen = () => {
     setShow(true);
+  };
+
+  const handleOpenDelete = () => {
+    setShowModalDelete(true);
+  };
+
+  const onDelete = (index, type) => {
+    setIndex(index);
+    setType(type);
   };
 
   const onClickExamType = (type) => {
@@ -204,6 +251,43 @@ const CreateExam = () => {
             setItemCheckBox([]);
             setResultCheckBox({});
             setResult();
+          }}
+        >
+          ยกเลิก
+        </Button>
+      </div>
+    );
+  };
+
+  const SaveCardButton = () => {
+    return (
+      <div>
+        <Button
+          variant="outlined"
+          sx={{
+            height: "50px",
+            width: "150px",
+            marginTop: "20px !important",
+            backgroundColor: "#fff !important",
+            borderRadius: "10px !important",
+          }}
+          onClick={() => {
+            UpdateCard(type, questionUpdate, index);
+          }}
+        >
+          บันทึก
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            height: "50px",
+            width: "150px",
+            marginTop: "20px !important",
+            backgroundColor: "#fff !important",
+            borderRadius: "10px !important",
+          }}
+          onClick={() => {
+            setStatus("create");
           }}
         >
           ยกเลิก
@@ -277,6 +361,7 @@ const CreateExam = () => {
                   title="คำถาม"
                   onValueChangeQuestion={onChangeQuestion}
                   question={true}
+                  showModifyButton={false}
                 />
                 <AddCardButton />
               </>
@@ -319,6 +404,7 @@ const CreateExam = () => {
                   className="select-textfield"
                   onClick={() => {
                     onClickExamType(TextFieldType);
+                    setStatus("create-exam");
                   }}
                 >
                   Textfield
@@ -347,11 +433,54 @@ const CreateExam = () => {
                 return (
                   <div key={index}>
                     {card.type === "TextField" ? (
-                      <TextFieldExam
-                        title={card.data.title}
-                        description={card.result}
-                        question={false}
-                      />
+                      status === "edit" ? (
+                        <>
+                          <TextFieldExam
+                            title="คำถาม"
+                            onValueChangeQuestion={(event) => {
+                              setQuestionUpdate(event.target.value);
+                            }}
+                            value={questionUpdate}
+                            question={true}
+                            showModifyButton={true}
+                          />
+                          <SaveCardButton />
+                        </>
+                      ) : (
+                        <>
+                          <TextFieldExam
+                            title={card.data.title}
+                            description={card.result}
+                            question={false}
+                            showModifyButton={true}
+                            onClickEdit={() => {
+                              setStatus("edit");
+                              setQuestionUpdate(card.data.title);
+                              setIndex(index);
+                              setType(card.type);
+                            }}
+                            onClickDelete={() => {
+                              // setStatus("delete");
+                              onDelete(index, card.type);
+                              setIndex(index);
+                              setType(card.type);
+                              handleOpenDelete();
+                            }}
+                          />
+                          <Modal
+                            title="แจ้งเตือนการลบ"
+                            show={showModalDelete}
+                            onClose={() => {
+                              setShowModalDelete(false);
+                            }}
+                            onConfirm={() => {
+                              DeleteCard();
+                            }}
+                          >
+                            <p>คุณต้องการลบข้อสอบข้อนี้ใช่หรือไม่</p>
+                          </Modal>
+                        </>
+                      )
                     ) : card.type === "Radio" ? (
                       <RadioBoxExam
                         title={card.data.title}
@@ -380,7 +509,11 @@ const CreateExam = () => {
               >
                 ยืนยัน
               </Button>
-              <Modal title="แจ้งเตือน" show={show}>
+              <Modal
+                title="แจ้งเตือน"
+                show={show}
+                onClose={() => setShow(false)}
+              >
                 <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
               </Modal>
             </div>

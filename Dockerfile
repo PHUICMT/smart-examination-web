@@ -1,10 +1,14 @@
-FROM node:alpine
+FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY . ./
-RUN yarn
 ENV PATH /app/node_modules/.bin:$PATH
-RUN yarn build
+
+COPY package.json ./
+
+RUN yarn add node-sass
+RUN yarn
+
+COPY . ./
 
 CMD [ "yarn", "start" ]

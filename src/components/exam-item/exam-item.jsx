@@ -89,7 +89,7 @@ export function CheckBoxExam(props) {
                     width: "150px",
                     marginTop: "20px",
                     backgroundColor: "#fff !important",
-                    border: "50%",
+                    borderRadius: "10px !important",
                   }}
                   onClick={props.onClickAddCheckBox}
                 >
@@ -160,31 +160,36 @@ export function RadioBoxExam(props) {
           </RadioGroup>
           {props.question ? (
             <div>
-              <FormControlLabel
-                checked={false}
-                label={""}
-                control={<Radio />}
-              />
-              <input
-                style={{ width: `${props.style}ch` }}
-                className="input-addItem"
-                type="text"
-                placeholder="add item"
-                value={props.valueRadio}
-                onChange={props.onChangeTextAddRadio}
-              />
-              <Button
-                sx={{
-                  height: "50px",
-                  width: "150px",
-                  marginTop: "20px",
-                  backgroundColor: "#fff !important",
-                  border: "50%",
-                }}
-                onClick={props.onClickAddRadio}
-              >
-                เพิ่ม
-              </Button>
+              <div className="formgruop-input-additem">
+                <FormControlLabel
+                  checked={false}
+                  label={""}
+                  control={<Radio />}
+                />
+                <input
+                  style={{ width: `${props.style}ch` }}
+                  className="input-addItem"
+                  type="text"
+                  placeholder="add item"
+                  value={props.valueRadio}
+                  onChange={props.onChangeTextAddRadio}
+                />
+              </div>
+
+              <div className="form-button-additem">
+                <Button
+                  sx={{
+                    height: "50px",
+                    width: "150px",
+                    marginTop: "20px",
+                    backgroundColor: "#fff !important",
+                    borderRadius: "10px !important",
+                  }}
+                  onClick={props.onClickAddRadio}
+                >
+                  เพิ่ม
+                </Button>
+              </div>
             </div>
           ) : null}
         </FormControl>

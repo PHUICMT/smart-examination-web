@@ -17,7 +17,7 @@ export async function handleOnGetExam(examPin) {
 
 export async function handleOnGetExamAll() {
   return await axios
-    .get("http://localhost:5000/get-exam-all")
+    .get("/get-exam-all")
     .then(function (result) {
       const response = result.data;
       if (response !== false) {

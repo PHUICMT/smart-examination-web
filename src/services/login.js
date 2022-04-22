@@ -7,7 +7,7 @@ export async function login(userId) {
   const jsonData = JSON.stringify(packedData);
 
   return await axios
-    .post("server:5000/login", jsonData, {
+    .post("/login", jsonData, {
       headers: { "Content-Type": "application/json" },
     })
     .then(function (result) {

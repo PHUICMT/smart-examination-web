@@ -3,7 +3,7 @@ const axios = require("axios");
 export async function handleOnSendExamResult(data) {
   //For student on finish exam
   return await axios
-    .post("server:5000/save-result", data, {
+    .post("/save-result", data, {
       headers: { "Content-Type": "application/json" },
     })
     .then(function (result) {

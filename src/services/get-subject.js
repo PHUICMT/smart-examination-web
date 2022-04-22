@@ -2,7 +2,7 @@ const axios = require("axios");
 
 export async function getSubject() {
   return await axios
-    .get("server:5000/get-subject")
+    .get("/get-subject")
     .then(function (result) {
       const response = result.data;
       if (response !== false) {

@@ -6,9 +6,8 @@ import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
 import { saveExam } from "../../services/save-exam";
-import { getSubject } from "../../services/get-subject";
-import { useHistory } from "react-router-dom";
-import { LoadingPopup } from "../../components/loading-popup/loading-popup";
+import { handleOnGetExamAll } from "../../services/get-exam-item";
+
 import {
   CheckBoxExam,
   RadioBoxExam,
@@ -57,6 +56,7 @@ const CreateExam = () => {
   const [indexX, setIndexX] = useState(0);
   const [resultRadioUpdate, setResultRadioUpdate] = useState("");
   const [resultCheckBoxUpdate, setResultCheckBoxUpdate] = useState({});
+  const [exam, setExam] = useState([]);
 
   const addCardButtonStyled = {
     width: "100%",
@@ -148,6 +148,13 @@ const CreateExam = () => {
       exam_items: cardList,
     };
     await saveExam(data);
+  }
+
+  async function handleGetExamAll() {
+    handleOnGetExamAll().then((res) => {
+      setExam(res.exam_items);
+      console.log(res.exam_items);
+    });
   }
 
   const addRadio = () => {
@@ -332,21 +339,6 @@ const CreateExam = () => {
     }
     autoGeneratePIN();
   }, [teacherID]);
-  const [loading, setLoading] = useState(false);
-  const [subject, setSubject] = useState([]);
-
-  useEffect(() => {
-    async function handleGetSubject() {
-      setLoading(true);
-      getSubject().then((res) => {
-        setLoading(false);
-        setSubject(res.subject_items);
-      });
-    }
-    handleGetSubject();
-  }, []);
-
-  const onClickSelect = (subject) => {};
 
   return (
     <React.Fragment>
@@ -364,6 +356,7 @@ const CreateExam = () => {
             <TabBar
               onClick={() => {
                 setTab(1);
+                handleGetExamAll();
               }}
               title="ข้อสอบ"
               tab={tab}
@@ -689,20 +682,17 @@ const CreateExam = () => {
           </Box>
         ) : (
           <Box sx={{ marginTop: 10 }}>
-            <LoadingPopup open={loading} />
             <Container maxWidth="lg">
               <div className="subject-container">
-                {subject.map((data, index) => {
+                {exam.map((data, index) => {
                   return (
                     <Button
                       variant="outlined"
                       className="button-select-subject"
-                      onClick={() => {
-                        onClickSelect(data.name);
-                      }}
+                      onClick={() => {}}
                       key={index}
                     >
-                      {data.name}
+                      {data.exam_pin} {data.exam_title}
                     </Button>
                   );
                 })}

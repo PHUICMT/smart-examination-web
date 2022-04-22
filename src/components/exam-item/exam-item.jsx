@@ -83,18 +83,21 @@ export function CheckBoxExam(props) {
                   value={props.valueCheckBox}
                   onChange={props.onChangeTextAddCheckBox}
                 />
-                <Button
-                  sx={{
-                    height: "50px",
-                    width: "150px",
-                    marginTop: "20px",
-                    backgroundColor: "#fff !important",
-                    borderRadius: "10px !important",
-                  }}
-                  onClick={props.onClickAddCheckBox}
-                >
-                  เพิ่ม
-                </Button>
+                <div className="form-button-additem">
+                  {" "}
+                  <Button
+                    sx={{
+                      height: "50px",
+                      width: "150px",
+                      marginTop: "20px",
+                      backgroundColor: "#fff !important",
+                      borderRadius: "10px !important",
+                    }}
+                    onClick={props.onClickAddCheckBox}
+                  >
+                    เพิ่ม
+                  </Button>
+                </div>
               </div>
             ) : null}
           </FormGroup>

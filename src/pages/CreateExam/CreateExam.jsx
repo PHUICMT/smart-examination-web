@@ -30,15 +30,16 @@ const CreateExam = () => {
   const CheckBoxType = "CheckBox";
   const RadioBoxType = "Radio";
   const TextFieldType = "TextField";
-  const teacherID = "07610442";
   const examSubject = location.state.data;
 
   const [tab, setTab] = useState(CreateExam);
   const [pin, setPIN] = useState();
   const [examTitle, setExamTitle] = useState("");
+  const [teacherID, setTeacherID] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [type, setType] = useState();
   const [question, setQuestion] = useState("");
+  const [examDescription, setExamDescription] = useState("");
   const [result, setResult] = useState("");
   const [cardList, setCardList] = useState([]);
   const [itemRadio, setItemRadio] = useState([]);
@@ -47,11 +48,12 @@ const CreateExam = () => {
   const [resultCheckBox, setResultCheckBox] = useState({});
   const [valueCheckBox, setValueCheckBox] = useState([]);
   const [width, setWidth] = useState(20);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("create");
   const [questionUpdate, setQuestionUpdate] = useState("");
   const [show, setShow] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [indexX, setIndexX] = useState(0);
+  const [resultRadioUpdate, setResultRadioUpdate] = useState("");
 
   const addCardButtonStyled = {
     width: "100%",
@@ -95,13 +97,13 @@ const CreateExam = () => {
     handleOnCreateExam();
   };
 
-  const UpdateCard = (type, questionUpdate, index) => {
+  const UpdateCard = (type, questionUpdate, indexX) => {
     let length = cardList.length;
     console.log(type);
     console.log(questionUpdate);
-    console.log(index);
+    console.log(indexX);
     for (let i = 0; i < length; i++) {
-      if (cardList[i].article === index + 1) {
+      if (cardList[i].article === indexX + 1) {
         if (type === "TextField") {
           console.log(questionUpdate);
           cardList[i].data.title = questionUpdate;
@@ -112,12 +114,14 @@ const CreateExam = () => {
     console.log(cardList);
     setCardList(cardList);
     setStatus("create");
+    setType();
     handleOnCreateExam();
   };
 
   const DeleteCard = () => {
+    console.log(indexX);
     for (let i = 0; i < cardList.length; i++) {
-      if (cardList[i].article === index + 1) {
+      if (cardList[i].article === indexX + 1) {
         cardList.splice(i, 1);
       }
     }
@@ -127,15 +131,17 @@ const CreateExam = () => {
     console.log(cardList);
     setCardList(cardList);
     setStatus("create");
+    setType();
     handleOnCreateExam();
   };
 
   async function handleOnCreateExam() {
+    console.log("teacher id: " + teacherID);
     const data = {
       exam_pin: pin,
       exam_subject: examSubject,
       exam_title: examTitle,
-      exam_description: "",
+      exam_description: examDescription,
       teacher_id: teacherID,
       exam_items: cardList,
     };
@@ -144,6 +150,13 @@ const CreateExam = () => {
 
   const addRadio = () => {
     if (valueRadio !== "") {
+      console.log("value: " + valueRadio);
+      console.log("status: " + status);
+      if (status === "edit") {
+        for (let i = 0; i < cardList.length; i++) {
+          cardList[i].data.items.push(valueRadio);
+        }
+      }
       setItemRadio([...itemRadio, valueRadio]);
       setValueRadio("");
     }
@@ -158,6 +171,7 @@ const CreateExam = () => {
 
   const onChangeTextAddRadio = (event) => {
     setValueRadio(event.target.value);
+    console.log(valueRadio);
     if (event.target.value.length > 20) {
       setWidth(event.target.value.length);
     } else {
@@ -202,8 +216,8 @@ const CreateExam = () => {
     setShowModalDelete(true);
   };
 
-  const onDelete = (index, type) => {
-    setIndex(index);
+  const onDelete = (indexX, type) => {
+    setIndexX(indexX);
     setType(type);
   };
 
@@ -228,6 +242,7 @@ const CreateExam = () => {
             setIsCollapsed(false);
             setType();
             setItemRadio([]);
+            setValueRadio();
             setItemCheckBox([]);
             setResultCheckBox({});
             setResult();
@@ -272,7 +287,7 @@ const CreateExam = () => {
             borderRadius: "10px !important",
           }}
           onClick={() => {
-            UpdateCard(type, questionUpdate, index);
+            UpdateCard(type, questionUpdate, indexX);
           }}
         >
           บันทึก
@@ -297,8 +312,12 @@ const CreateExam = () => {
   };
 
   useEffect(() => {
+    let sessionUserId = window.sessionStorage.getItem("userId");
+    if (sessionUserId && sessionUserId !== null) {
+      setTeacherID(sessionUserId);
+    }
     autoGeneratePIN();
-  }, []);
+  }, [teacherID]);
 
   return (
     <React.Fragment>
@@ -341,6 +360,13 @@ const CreateExam = () => {
               }}
               disabled={false}
             />
+            <TitleWithInput
+              title="รายละเอียด"
+              onChange={(event) => {
+                setExamDescription(event.target.value);
+              }}
+              disabled={false}
+            />
             <TitleWithInput title="PIN" value={pin} disabled={true} />
 
             {!isCollapsed ? (
@@ -355,7 +381,7 @@ const CreateExam = () => {
                   <AddIcon fontSize="large" />
                 </IconButton>
               </div>
-            ) : type === TextFieldType ? (
+            ) : type === TextFieldType && status === "create" ? (
               <>
                 <TextFieldExam
                   title="คำถาม"
@@ -365,7 +391,7 @@ const CreateExam = () => {
                 />
                 <AddCardButton />
               </>
-            ) : type === RadioBoxType ? (
+            ) : type === RadioBoxType && status === "create" ? (
               <>
                 <RadioBoxExam
                   title="คำถาม"
@@ -382,7 +408,7 @@ const CreateExam = () => {
                 />
                 <AddCardButton />
               </>
-            ) : type === CheckBoxType ? (
+            ) : type === CheckBoxType && status === "create" ? (
               <>
                 <CheckBoxExam
                   title="คำถาม"
@@ -404,7 +430,7 @@ const CreateExam = () => {
                   className="select-textfield"
                   onClick={() => {
                     onClickExamType(TextFieldType);
-                    setStatus("create-exam");
+                    setStatus("create");
                   }}
                 >
                   Textfield
@@ -413,6 +439,7 @@ const CreateExam = () => {
                   className="select-radio"
                   onClick={() => {
                     onClickExamType(RadioBoxType);
+                    setStatus("create");
                   }}
                 >
                   Radio
@@ -421,6 +448,7 @@ const CreateExam = () => {
                   className="select-checkbox"
                   onClick={() => {
                     onClickExamType(CheckBoxType);
+                    setStatus("create");
                   }}
                 >
                   Checkboxes
@@ -433,7 +461,7 @@ const CreateExam = () => {
                 return (
                   <div key={index}>
                     {card.type === "TextField" ? (
-                      status === "edit" ? (
+                      status === "edit" && index === indexX ? (
                         <>
                           <TextFieldExam
                             title="คำถาม"
@@ -456,13 +484,13 @@ const CreateExam = () => {
                             onClickEdit={() => {
                               setStatus("edit");
                               setQuestionUpdate(card.data.title);
-                              setIndex(index);
+                              setIndexX(index);
                               setType(card.type);
                             }}
                             onClickDelete={() => {
-                              // setStatus("delete");
+                              setStatus("delete");
                               onDelete(index, card.type);
-                              setIndex(index);
+                              setIndexX(index);
                               setType(card.type);
                               handleOpenDelete();
                             }}
@@ -472,6 +500,7 @@ const CreateExam = () => {
                             show={showModalDelete}
                             onClose={() => {
                               setShowModalDelete(false);
+                              setType();
                             }}
                             onConfirm={() => {
                               DeleteCard();
@@ -482,12 +511,67 @@ const CreateExam = () => {
                         </>
                       )
                     ) : card.type === "Radio" ? (
-                      <RadioBoxExam
-                        title={card.data.title}
-                        items={card.data.items}
-                        value={card.result}
-                        question={false}
-                      />
+                      status === "edit" && index === indexX ? (
+                        <>
+                          <RadioBoxExam
+                            title="คำถาม"
+                            onValueChangeQuestion={(event) => {
+                              setQuestionUpdate(event.target.value);
+                            }}
+                            items={card.data.items}
+                            value={questionUpdate}
+                            result={card.result}
+                            question={true}
+                            showModifyButton={true}
+                            onClickAddRadio={addRadio}
+                            onChangeTextAddRadio={onChangeTextAddRadio}
+                            onChangeResult={(event) => {
+                              setResultRadioUpdate(event.target.value);
+                            }}
+                            valueRadio={valueRadio}
+                          />
+                          <SaveCardButton />
+                        </>
+                      ) : (
+                        <>
+                          <RadioBoxExam
+                            title={card.data.title}
+                            items={card.data.items}
+                            value={card.result}
+                            question={false}
+                            showModifyButton={true}
+                            onClickEdit={() => {
+                              console.log(card.data.items);
+                              setStatus("edit");
+                              setQuestionUpdate(card.data.title);
+                              setResultRadioUpdate(card.result);
+                              setIndexX(index);
+                              setType(card.type);
+                            }}
+                            onClickDelete={() => {
+                              console.log("delete card");
+                              setStatus("delete");
+                              onDelete(index, card.type);
+                              setIndexX(index);
+                              setType(card.type);
+                              handleOpenDelete();
+                            }}
+                          />
+                          <Modal
+                            title="แจ้งเตือนการลบ"
+                            show={showModalDelete}
+                            onClose={() => {
+                              setShowModalDelete(false);
+                              setType();
+                            }}
+                            onConfirm={() => {
+                              DeleteCard();
+                            }}
+                          >
+                            <p>คุณต้องการลบข้อสอบข้อนี้ใช่หรือไม่</p>
+                          </Modal>
+                        </>
+                      )
                     ) : card.type === "CheckBox" ? (
                       <CheckBoxExam
                         title={card.data.title}

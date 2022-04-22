@@ -22,6 +22,7 @@ const InputText = (props) => {
         disabled={props.disabled}
         value={props.value}
         onChange={props.onChange}
+        multiline={true}
       />
     </FormControl>
   );

@@ -131,7 +131,7 @@ export function RadioBoxExam(props) {
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             name="radio-buttons-group"
-            value={props.value}
+            value={props.result}
           >
             {items.map((data, index) => {
               return (
@@ -175,6 +175,18 @@ export function RadioBoxExam(props) {
             </div>
           ) : null}
         </FormControl>
+      }
+      delete_button={
+        props.showModifyButton ? (
+          <div className="is-flex is-justify-content-flex-end">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
+              ลบ
+            </ButtonWithIcon>
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
+              ลบ
+            </ButtonWithIcon>
+          </div>
+        ) : null
       }
     />
   );

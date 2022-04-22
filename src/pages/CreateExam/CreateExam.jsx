@@ -152,9 +152,13 @@ const CreateExam = () => {
     if (valueRadio !== "") {
       console.log("value: " + valueRadio);
       console.log("status: " + status);
+      console.log("index: " + indexX);
       if (status === "edit") {
         for (let i = 0; i < cardList.length; i++) {
-          cardList[i].data.items.push(valueRadio);
+          console.log("data: " + cardList[i].article);
+          if (cardList[i].article === indexX + 1) {
+            cardList[i].data.items.push(valueRadio);
+          }
         }
       }
       setItemRadio([...itemRadio, valueRadio]);
@@ -439,6 +443,7 @@ const CreateExam = () => {
                   className="select-radio"
                   onClick={() => {
                     onClickExamType(RadioBoxType);
+                    setItemRadio([]);
                     setStatus("create");
                   }}
                 >

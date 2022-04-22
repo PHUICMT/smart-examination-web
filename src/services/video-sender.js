@@ -20,7 +20,7 @@ export async function uploadVideo(data, fileName) {
 
   try {
     await axios
-      .post("http://server:5000/upload-video", formData, {
+      .post("http://localhost:5000/upload-video", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Access-Control-Allow-Credentials": true,

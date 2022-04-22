@@ -37,6 +37,7 @@ export function CheckBoxExam(props) {
     <InfoCard
       className="exam-card"
       title={title}
+      value={props.value}
       onChange={props.onValueChangeQuestion}
       question={props.question}
       description={null}
@@ -49,13 +50,13 @@ export function CheckBoxExam(props) {
               return (
                 <FormControlLabel
                   control={
-                    props.value !== undefined ? (
+                    props.result !== undefined ? (
                       <Checkbox
                         onChange={handleChange}
                         id={`${index}`}
                         checked={
-                          props.value[index] !== undefined
-                            ? props.value[index]
+                          props.result[index] !== undefined
+                            ? props.result[index]
                             : false
                         }
                       />
@@ -98,6 +99,18 @@ export function CheckBoxExam(props) {
             ) : null}
           </FormGroup>
         </div>
+      }
+      delete_button={
+        props.showModifyButton ? (
+          <div className="is-flex is-justify-content-flex-end">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
+              ลบ
+            </ButtonWithIcon>
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
+              แก้ไข
+            </ButtonWithIcon>
+          </div>
+        ) : null
       }
     />
   );
@@ -183,7 +196,7 @@ export function RadioBoxExam(props) {
               ลบ
             </ButtonWithIcon>
             <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
-              ลบ
+              แก้ไข
             </ButtonWithIcon>
           </div>
         ) : null
@@ -223,7 +236,7 @@ export function TextFieldExam(props) {
               ลบ
             </ButtonWithIcon>
             <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
-              ลบ
+              แก้ไข
             </ButtonWithIcon>
           </div>
         ) : null

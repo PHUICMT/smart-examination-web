@@ -6,7 +6,9 @@ import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
 import { saveExam } from "../../services/save-exam";
-
+import { getSubject } from "../../services/get-subject";
+import { useHistory } from "react-router-dom";
+import { LoadingPopup } from "../../components/loading-popup/loading-popup";
 import {
   CheckBoxExam,
   RadioBoxExam,
@@ -330,6 +332,21 @@ const CreateExam = () => {
     }
     autoGeneratePIN();
   }, [teacherID]);
+  const [loading, setLoading] = useState(false);
+  const [subject, setSubject] = useState([]);
+
+  useEffect(() => {
+    async function handleGetSubject() {
+      setLoading(true);
+      getSubject().then((res) => {
+        setLoading(false);
+        setSubject(res.subject_items);
+      });
+    }
+    handleGetSubject();
+  }, []);
+
+  const onClickSelect = (subject) => {};
 
   return (
     <React.Fragment>
@@ -671,7 +688,27 @@ const CreateExam = () => {
             </div>
           </Box>
         ) : (
-          <Typography component={"span"}>ข้อสอบ</Typography>
+          <Box sx={{ marginTop: 10 }}>
+            <LoadingPopup open={loading} />
+            <Container maxWidth="lg">
+              <div className="subject-container">
+                {subject.map((data, index) => {
+                  return (
+                    <Button
+                      variant="outlined"
+                      className="button-select-subject"
+                      onClick={() => {
+                        onClickSelect(data.name);
+                      }}
+                      key={index}
+                    >
+                      {data.name}
+                    </Button>
+                  );
+                })}
+              </div>
+            </Container>
+          </Box>
         )}
       </Container>
     </React.Fragment>

@@ -676,6 +676,7 @@ const CreateExam = () => {
                 onClose={() => setShow(false)}
                 onConfirm={() => {
                   handleOnCreateExam()
+                  handleGetExamAll()
                   setTab(1)
                 }}
               >

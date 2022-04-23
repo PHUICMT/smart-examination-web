@@ -105,13 +105,9 @@ export function CheckBoxExam(props) {
       }
       delete_button={
         props.showModifyButton ? (
-          <div className="is-flex is-justify-content-flex-end">
-            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
-              ลบ
-            </ButtonWithIcon>
-            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
-              แก้ไข
-            </ButtonWithIcon>
+          <div className="option-icon">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash} />
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit} />
           </div>
         ) : null
       }
@@ -199,13 +195,9 @@ export function RadioBoxExam(props) {
       }
       delete_button={
         props.showModifyButton ? (
-          <div className="is-flex is-justify-content-flex-end">
-            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
-              ลบ
-            </ButtonWithIcon>
-            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
-              แก้ไข
-            </ButtonWithIcon>
+          <div className="option-icon">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash} />
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit} />
           </div>
         ) : null
       }
@@ -239,13 +231,9 @@ export function TextFieldExam(props) {
       input={null}
       delete_button={
         props.showModifyButton ? (
-          <div className="is-flex is-justify-content-flex-end">
-            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
-              ลบ
-            </ButtonWithIcon>
-            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
-              แก้ไข
-            </ButtonWithIcon>
+          <div className="option-icon">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash} />
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit} />
           </div>
         ) : null
       }

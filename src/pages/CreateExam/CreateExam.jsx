@@ -6,6 +6,7 @@ import TitleWithInput from "../../components/title-with-input/title-with-input";
 import TabBar from "../../components/tab-bar/tab-bar";
 import Modal from "../../components/modal-notification/moodal-notification";
 import { saveExam } from "../../services/save-exam";
+import { handleOnGetExamAll } from "../../services/get-exam-item";
 
 import {
   CheckBoxExam,
@@ -54,6 +55,8 @@ const CreateExam = () => {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [indexX, setIndexX] = useState(0);
   const [resultRadioUpdate, setResultRadioUpdate] = useState("");
+  const [resultCheckBoxUpdate, setResultCheckBoxUpdate] = useState({});
+  const [exam, setExam] = useState([]);
 
   const addCardButtonStyled = {
     width: "100%",
@@ -97,21 +100,23 @@ const CreateExam = () => {
     handleOnCreateExam();
   };
 
-  const UpdateCard = (type, questionUpdate, indexX) => {
+  const UpdateCard = (type, questionUpdate, indexX, resultRadioUpdate) => {
     let length = cardList.length;
-    console.log(type);
-    console.log(questionUpdate);
-    console.log(indexX);
     for (let i = 0; i < length; i++) {
       if (cardList[i].article === indexX + 1) {
         if (type === "TextField") {
-          console.log(questionUpdate);
           cardList[i].data.title = questionUpdate;
-          console.log(cardList[i].data.title);
+        }
+        if (type === "Radio") {
+          cardList[i].data.title = questionUpdate;
+          cardList[i].result = resultRadioUpdate;
+        }
+        if (type === "CheckBox") {
+          cardList[i].data.title = questionUpdate;
+          cardList[i].result = resultCheckBoxUpdate;
         }
       }
     }
-    console.log(cardList);
     setCardList(cardList);
     setStatus("create");
     setType();
@@ -119,7 +124,6 @@ const CreateExam = () => {
   };
 
   const DeleteCard = () => {
-    console.log(indexX);
     for (let i = 0; i < cardList.length; i++) {
       if (cardList[i].article === indexX + 1) {
         cardList.splice(i, 1);
@@ -128,7 +132,6 @@ const CreateExam = () => {
     for (let i = 0; i < cardList.length; i++) {
       cardList[i].article = i + 1;
     }
-    console.log(cardList);
     setCardList(cardList);
     setStatus("create");
     setType();
@@ -136,7 +139,6 @@ const CreateExam = () => {
   };
 
   async function handleOnCreateExam() {
-    console.log("teacher id: " + teacherID);
     const data = {
       exam_pin: pin,
       exam_subject: examSubject,
@@ -148,14 +150,17 @@ const CreateExam = () => {
     await saveExam(data);
   }
 
+  async function handleGetExamAll() {
+    handleOnGetExamAll().then((res) => {
+      setExam(res.exam_items);
+      console.log(res.exam_items);
+    });
+  }
+
   const addRadio = () => {
     if (valueRadio !== "") {
-      console.log("value: " + valueRadio);
-      console.log("status: " + status);
-      console.log("index: " + indexX);
       if (status === "edit") {
         for (let i = 0; i < cardList.length; i++) {
-          console.log("data: " + cardList[i].article);
           if (cardList[i].article === indexX + 1) {
             cardList[i].data.items.push(valueRadio);
           }
@@ -168,6 +173,13 @@ const CreateExam = () => {
 
   const addCheckBox = () => {
     if (valueCheckBox !== "") {
+      if (status === "edit") {
+        for (let i = 0; i < cardList.length; i++) {
+          if (cardList[i].article === indexX + 1) {
+            cardList[i].data.items.push(valueCheckBox);
+          }
+        }
+      }
       setItemCheckBox([...itemCheckBox, valueCheckBox]);
       setValueCheckBox("");
     }
@@ -175,7 +187,6 @@ const CreateExam = () => {
 
   const onChangeTextAddRadio = (event) => {
     setValueRadio(event.target.value);
-    console.log(valueRadio);
     if (event.target.value.length > 20) {
       setWidth(event.target.value.length);
     } else {
@@ -291,7 +302,13 @@ const CreateExam = () => {
             borderRadius: "10px !important",
           }}
           onClick={() => {
-            UpdateCard(type, questionUpdate, indexX);
+            UpdateCard(
+              type,
+              questionUpdate,
+              indexX,
+              resultRadioUpdate,
+              resultCheckBoxUpdate
+            );
           }}
         >
           บันทึก
@@ -339,6 +356,7 @@ const CreateExam = () => {
             <TabBar
               onClick={() => {
                 setTab(1);
+                handleGetExamAll();
               }}
               title="ข้อสอบ"
               tab={tab}
@@ -380,6 +398,7 @@ const CreateExam = () => {
                   sx={addCardButtonStyled}
                   onClick={() => {
                     setIsCollapsed(true);
+                    setType();
                   }}
                 >
                   <AddIcon fontSize="large" />
@@ -525,7 +544,7 @@ const CreateExam = () => {
                             }}
                             items={card.data.items}
                             value={questionUpdate}
-                            result={card.result}
+                            result={resultRadioUpdate}
                             question={true}
                             showModifyButton={true}
                             onClickAddRadio={addRadio}
@@ -542,11 +561,10 @@ const CreateExam = () => {
                           <RadioBoxExam
                             title={card.data.title}
                             items={card.data.items}
-                            value={card.result}
+                            result={card.result}
                             question={false}
                             showModifyButton={true}
                             onClickEdit={() => {
-                              console.log(card.data.items);
                               setStatus("edit");
                               setQuestionUpdate(card.data.title);
                               setResultRadioUpdate(card.result);
@@ -554,7 +572,6 @@ const CreateExam = () => {
                               setType(card.type);
                             }}
                             onClickDelete={() => {
-                              console.log("delete card");
                               setStatus("delete");
                               onDelete(index, card.type);
                               setIndexX(index);
@@ -578,12 +595,67 @@ const CreateExam = () => {
                         </>
                       )
                     ) : card.type === "CheckBox" ? (
-                      <CheckBoxExam
-                        title={card.data.title}
-                        items={card.data.items}
-                        value={card.result}
-                        question={false}
-                      />
+                      status === "edit" && index === indexX ? (
+                        <>
+                          <CheckBoxExam
+                            title="คำถาม"
+                            value={questionUpdate}
+                            result={resultCheckBoxUpdate}
+                            onChangeResult={(event) => {
+                              setResultCheckBoxUpdate({
+                                ...resultCheckBoxUpdate,
+                                [event.target.id]: event.target.checked,
+                              });
+                            }}
+                            onValueChangeQuestion={(event) => {
+                              setQuestionUpdate(event.target.value);
+                            }}
+                            question={true}
+                            items={card.data.items}
+                            onClickAddCheckBox={addCheckBox}
+                            onChangeTextAddCheckBox={onChangeTextAddCheckBox}
+                            valueCheckBox={valueCheckBox}
+                          />
+                          <SaveCardButton />
+                        </>
+                      ) : (
+                        <>
+                          <CheckBoxExam
+                            title={card.data.title}
+                            items={card.data.items}
+                            result={card.result}
+                            question={false}
+                            showModifyButton={true}
+                            onClickEdit={() => {
+                              setStatus("edit");
+                              setQuestionUpdate(card.data.title);
+                              setResultCheckBoxUpdate(card.result);
+                              setIndexX(index);
+                              setType(card.type);
+                            }}
+                            onClickDelete={() => {
+                              setStatus("delete");
+                              onDelete(index, card.type);
+                              setIndexX(index);
+                              setType(card.type);
+                              handleOpenDelete();
+                            }}
+                          />
+                          <Modal
+                            title="แจ้งเตือนการลบ"
+                            show={showModalDelete}
+                            onClose={() => {
+                              setShowModalDelete(false);
+                              setType();
+                            }}
+                            onConfirm={() => {
+                              DeleteCard();
+                            }}
+                          >
+                            <p>คุณต้องการลบข้อสอบข้อนี้ใช่หรือไม่</p>
+                          </Modal>
+                        </>
+                      )
                     ) : null}
                   </div>
                 );
@@ -602,13 +674,31 @@ const CreateExam = () => {
                 title="แจ้งเตือน"
                 show={show}
                 onClose={() => setShow(false)}
+                onConfirm={handleOnCreateExam}
               >
                 <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
               </Modal>
             </div>
           </Box>
         ) : (
-          <Typography component={"span"}>ข้อสอบ</Typography>
+          <Box sx={{ marginTop: 10 }}>
+            <Container maxWidth="lg">
+              <div className="subject-container">
+                {exam.map((data, index) => {
+                  return (
+                    <Button
+                      variant="outlined"
+                      className="button-select-subject"
+                      onClick={() => {}}
+                      key={index}
+                    >
+                      {data.exam_pin} {data.exam_title}
+                    </Button>
+                  );
+                })}
+              </div>
+            </Container>
+          </Box>
         )}
       </Container>
     </React.Fragment>

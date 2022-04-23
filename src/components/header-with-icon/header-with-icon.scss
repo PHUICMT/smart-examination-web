@@ -1,6 +1,6 @@
 .header-with-icon {
   position: relative;
-  height: 450px;
+  height: 370px;
 
   div {
     width: 100%;
@@ -11,7 +11,7 @@
     width: 250px;
     position: absolute;
     top: 20%;
-    right: 20%;
+    right: 15%;
   }
 
   .title-box {
@@ -22,6 +22,7 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    padding-left: 5%;
     .title-1 {
       padding-left: 5%;
       font-size: 80px;

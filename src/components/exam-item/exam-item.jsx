@@ -37,6 +37,7 @@ export function CheckBoxExam(props) {
     <InfoCard
       className="exam-card"
       title={title}
+      value={props.value}
       onChange={props.onValueChangeQuestion}
       question={props.question}
       description={null}
@@ -49,13 +50,13 @@ export function CheckBoxExam(props) {
               return (
                 <FormControlLabel
                   control={
-                    props.value !== undefined ? (
+                    props.result !== undefined ? (
                       <Checkbox
                         onChange={handleChange}
                         id={`${index}`}
                         checked={
-                          props.value[index] !== undefined
-                            ? props.value[index]
+                          props.result[index] !== undefined
+                            ? props.result[index]
                             : false
                         }
                       />
@@ -82,22 +83,33 @@ export function CheckBoxExam(props) {
                   value={props.valueCheckBox}
                   onChange={props.onChangeTextAddCheckBox}
                 />
-                <Button
-                  sx={{
-                    height: "50px",
-                    width: "150px",
-                    marginTop: "20px",
-                    backgroundColor: "#fff !important",
-                    border: "50%",
-                  }}
-                  onClick={props.onClickAddCheckBox}
-                >
-                  เพิ่ม
-                </Button>
+                <div className="form-button-additem">
+                  {" "}
+                  <Button
+                    sx={{
+                      height: "50px",
+                      width: "150px",
+                      marginTop: "20px",
+                      backgroundColor: "#fff !important",
+                      borderRadius: "10px !important",
+                    }}
+                    onClick={props.onClickAddCheckBox}
+                  >
+                    เพิ่ม
+                  </Button>
+                </div>
               </div>
             ) : null}
           </FormGroup>
         </div>
+      }
+      delete_button={
+        props.showModifyButton ? (
+          <div className="option-icon">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash} />
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit} />
+          </div>
+        ) : null
       }
     />
   );
@@ -147,44 +159,45 @@ export function RadioBoxExam(props) {
           </RadioGroup>
           {props.question ? (
             <div>
-              <FormControlLabel
-                checked={false}
-                label={""}
-                control={<Radio />}
-              />
-              <input
-                style={{ width: `${props.style}ch` }}
-                className="input-addItem"
-                type="text"
-                placeholder="add item"
-                value={props.valueRadio}
-                onChange={props.onChangeTextAddRadio}
-              />
-              <Button
-                sx={{
-                  height: "50px",
-                  width: "150px",
-                  marginTop: "20px",
-                  backgroundColor: "#fff !important",
-                  border: "50%",
-                }}
-                onClick={props.onClickAddRadio}
-              >
-                เพิ่ม
-              </Button>
+              <div className="formgruop-input-additem">
+                <FormControlLabel
+                  checked={false}
+                  label={""}
+                  control={<Radio />}
+                />
+                <input
+                  style={{ width: `${props.style}ch` }}
+                  className="input-addItem"
+                  type="text"
+                  placeholder="add item"
+                  value={props.valueRadio}
+                  onChange={props.onChangeTextAddRadio}
+                />
+              </div>
+
+              <div className="form-button-additem">
+                <Button
+                  sx={{
+                    height: "50px",
+                    width: "150px",
+                    marginTop: "20px",
+                    backgroundColor: "#fff !important",
+                    borderRadius: "10px !important",
+                  }}
+                  onClick={props.onClickAddRadio}
+                >
+                  เพิ่ม
+                </Button>
+              </div>
             </div>
           ) : null}
         </FormControl>
       }
       delete_button={
         props.showModifyButton ? (
-          <div className="is-flex is-justify-content-flex-end">
-            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
-              ลบ
-            </ButtonWithIcon>
-            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
-              ลบ
-            </ButtonWithIcon>
+          <div className="option-icon">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash} />
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit} />
           </div>
         ) : null
       }
@@ -218,13 +231,9 @@ export function TextFieldExam(props) {
       input={null}
       delete_button={
         props.showModifyButton ? (
-          <div className="is-flex is-justify-content-flex-end">
-            <ButtonWithIcon onClick={props.onClickDelete} icon={trash}>
-              ลบ
-            </ButtonWithIcon>
-            <ButtonWithIcon onClick={props.onClickEdit} icon={edit}>
-              ลบ
-            </ButtonWithIcon>
+          <div className="option-icon">
+            <ButtonWithIcon onClick={props.onClickDelete} icon={trash} />
+            <ButtonWithIcon onClick={props.onClickEdit} icon={edit} />
           </div>
         ) : null
       }

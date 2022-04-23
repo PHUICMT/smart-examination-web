@@ -147,7 +147,9 @@ const CreateExam = () => {
       teacher_id: teacherID,
       exam_items: cardList,
     };
-    await saveExam(data);
+    await saveExam(data).then(
+      setTab(1)
+    );
   }
 
   async function handleGetExamAll() {
@@ -684,18 +686,22 @@ const CreateExam = () => {
           <Box sx={{ marginTop: 10 }}>
             <Container maxWidth="lg">
               <div className="subject-container">
-                {exam.map((data, index) => {
-                  return (
-                    <Button
-                      variant="outlined"
-                      className="button-select-subject"
-                      onClick={() => { }}
-                      key={index}
-                    >
-                      {data.exam_pin} {data.exam_title}
-                    </Button>
-                  );
-                })}
+                {exam.length !== 0 ? (
+                  exam.map((data, index) => {
+                    return (
+                      <Button
+                        variant="outlined"
+                        className="button-select-subject"
+                        onClick={() => { }}
+                        key={index}
+                      >
+                        {data.exam_pin} {data.exam_title}
+                      </Button>
+                    );
+                  })
+                ) : (
+                  <p>ไม่มีข้อสอบ</p>
+                )}
               </div>
             </Container>
           </Box>

@@ -456,7 +456,7 @@ const CreateExam = () => {
                     setStatus("create");
                   }}
                 >
-                  Textfield
+                  บรรยาย
                 </Button>
                 <Button
                   className="select-radio"
@@ -466,7 +466,7 @@ const CreateExam = () => {
                     setStatus("create");
                   }}
                 >
-                  Radio
+                  ตัวเลือก
                 </Button>
                 <Button
                   className="select-checkbox"
@@ -475,7 +475,7 @@ const CreateExam = () => {
                     setStatus("create");
                   }}
                 >
-                  Checkboxes
+                  หลายตัวเลือก
                 </Button>
               </div>
             )}
@@ -689,7 +689,7 @@ const CreateExam = () => {
                     <Button
                       variant="outlined"
                       className="button-select-subject"
-                      onClick={() => {}}
+                      onClick={() => { }}
                       key={index}
                     >
                       {data.exam_pin} {data.exam_title}

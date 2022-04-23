@@ -147,9 +147,7 @@ const CreateExam = () => {
       teacher_id: teacherID,
       exam_items: cardList,
     };
-    await saveExam(data).then(
-      setTab(1)
-    );
+    await saveExam(data);
   }
 
   async function handleGetExamAll() {
@@ -676,7 +674,10 @@ const CreateExam = () => {
                 title="แจ้งเตือน"
                 show={show}
                 onClose={() => setShow(false)}
-                onConfirm={handleOnCreateExam}
+                onConfirm={() => {
+                  handleOnCreateExam()
+                  setTab(1)
+                }}
               >
                 <p>คุณต้องการส่งแบบฟอร์มใช่หรือไม่</p>
               </Modal>
